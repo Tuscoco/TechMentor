@@ -19,18 +19,20 @@
 <body>
 
   <header>
-    <a href="../pages/home.html" id="logo"><p>TechMentor</p></a>
+    <a href="../pages/home.html" id="logo">
+      <p>TechMentor</p>
+    </a>
     <p>Fulano</p>
     <i class="ph-fill ph-user-circle"></i>
   </header>
 
-    <main>
-        <div class="calendar">
-        <div class="mes">
+  <main>
+    <div class="calendar">
+      <div class="mes">
         <button id="prevMonth"><i class="ph ph-caret-left"></i></button>
         <p id="monthYear"></p>
         <button id="nextMonth"><i class="ph ph-caret-right"></i></button>
-        </div>
+      </div>
       <table>
         <thead>
           <div class="days">
@@ -48,27 +50,33 @@
       </table>
     </div>
     <div class="form-container" id="formContainer">
-      <form id="eventForm">
-        <h2>Adicionar Horário</h2>
-        <input type="time" id="eventTitle" name="eventTitle" required>
-        <button type="submit">Adicionar</button>
-      </form>
-      <div id="horarios">
+      <div id="eventos">
+      </div>
+    </div>
 
-      </div>
-    </div>
-    
     <div id="modal" class="modal">
-      <div class="modal-content">
-        <span id="closeModal" class="close">&times;</span>
-        <h2>Adicionar Horário</h2>
-        <input type="time" id="eventTitle" name="eventTitle" required>
-        <button type="submit">Adicionar</button>
+      <div>
+        <div id="modalHead">
+          <p>Eventos</p>
+          <i id="closeModal" class="ph ph-x"></i>
+        </div>
+        <div class="modalContent">
+          <div id="novoEvento">
+            <button type="submit">Adicionar</button>
+            <input type="text" name="" id="" placeholder="  Evento - Hora">
+          </div>
+          <div id="eventos">
+            <p>evento3 - 07:00 <button><i class="ph-fill ph-trash-simple"></i></button></p>
+            <p>evento3 - 07:00 <button><i class="ph-fill ph-trash-simple"></i></button></p>
+            <p>evento3 - 07:00 <button><i class="ph-fill ph-trash-simple"></i></button></p>
+
+          </div>
+        </div>
       </div>
     </div>
-    
+
   </main>
-<script src="../assets/js/calendario.js"></script>
+  <script src="../assets/js/calendario.js"></script>
 </body>
 
 

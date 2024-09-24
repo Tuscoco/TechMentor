@@ -4,8 +4,7 @@ let currentYear = today.getFullYear();
 let day;
 let mes;
 
-
-// Carregar compromissos ao carregar a página
+// Gerar calendario ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     generateCalendar(currentMonth, currentYear); // Gerar o calendário para o mês atual
 });
@@ -54,18 +53,19 @@ function generateCalendar(month, year) {
 
                 // Verifica se o dia atual é igual ao dia gerado e destaca com a cor azul
                 if (date === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                    button.style.backgroundColor = 'blue'; // Define a cor de fundo azul para o dia atual
+                    button.style.backgroundColor = '#5832A6'; // Define a cor de fundo azul para o dia atual
                     button.style.color = 'white'; // Opcional: Define a cor do texto como branca para melhor contraste
                 }
 
                 button.addEventListener('click', () => {
-                    horarios.innerHTML = "";
+                    eventos.innerHTML = "";
                     const selectedButton = document.querySelector('.selected');
                     if (selectedButton) {
                         selectedButton.classList.remove('selected');
                     }
                     button.classList.add('selected');
                     day = +button.textContent;
+                    openModal();
                 });
 
                 cell.appendChild(button);
@@ -103,8 +103,6 @@ function prevMonth() {
 document.getElementById('nextMonth').addEventListener('click', nextMonth);
 document.getElementById('prevMonth').addEventListener('click', prevMonth);
 
-// as
-
 // Função para abrir o modal e escurecer o fundo
 function openModal() {
     const modal = document.getElementById('modal');
@@ -118,11 +116,6 @@ function closeModal() {
     modal.style.display = 'none'; // Oculta a janela modal
     document.body.style.overflow = 'auto'; // Restaura a rolagem da página
 }
-
-// Event listener para abrir o modal ao clicar em um dia do calendário
-document.querySelectorAll('.calendar button').forEach(button => {
-    button.addEventListener('click', openModal);
-});
 
 // Event listener para fechar o modal ao clicar no botão "X"
 document.getElementById('closeModal').addEventListener('click', closeModal);
