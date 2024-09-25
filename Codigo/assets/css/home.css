@@ -15,7 +15,7 @@ article{
     background-color: #7F32A6;
     border-radius: 10px;
     text-align: center;
-    transition: .3s;
+    transition: .1s;
 }
 
 article p{
@@ -27,5 +27,8 @@ article i{
 }
 
 article:hover{
-    scale: 1.1;
+    scale: 1.05;
+    color: #7F32A6;
+    background-color: #fff;
+    outline: 5px solid #7F32A6;
 }

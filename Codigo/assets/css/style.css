@@ -1,8 +1,31 @@
 body{
-    background-color: #7F32A6;
+    background: linear-gradient(45deg, #7F32A6, #7F32A6, #00fff2);
+    height: 100%;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(45deg, #00fff2, #7F32A6, #00fff2); */
+    /* background-size: 400% 400%; */
+    /* animation: gradientAnimation 15s ease infinite; */
 
 }
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+header {
+    flex-shrink: 0;
+}
+
 header{
     align-items: center;
     color: #7F32A6;
@@ -28,7 +51,7 @@ header i{
     margin-right: auto;
     text-decoration: none;
     color: #7F32A6;
-    transition: .5s;
+    transition: .1s;
 }
 
 #logo:hover{
@@ -40,13 +63,17 @@ header i{
     scale: 1.1;
 }
 
-main{
+main {
+    margin: 0;
     background-color: #fff;
     color: #7F32A6;
-    margin: 50px 170px;
     border-radius: 10px;
     font-size: 30px;
     font-family: Arial, sans-serif;
     font-weight: 900;
     font-style: italic;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 50px 170px;
+    min-height: 632px;
 }

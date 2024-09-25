@@ -16,26 +16,41 @@
     </header>
 
     <main>
-        <p>Monitores Presentes</p>
+        <p class="title">Monitores Presentes</p>
         <section class="monit" id="MonP">
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
+            <button id="monitor"><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
+            <button id="monitor"><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
+            <button id="monitor"><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
+            <button id="monitor"><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
+            <button id="monitor"><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
         </section>
 
         <p class="title">Monitores Ausentes</p>
         <section class="monit" id="MonA">
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
-            <button><i class="ph-fill ph-user"></i><p>AEDS II</p></button>
+            <button><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
+            <button><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
+            <button><img src="../assets/img/3535250.webp" alt=""><p>AEDS II</p></button>
         </section>
+
+        <div id="modal" class="modal">
+            <div>
+              <div id="modalHead">
+                <p>Eventos</p>
+                <i id="closeModal" class="ph ph-x"></i>
+              </div>
+              <div class="modalContent">
+                <div id="novoEvento">
+                  <button type="submit">Adicionar</button>
+                  <input type="text" name="" id="" placeholder="  Evento">
+                  <input type="time" name="" id="">
+                </div>
+                <div id="eventos">
+                </div>
+              </div>
+            </div>
+          </div>
+
     </main>
-    
+    <script src="../assets/js/monitoria.js"></script>
 </body>
 </html>

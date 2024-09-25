@@ -11,7 +11,25 @@ main a{
 }
 
 #repo{
+    display: flex;
     background-color: #7F32A6;
     color: #fff;
     border-radius: 10px;
+    transition: .1s ;
+    align-items: center;
+    justify-content: center;
+}
+
+#repo a{
+    /* align-items: center; */
+    /* text-align: center; */
+    /* justify-content: center; */
+}
+
+#repo:hover{
+    background-color: #fff;
+    color: #7F32A6;
+    border-radius: 10px;
+    scale: 1.05;
+    outline: 5px solid #7F32A6;
 }

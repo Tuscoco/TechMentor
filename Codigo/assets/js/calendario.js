@@ -118,6 +118,13 @@ function openModal() {
 // Função para fechar o modal
 // Função para fechar o modal com animação de fade out
 function closeModal() {
+
+    //desmarca o botao selecionado
+    // const selectedButton = document.querySelector('.selected');
+    // if (selectedButton) {
+    //     selectedButton.classList.remove('selected');
+    // }
+    
     const modal = document.getElementById('modal');
     modal.style.opacity = 0; // Inicia o fade out
 

@@ -1,22 +1,24 @@
+
+
 main{
-    padding: 5px;
-    padding-bottom: 75px;
+    padding-top: 0px;
 }
 
 main p{
     text-align: center;
+    margin: 0;
 }
 
 .monit {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     gap: 25px;
     justify-items: center;
-    margin-inline: 300px;
+    margin: 0 200px;
 }
 
 button{
-    padding-top: 10px;
+    padding: 10px;
     background-color: #7F32A6;
     color: #7F32A6;
     border: none;
@@ -24,21 +26,43 @@ button{
     transition: .1s;
 }
 
-button:hover{
-    scale: 1.2;
-}
-
-button i{
+button img{
     border-radius: 5px;
-    font-size: 60px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: top;
     background-color: #fff;
 }
 
 button p{
+    font-size: 10px;
+    margin-top: 10px;
     padding: 5px;
     border-radius: 5px;
     font-family: Arial, sans-serif;
     font-weight: 900;
     font-style: italic;
     background-color: #fff;
+}
+
+button:hover{
+    scale: 1.2;
+    background-color: #fff;
+    outline: 5px solid #7F32A6;
+}
+
+button:hover i{
+    background-color: #7F32A6;
+    color: #fff;
+}
+
+button:hover p{
+    background-color: #7F32A6;
+    color: #fff;
+}
+
+
+.title{
+    padding: 20px;
 }
