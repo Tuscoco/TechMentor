@@ -1,0 +1,28 @@
+main{
+    padding: 5px;
+    padding-bottom: 75px;
+}
+
+main p{
+    text-align: center;
+}
+
+.monit {
+    display: grid;
+    gap: 2px;
+}
+
+button{
+    background-color: #ffffff;
+    color: #7F32A6;
+    border: 3px solid #7F32A6;;
+    border-radius: 10px;
+    transition: .2s;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+button:hover {
+    scale: 1.1;
+}

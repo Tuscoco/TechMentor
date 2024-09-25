@@ -1,0 +1,122 @@
+main{
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 75px;
+}
+
+main p{
+    text-align: center;
+    font-size: 35px;
+}
+
+.fotoPerfil {
+    width: 300px;
+    height: 300px;
+    margin-left: 80px;
+    margin-bottom: 15px;
+}
+
+.container {
+    display: flex;
+}
+
+
+.contentArea { /*area principal, a direita da tela*/
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+    font-size: 20px;
+    flex: 1;
+    align-items: center;
+}
+
+
+label {
+    font-size: 15px;
+    margin-top: 10px; /* Espaço acima dos rótulos */
+    display: block; /* Faz o rótulo ocupar toda a linha */
+}
+
+
+input {
+    font-size: 20px;
+    color:#7f32a6;
+    width: 650px;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 15px; /* Espaço abaixo dos campos de entrada */
+    padding: 8px; /* Espaçamento interno */
+    border: 3px solid #7f32a6; /* Borda */
+    border-radius: 10px; /* Cantos arredondados */
+} 
+
+
+
+.botoes { /* botoes salvar/cancelar */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.salvarAlteracoes { /* botão salvar alterações */
+    width: 450px;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: italic;
+    background-color: #7f32a6;
+    color:#ffffff;
+    border: none;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.salvarAlteracoes:hover { /* mouse em cima do botão*/
+    scale: 1.1;
+}
+
+.cancelar { /* botão cancelar alterações */
+    border: none;
+    background-color: #ffffff;
+    color: #7f32a6;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    transition: .2s;
+}
+
+.cancelar:hover{ /* mouse em cima do botão*/
+    scale: 1.1;
+}
+
+
+
+
+.sidebar { /* para foto de perfil */
+    display: flex;
+    flex-direction: column; /* Coloca os elementos em coluna */
+    align-items: flex-start; /* Alinha os elementos à esquerda */
+}
+
+#buttonFoto { 
+    margin-left: 155px;
+    background-color: #ffffff;
+    color: #7f32a6; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    font-style: italic;
+    transition: .4s;
+}
+
+#buttonFoto:hover {
+    background-color: #7f32a6;
+    color:#ffffff
+}
+
+
