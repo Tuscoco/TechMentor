@@ -15,6 +15,10 @@ main p{
     height: 300px;
     margin-left: 80px;
     margin-bottom: 15px;
+    object-fit: cover;
+    object-position: top;
+    outline: 5px solid #7f32a6;
+    border-radius: 10px;
 }
 
 .container {

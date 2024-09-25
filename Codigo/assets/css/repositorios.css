@@ -20,12 +20,6 @@ main a{
     justify-content: center;
 }
 
-#repo a{
-    /* align-items: center; */
-    /* text-align: center; */
-    /* justify-content: center; */
-}
-
 #repo:hover{
     background-color: #fff;
     color: #7F32A6;

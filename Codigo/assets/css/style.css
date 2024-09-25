@@ -37,13 +37,26 @@ header{
     font-style: italic;
     padding-left: 1px;
     padding: 5px;
+    height: 50px;
 }
+
+header a{
+    color: #7F32A6;
+    text-decoration: none;
+    display: flex;
+}
+
 header p{
     margin: 0;
     margin-right: 10px;
 }
-header i{
-    font-size: 50px;
+header img{
+    outline: 3px solid #7F32A6;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
 }
 #logo{
@@ -57,7 +70,7 @@ header i{
 #logo:hover{
     translate: 20px;
     background-color: #7F32A6;
-    color: white;
+    color: white !important;
     padding: 0 10px;
     border-radius: 5px;
     scale: 1.1;
