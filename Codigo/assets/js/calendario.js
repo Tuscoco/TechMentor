@@ -53,7 +53,7 @@ function generateCalendar(month, year) {
 
                 // Verifica se o dia atual é igual ao dia gerado e destaca com a cor azul
                 if (date === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                    button.style.backgroundColor = '#5832A6'; // Define a cor de fundo azul para o dia atual
+                    button.style.backgroundColor = '#5932A6'; // Define a cor de fundo azul para o dia atual
                     button.style.color = 'white'; // Opcional: Define a cor do texto como branca para melhor contraste
                 }
 
@@ -107,15 +107,27 @@ document.getElementById('prevMonth').addEventListener('click', prevMonth);
 function openModal() {
     const modal = document.getElementById('modal');
     modal.style.display = 'flex'; // Mostra a janela modal
+    modal.style.opacity = 0; // Inicialmente opaco
     document.body.style.overflow = 'hidden'; // Evita rolar a página ao fundo
+
+    setTimeout(() => {
+        modal.style.opacity = 1; // Aumenta a opacidade gradualmente
+    }   , 10);
 }
 
 // Função para fechar o modal
+// Função para fechar o modal com animação de fade out
 function closeModal() {
     const modal = document.getElementById('modal');
-    modal.style.display = 'none'; // Oculta a janela modal
-    document.body.style.overflow = 'auto'; // Restaura a rolagem da página
+    modal.style.opacity = 0; // Inicia o fade out
+
+    // Aguardar a transição de opacidade antes de ocultar o modal
+    setTimeout(() => {
+        modal.style.display = 'none'; // Oculta a janela modal
+        document.body.style.overflow = 'auto'; // Restaura a rolagem da página
+    }, 250); // O tempo deve ser o mesmo definido para a transição no CSS
 }
+
 
 // Event listener para fechar o modal ao clicar no botão "X"
 document.getElementById('closeModal').addEventListener('click', closeModal);
