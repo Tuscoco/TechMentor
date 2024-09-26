@@ -23,7 +23,7 @@ CREATE TABLE evento (local VARCHAR(100) NOT NULL, data_hora VARCHAR(30), materia
 CREATE TABLE repositorio (nome VARCHAR(50) NOT NULL, link VARCHAR(300) NOT NULL, descricao VARCHAR(300), cod_materia INTEGER NOT NULL, PRIMARY KEY(cod_materia), FOREIGN KEY(cod_materia) REFERENCES materia(cod_materia) ON DELETE SET NULL);
 
 -- CRIAR TABELA MONITOR
-CREATE TABLE monitor (matricula INTEGER NOT NULL, cod_materia INTEGER NOT NULL, PRIMARY KEY(matricula, cod_materia), FOREIGN KEY(matricula) REFERENCES aluno(matricula) ON DELETE CASCADE, FOREIGN KEY(cod_materia) REFERENCES materia(cod_materia) ON DELETE CASCADE);
+CREATE TABLE monitor (matricula INTEGER NOT NULL, cod_materia INTEGER NOT NULL, esta_online BOOLEAN NOT NULL, PRIMARY KEY(matricula, cod_materia), FOREIGN KEY(matricula) REFERENCES aluno(matricula) ON DELETE CASCADE, FOREIGN KEY(cod_materia) REFERENCES materia(cod_materia) ON DELETE CASCADE);
 
 -- CRIAR TABELA ATENDIMENTO
 CREATE TABLE atendimento (matricula_a INTEGER NOT NULL, matricula_m INTEGER NOT NULL, horario VARCHAR(10) NOT NULL, data VARCHAR(20) NOT NULL, cod_materia INTEGER NOT NULL, tema_duvida VARCHAR(20) NOT NULL, descricao VARCHAR(100) NULL, duvida_sanada BOOLEAN NOT NULL, PRIMARY KEY(matricula_a, matricula_m, horario, data, cod_materia), FOREIGN KEY(matricula_a) REFERENCES aluno(matricula), FOREIGN KEY(matricula_m) REFERENCES monitor(matricula), FOREIGN KEY(cod_materia) REFERENCES monitor(cod_materia));
