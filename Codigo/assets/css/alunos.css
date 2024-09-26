@@ -1,3 +1,49 @@
+search{
+    display: flex;
+    justify-content: center;
+}
+
+search input{
+    color: #7F32A6;
+    font-size:20px;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    padding-left: 10px;
+    border: none;
+    outline: 5px solid #7F32A6;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 700px;
+    height: 40px;
+}
+
+search button{
+    background-color: #7F32A6;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    transform: translateY(-4.8px);
+    transition: .1s;
+}
+
+search button:active{
+    background-color: #53216c;
+    border: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #c5c5c5;
+    height: 50px;
+    width: 50px;
+}
+
+#lupa{
+    font-size: 30px;
+}
+
 #alunos{
     margin-top: 30px;
 }
@@ -12,12 +58,51 @@
 }
 
 #aluno img{
-    margin-left: 30px;
-    width: 30px;
-    height: 30px;
+    margin-left: 20px;
+    width: 35px;
+    height: 35px;
     object-fit: cover;
     object-position: top;
     border-radius: 50px;
-    outline: 5px solid #7F32A6;
+    outline: 3px solid #7F32A6;
 }
 
+#nome{
+    margin-left: 20px;
+    margin-right: 727px;
+}
+
+#aluno input[type="checkbox"] {
+    margin-left: 20px;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #7F32A6;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+#aluno input[type="checkbox"] {
+    margin-left: 20px;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #7F32A6;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+#aluno input[type="checkbox"]:checked {
+    background-color: #7F32A6;
+}
+
+#aluno input[type="checkbox"]:checked::after {
+    color: #fff;
+    content: '✔';
+    display: block;
+    font-size: 30px;
+    margin-top: -6px;
+    margin-left: 3px;
+}
