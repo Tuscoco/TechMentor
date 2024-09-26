@@ -1,28 +1,108 @@
-main{
-    padding: 5px;
+main {
+    padding: 20px;
     padding-bottom: 75px;
 }
 
-main p{
+main p {
     text-align: center;
 }
 
 .monit {
     display: grid;
-    gap: 2px;
+    gap: 7px;
 }
 
-button{
+.monit img {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50px;
+    outline: 3px solid #7F32A6;
+    transition: all 0.3s ease;
+}
+
+#monA{
+    opacity: 50%;
+}
+
+button {
     background-color: #ffffff;
     color: #7F32A6;
-    border: 3px solid #7F32A6;;
+    border: 3px solid #7F32A6;
     border-radius: 10px;
-    transition: .2s;
+    transition: 0.2s;
     font-family: Arial, sans-serif;
     font-weight: 700;
     font-style: italic;
 }
 
 button:hover {
-    scale: 1.1;
+    scale: 1.02;
 }
+
+/* Aumenta o botão inteiro quando clicado */
+.menu-open {
+    height: 100px;
+    transition: all 0.3s ease;  /* Suaviza a transição */
+}
+
+/* Caso deseje mudar também o tamanho da imagem dentro do botão */
+.menu-open img {
+    width: 60px;
+    height: 60px;
+}
+
+.div-hamburguer{
+    display: flex;
+    margin: 3px 10px 10px;
+    font-size: 25px;
+    gap: 170px;
+}
+
+.div-hamburguer.open{
+    font-size: 10px;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Estilo para o botão que pode expandir */
+button.menu-hamburger {
+    font-size: 10px;
+    background-color: #ffffff;
+    color: #7F32A6;
+    border: 3px solid #7F32A6;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;  /* Para alinhar as informações verticalmente */
+    align-items: flex-start;  /* Alinha o conteúdo à esquerda */
+    padding: 10px;
+    max-height: 60px;  /* Altura inicial do botão */
+    overflow: hidden;  /* Esconde o conteúdo extra inicialmente */
+}
+
+/* Estilo para quando o botão estiver "aberto" */
+button.menu-hamburger.open {
+    max-height: 200px;  /* Altura do botão expandido */
+    transition: max-height 0.3s ease;
+}
+
+/* Ajuste de estilo para o conteúdo adicional */
+button.menu-hamburger p {
+    margin: 5px 0;
+}
+
+/* Estilo para o botão ao passar o mouse */
+button:hover {
+    scale: 1.02;
+    transition: 0.2s;
+}
+
+
+
+

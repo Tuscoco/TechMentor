@@ -38,7 +38,7 @@ function toggleNewField() {
         // Cria um novo campo de entrada
         var newInput = document.createElement('input');
         newInput.type = 'Number';
-        newInput.placeholder = 'Código de Monitor';
+        newInput.placeholder = 'Código de coordenador';
 
         // Adiciona o novo campo ao contêiner
         additionalFields.appendChild(newInput);
