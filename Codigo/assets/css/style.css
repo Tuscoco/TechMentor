@@ -1,12 +1,12 @@
 body{
-    background: linear-gradient(45deg, #7F32A6, #7F32A6, #00fff2);
+    /* background: linear-gradient(45deg, #7F32A6, #7F32A6, #00fff2); */
     height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
-    /* background: linear-gradient(45deg, #00fff2, #7F32A6, #00fff2); */
-    /* background-size: 400% 400%; */
-    /* animation: gradientAnimation 15s ease infinite; */
+    background: linear-gradient(45deg, #00fff2, #7F32A6, #00fff2    );
+    background-size: 400% 400%;
+    animation: gradientAnimation 30s ease infinite;
 
 }
 
@@ -70,10 +70,30 @@ header img{
 #logo:hover{
     translate: 20px;
     background-color: #7F32A6;
-    color: white !important;
+    color: #fff !important;
     padding: 0 10px;
     border-radius: 5px;
     scale: 1.1;
+}
+
+#perfil{
+    transition: .1s;
+}
+
+#perfil:hover{
+    translate: -20px;
+    background-color: #7F32A6;
+    color: #fff !important;
+    padding: 0 10px;
+    border-radius: 5px;
+    scale: 1.1;
+}
+
+#perfil:hover img{
+    outline: #fff solid 3px;
+    margin: 6px 0;
+    width: 30px;
+    height: 30px;
 }
 
 main {

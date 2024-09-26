@@ -1,0 +1,23 @@
+#alunos{
+    margin-top: 30px;
+}
+
+#aluno{
+    height: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    outline: 5px solid #7F32A6;
+    border-radius: 5px;
+    align-items: center;
+}
+
+#aluno img{
+    margin-left: 30px;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50px;
+    outline: 5px solid #7F32A6;
+}
+
