@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TechMentor</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/monitoriaPilha.css">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/monitoriaGrade.css" id="grade-css">
+  <link rel="stylesheet" href="../css/monitoriaPilha.css" id="pilha-css" disabled>
 </head>
 
 <body>
@@ -22,48 +23,22 @@
   </header>
 
   <main>
+
+    <div id="toggleButton">
+      <i class="ph-fill ph-grid-four"></i>
+      <input id="toggle" class="toggle" type="checkbox">
+      <label for="toggle"></label>
+      <i class="ph-fill ph-rows"></i>
+    </div>
+
     <p class="title">Monitores Presentes</p>
     <section class="monit" id="monP">
       
       <button class="menu-hamburger">
-        <div class="bar-close">
+        <div class="bar-grid">
           <img src="../assets/img/3535250.png" alt="">
-          <p id="nome">Nome</p>
           <p id="materia">AEDS II</p>
-          <p id="horario">13:00 - 16:00</p>
         </div>
-        <div class="bar-open">
-          <img src="../assets/img/3535250.png" alt="">
-          <div class="dados">
-            <p id="nome">Nome: Fulano</p>
-            <p id="materia">Disciplina: AEDS II</p>
-            <p id="horario">Horarios: 13:00 - 16:00</p>
-            <p>Local: Sala 305</p>
-            <p>Contato: fulano@exemplo.com</p>
-          </div>
-        </div>
-      </button>
-      
-      <button class="menu-hamburger">
-        <div class="bar-close">
-          <img src="../assets/img/3535250.png" alt="">
-          <p id="nome">Nome</p>
-          <p id="materia">AEDS II</p>
-          <p id="horario">13:00 - 16:00</p>
-        </div>
-        <div class="bar-open">
-          <img src="../assets/img/3535250.png" alt="">
-          <div class="dados">
-            <p id="nome">Nome: Fulano</p>
-            <p id="materia">Disciplina: AEDS II</p>
-            <p id="horario">Horarios: 13:00 - 16:00</p>
-            <p>Local: Sala 305</p>
-            <p>Contato: fulano@exemplo.com</p>
-          </div>
-        </div>
-      </button>
-
-      <button class="menu-hamburger">
         <div class="bar-close">
           <img src="../assets/img/3535250.png" alt="">
           <p id="nome">Nome</p>
@@ -83,6 +58,10 @@
       </button>
 
       <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
         <div class="bar-close">
           <img src="../assets/img/3535250.png" alt="">
           <p id="nome">Nome</p>
@@ -102,6 +81,10 @@
       </button>
 
       <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
         <div class="bar-close">
           <img src="../assets/img/3535250.png" alt="">
           <p id="nome">Nome</p>
@@ -119,10 +102,144 @@
           </div>
         </div>
       </button>
-      
 
+      <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
+        <div class="bar-close">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="nome">Nome</p>
+          <p id="materia">AEDS II</p>
+          <p id="horario">13:00 - 16:00</p>
+        </div>
+        <div class="bar-open">
+          <img src="../assets/img/3535250.png" alt="">
+          <div class="dados">
+            <p id="nome">Nome: Fulano</p>
+            <p id="materia">Disciplina: AEDS II</p>
+            <p id="horario">Horarios: 13:00 - 16:00</p>
+            <p>Local: Sala 305</p>
+            <p>Contato: fulano@exemplo.com</p>
+          </div>
+        </div>
+      </button>
 
-      
+      <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
+        <div class="bar-close">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="nome">Nome</p>
+          <p id="materia">AEDS II</p>
+          <p id="horario">13:00 - 16:00</p>
+        </div>
+        <div class="bar-open">
+          <img src="../assets/img/3535250.png" alt="">
+          <div class="dados">
+            <p id="nome">Nome: Fulano</p>
+            <p id="materia">Disciplina: AEDS II</p>
+            <p id="horario">Horarios: 13:00 - 16:00</p>
+            <p>Local: Sala 305</p>
+            <p>Contato: fulano@exemplo.com</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
+        <div class="bar-close">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="nome">Nome</p>
+          <p id="materia">AEDS II</p>
+          <p id="horario">13:00 - 16:00</p>
+        </div>
+        <div class="bar-open">
+          <img src="../assets/img/3535250.png" alt="">
+          <div class="dados">
+            <p id="nome">Nome: Fulano</p>
+            <p id="materia">Disciplina: AEDS II</p>
+            <p id="horario">Horarios: 13:00 - 16:00</p>
+            <p>Local: Sala 305</p>
+            <p>Contato: fulano@exemplo.com</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
+        <div class="bar-close">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="nome">Nome</p>
+          <p id="materia">AEDS II</p>
+          <p id="horario">13:00 - 16:00</p>
+        </div>
+        <div class="bar-open">
+          <img src="../assets/img/3535250.png" alt="">
+          <div class="dados">
+            <p id="nome">Nome: Fulano</p>
+            <p id="materia">Disciplina: AEDS II</p>
+            <p id="horario">Horarios: 13:00 - 16:00</p>
+            <p>Local: Sala 305</p>
+            <p>Contato: fulano@exemplo.com</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
+        <div class="bar-close">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="nome">Nome</p>
+          <p id="materia">AEDS II</p>
+          <p id="horario">13:00 - 16:00</p>
+        </div>
+        <div class="bar-open">
+          <img src="../assets/img/3535250.png" alt="">
+          <div class="dados">
+            <p id="nome">Nome: Fulano</p>
+            <p id="materia">Disciplina: AEDS II</p>
+            <p id="horario">Horarios: 13:00 - 16:00</p>
+            <p>Local: Sala 305</p>
+            <p>Contato: fulano@exemplo.com</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
+        <div class="bar-close">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="nome">Nome</p>
+          <p id="materia">AEDS II</p>
+          <p id="horario">13:00 - 16:00</p>
+        </div>
+        <div class="bar-open">
+          <img src="../assets/img/3535250.png" alt="">
+          <div class="dados">
+            <p id="nome">Nome: Fulano</p>
+            <p id="materia">Disciplina: AEDS II</p>
+            <p id="horario">Horarios: 13:00 - 16:00</p>
+            <p>Local: Sala 305</p>
+            <p>Contato: fulano@exemplo.com</p>
+          </div>
+        </div>
+      </button>
     </section>
 
     <p class="title">Monitores Ausentes</p>
@@ -130,6 +247,10 @@
     <section class="monit" id="monA">
 
       <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
         <div class="bar-close">
           <img src="../assets/img/3535250.png" alt="">
           <p id="nome">Nome</p>
@@ -149,6 +270,10 @@
       </button>
 
       <button class="menu-hamburger">
+        <div class="bar-grid">
+          <img src="../assets/img/3535250.png" alt="">
+          <p id="materia">AEDS II</p>
+        </div>
         <div class="bar-close">
           <img src="../assets/img/3535250.png" alt="">
           <p id="nome">Nome</p>
@@ -168,25 +293,10 @@
       </button>
 
       <button class="menu-hamburger">
-        <div class="bar-close">
+        <div class="bar-grid">
           <img src="../assets/img/3535250.png" alt="">
-          <p id="nome">Nome</p>
           <p id="materia">AEDS II</p>
-          <p id="horario">13:00 - 16:00</p>
         </div>
-        <div class="bar-open">
-          <img src="../assets/img/3535250.png" alt="">
-          <div class="dados">
-            <p id="nome">Nome: Fulano</p>
-            <p id="materia">Disciplina: AEDS II</p>
-            <p id="horario">Horarios: 13:00 - 16:00</p>
-            <p>Local: Sala 305</p>
-            <p>Contato: fulano@exemplo.com</p>
-          </div>
-        </div>
-      </button>
-
-      <button class="menu-hamburger">
         <div class="bar-close">
           <img src="../assets/img/3535250.png" alt="">
           <p id="nome">Nome</p>
@@ -208,6 +318,9 @@
     </section>
   </main>
   <script src="../js/monitoriaPilha.js"></script>
+  <script src="../js/monitoriaGrade.js"></script>
+  <script defer src="../js/monitoriaStyle.js"></script>
+
 </body>
 
 </html>
