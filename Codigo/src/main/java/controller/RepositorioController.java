@@ -2,7 +2,9 @@ package controller;
 
 import static spark.Spark.*;
 import com.google.gson.Gson;
+import model.Repositorio;
 import service.RepositorioService;
+import java.util.*;
 
 public class RepositorioController {
     
@@ -16,6 +18,37 @@ public class RepositorioController {
 
     }
 
-    public void setup(){}
+    public void setup(){
+
+        post("/salvarrepositorio", (req, res) -> {
+
+            res.type("application/json");
+
+            Repositorio repositorio = gson.fromJson(req.body(), Repositorio.class);
+            boolean success = repositorioService.salvarRepositorio(repositorio);
+
+            if(success){
+
+                return gson.toJson("Repositorio salvo!");
+
+            }else{
+
+                return gson.toJson("Falha ao salvar repositorio!");
+
+            }
+
+        });
+
+        get("/mostrarrepositorio", (req, res) -> {
+
+            res.type("application/json");
+
+            List<Repositorio> lista = repositorioService.getTodos();
+
+            return new Gson().toJson(lista);
+
+        });
+
+    }
 
 }

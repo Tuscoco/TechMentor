@@ -2,9 +2,9 @@ package model;
 
 public class Atendimento {
     
-    private int matricula_a;
+    private int id;
+	private int matricula_a;
     private int matricula_m;
-    private String horario;
     private String data;
     private int cod_materia;
     private String tema_duvida;
@@ -12,18 +12,23 @@ public class Atendimento {
     private boolean duvida_sanada;
 
 
-    public Atendimento(int matricula_a, int matricula_m, String horario, String data, int cod_materia, String tema_duvida, String descricao, boolean duvida_sanada) {
+    public Atendimento(int id, int matricula_a, int matricula_m, int cod_materia, String data, String tema_duvida, String descricao, boolean duvida_sanada) {
 
-        this.matricula_a = matricula_a;
+        this.id = id;
+		this.matricula_a = matricula_a;
         this.matricula_m = matricula_m;
-        this.horario = horario;
+		this.cod_materia = cod_materia;
         this.data = data;
-        this.cod_materia = cod_materia;
         this.tema_duvida = tema_duvida;
         this.descricao = descricao;
         this.duvida_sanada = duvida_sanada;
 
     }
+
+
+	public int getId() {
+		return id;
+	}
 
 
 	public int getMatricula_a() {
@@ -33,11 +38,6 @@ public class Atendimento {
 
 	public int getMatricula_m() {
 		return matricula_m;
-	}
-
-
-	public String getHorario() {
-		return horario;
 	}
 
 

@@ -9,5 +9,49 @@ public class AtendimentoDAO {
     private String url = "jdbc:postgresql://localhost:5432/techmentor";
     private String user = "";
     private String password = "";
+
+
+    public void salvarAtendimento(Atendimento atendimento) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "INSERT INTO atendimento (id, id_monitor, id_aluno, cod_materia, data, tema_duvida, descricao, duvida_sanada) VALUES (?,?,?,?,?,?,?,?)";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, getNextId());
+            pstmt.setInt(2, atendimento.getMatricula_m());
+            pstmt.setInt(3, atendimento.getMatricula_a());
+            pstmt.setInt(4, atendimento.getCod_materia());
+            pstmt.setString(5, atendimento.getData());
+            pstmt.setString(6, atendimento.getTema_duvida());
+            pstmt.setString(7, atendimento.getDescricao());
+            pstmt.setBoolean(8, atendimento.isDuvida_sanada());
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
+
+    public int getNextId() throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELEXT MAX(id) AS max_id FROM repositorio";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                return result.getInt("max_id") + 1;
+
+            }
+
+        }
+
+        return 1;
+
+    }
     
 }
