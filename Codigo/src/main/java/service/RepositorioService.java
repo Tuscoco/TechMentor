@@ -34,4 +34,10 @@ public class RepositorioService {
 
     }
 
+    public List<Repositorio> getAlguns(int cod_materia) throws SQLException{
+
+        return repositorioDAO.getAlguns(cod_materia);
+
+    }
+
 }

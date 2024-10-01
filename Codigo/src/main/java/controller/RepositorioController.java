@@ -49,6 +49,18 @@ public class RepositorioController {
 
         });
 
+        get("/mostrarrepositoriofiltrado", (req, res) -> {
+
+            res.type("application/json");
+
+            int cod_materia = gson.fromJson(req.body(), int.class);
+
+            List<Repositorio> lista = repositorioService.getAlguns(cod_materia);
+
+            return new Gson().toJson(lista);
+
+        });
+
     }
 
 }

@@ -72,5 +72,30 @@ public class RepositorioDAO {
         return lista;
 
     }
+
+    public List<Repositorio> getAlguns(int cod_materia) throws SQLException{
+
+        List<Repositorio> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT * FROM repositorio WHERE cod_materia = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, cod_materia);
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("name"), result.getString("link"), result.getString("descricao"), result.getInt("cod_materia"));
+                lista.add(repositorio);
+
+            }
+
+        }
+
+        return lista;
+
+    }
     
 }
