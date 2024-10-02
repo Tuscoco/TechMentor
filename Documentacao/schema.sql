@@ -2,32 +2,81 @@
 CREATE DATABASE techmentor;
 
 -- CRIAR TABELA DE PESSOA
-CREATE TABLE pessoa (id INTEGER NOT NULL, nome VARCHAR(50) NOT NULL, email VARCHAR(50) NOT NULL, senha VARCHAR(40) NOT NULL, imagem VARCHAR(60),PRIMARY KEY(id));
-
--- CRIAR TABELA ALUNO
-CREATE TABLE aluno (matricula INTEGER NOT NULL, id INTEGER NOT NULL, PRIMARY KEY(matricula), FOREIGN KEY(id) REFERENCES pessoa(id) ON DELETE SET NULL);
-
--- CRIAR TABELA COORDENADOR
-CREATE TABLE coordenador (cod_coordenador INTEGER NOT NULL, id INTEGER NOT NULL, PRIMARY KEY(cod_coordenador), FOREIGN KEY(id) REFERENCES pessoa(id) ON DELETE SET NULL);
+CREATE TABLE pessoa (
+    id INTEGER NOT NULL, 
+    nome VARCHAR(50) NOT NULL, 
+    email VARCHAR(50) NOT NULL, 
+    imagem VARCHAR(60), 
+    tipo_usuario INTEGER NOT NULL, 
+    matricula INTEGER NOT NULL, 
+    PRIMARY KEY(id)
+);
 
 -- CRIAR TABELA MATERIA
-CREATE TABLE materia (cod_materia INTEGER NOT NULL, nome VARCHAR(50) NOT NULL, PRIMARY KEY(cod_materia));
+CREATE TABLE materia (
+    id_materia INTEGER NOT NULL, 
+    nome VARCHAR(50) NOT NULL, 
+    PRIMARY KEY(id_materia)
+);
 
 -- CRIAR TABELA MATERIA_ALUNO
-CREATE TABLE materia_aluno (matricula INTEGER NOT NULL, cod_materia INTEGER NOT NULL, PRIMARY KEY(matricula, cod_materia), FOREIGN KEY(matricula) REFERENCES aluno(matricula) ON DELETE CASCADE, FOREIGN KEY(cod_materia) REFERENCES materia(cod_materia) ON DELETE CASCADE);
+CREATE TABLE materia_aluno (
+    id_aluno INTEGER NOT NULL, 
+    id_materia INTEGER NOT NULL, 
+    PRIMARY KEY(id_aluno, id_materia), 
+    FOREIGN KEY(id_aluno) REFERENCES pessoa(id) ON DELETE CASCADE, 
+    FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
+);
 
 -- CRIAR TABELA EVENTO
-CREATE TABLE evento (local VARCHAR(100) NOT NULL, data_hora VARCHAR(30), materia INTEGER NOT NULL, nome VARCHAR(50), PRIMARY KEY(local, data_hora), FOREIGN KEY(materia) REFERENCES materia(cod_materia) ON DELETE SET NULL);
+CREATE TABLE evento (
+    id SERIAL PRIMARY KEY, 
+    local VARCHAR(100) NOT NULL, 
+    data_hora TIMESTAMP, 
+    id_materia INTEGER,  -- Permitir NULL devido ao ON DELETE SET NULL
+    nome VARCHAR(50), 
+    FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE SET NULL
+);
 
 -- CRIAR TABELA REPOSITORIO
-CREATE TABLE repositorio (nome VARCHAR(50) NOT NULL, link VARCHAR(300) NOT NULL, descricao VARCHAR(300), cod_materia INTEGER NOT NULL, PRIMARY KEY(cod_materia), FOREIGN KEY(cod_materia) REFERENCES materia(cod_materia) ON DELETE SET NULL);
+CREATE TABLE repositorio (
+    id SERIAL PRIMARY KEY, 
+    nome VARCHAR(50) NOT NULL, 
+    link TEXT NOT NULL, 
+    descricao TEXT, 
+    id_materia INTEGER, 
+    FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE SET NULL
+);
 
--- CRIAR TABELA MONITOR
-CREATE TABLE monitor (matricula INTEGER NOT NULL, cod_materia INTEGER NOT NULL, esta_online BOOLEAN NOT NULL, PRIMARY KEY(matricula, cod_materia), FOREIGN KEY(matricula) REFERENCES aluno(matricula) ON DELETE CASCADE, FOREIGN KEY(cod_materia) REFERENCES materia(cod_materia) ON DELETE CASCADE);
+-- CRIAR TABELA MONITORIA
+CREATE TABLE monitoria (
+    id_monitor INTEGER, 
+    id_materia INTEGER, 
+    online BOOLEAN, 
+    PRIMARY KEY(id_monitor, id_materia), 
+    FOREIGN KEY(id_monitor) REFERENCES pessoa(id) ON DELETE CASCADE, 
+    FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
+);
 
 -- CRIAR TABELA ATENDIMENTO
-CREATE TABLE atendimento (matricula_a INTEGER NOT NULL, matricula_m INTEGER NOT NULL, horario VARCHAR(10) NOT NULL, data VARCHAR(20) NOT NULL, cod_materia INTEGER NOT NULL, tema_duvida VARCHAR(20) NOT NULL, descricao VARCHAR(100) NULL, duvida_sanada BOOLEAN NOT NULL, PRIMARY KEY(matricula_a, matricula_m, horario, data, cod_materia), FOREIGN KEY(matricula_a) REFERENCES aluno(matricula), FOREIGN KEY(matricula_m) REFERENCES monitor(matricula), FOREIGN KEY(cod_materia) REFERENCES monitor(cod_materia));
+CREATE TABLE atendimento (
+    id SERIAL PRIMARY KEY, 
+    id_monitor INTEGER NOT NULL, 
+    id_aluno INTEGER NOT NULL, 
+    data TIMESTAMP NOT NULL, 
+    id_materia INTEGER NOT NULL, 
+    descricao TEXT, 
+    FOREIGN KEY(id_aluno) REFERENCES pessoa(id), 
+    FOREIGN KEY(id_monitor, id_materia) REFERENCES monitoria(id_monitor, id_materia)
+);
 
 -- CRIAR TABELA CARGA_HORARIA
-CREATE TABLE carga_horaria (dia_da_semana VARCHAR(10) NOT NULL, matricula INTEGER NOT NULL, cod_materia INTEGER NOT NULL, horario_entrada VARCHAR(20) NULL, horario_saida VARCHAR(20) NULL, PRIMARY KEY(dia_da_semana, matricula, cod_materia), FOREIGN KEY(matricula, cod_materia) REFERENCES monitor(matricula, cod_materia));
-
+CREATE TABLE carga_horaria (
+    id_monitor INTEGER NOT NULL, 
+    id_materia INTEGER, 
+    dia_semana VARCHAR(20) NOT NULL, 
+    horario_entrada TIME, 
+    horario_saida TIME, 
+    PRIMARY KEY(id_monitor, id_materia, dia_semana), 
+    FOREIGN KEY(id_monitor, id_materia) REFERENCES monitoria(id_monitor, id_materia)
+);
