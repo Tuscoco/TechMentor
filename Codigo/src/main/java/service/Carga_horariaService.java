@@ -1,10 +1,10 @@
 package service;
 
-import dao.Carga_horariaDAO;
-import model.Carga_horaria;
+import dao.CargaHorariaDAO;
+import model.CargaHoraria;
 
 public class Carga_horariaService {
     
-    private Carga_horariaDAO carga_horariaDAO = new Carga_horariaDAO();
+    private CargaHorariaDAO carga_horariaDAO = new CargaHorariaDAO();
 
 }

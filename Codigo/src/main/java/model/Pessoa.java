@@ -7,14 +7,16 @@ public class Pessoa {
     private String email;
     private String senha;
     private String imagem;
+    private int tipo_usuario;
 
 
-    public Pessoa(int id, String nome, String email, String senha) {
+    public Pessoa(int id, String nome, String email, String senha, int tipo_usuario) {
 
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.tipo_usuario = tipo_usuario;
 
     }
 
@@ -46,6 +48,11 @@ public class Pessoa {
 
     public String getImagem() {
         return imagem;
+    }
+
+
+    public int getTipoUsuario() {
+        return tipo_usuario;
     }
 
 }

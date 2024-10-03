@@ -20,13 +20,13 @@ public class AtendimentoDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, getNextId());
-            pstmt.setInt(2, atendimento.getMatricula_m());
-            pstmt.setInt(3, atendimento.getMatricula_a());
-            pstmt.setInt(4, atendimento.getCod_materia());
-            pstmt.setString(5, atendimento.getData());
-            pstmt.setString(6, atendimento.getTema_duvida());
+            pstmt.setInt(2, atendimento.getIdMonitor());
+            pstmt.setInt(3, atendimento.getIdAluno());
+            pstmt.setInt(4, atendimento.getIdMateria());
+            pstmt.setDate(5, atendimento.getData());
+            pstmt.setString(6, atendimento.getTemaDuvida());
             pstmt.setString(7, atendimento.getDescricao());
-            pstmt.setBoolean(8, atendimento.isDuvida_sanada());
+            pstmt.setBoolean(8, atendimento.isDuvidaSanada());
 
             pstmt.executeUpdate();
 

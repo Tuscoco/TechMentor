@@ -6,16 +6,16 @@ public class Repositorio {
     private String nome;
     private String link;
     private String descricao;
-    private int cod_materia;
+    private int id_materia;
 
 
-    public Repositorio(int id, String nome, String link, String descricao, int cod_materia) {
+    public Repositorio(int id, String nome, String link, String descricao, int id_materia) {
 
         this.id = id;
         this.nome = nome;
         this.link = link;
         this.descricao = descricao;
-        this.cod_materia = cod_materia;
+        this.id_materia = id_materia;
 
     }
 
@@ -25,8 +25,8 @@ public class Repositorio {
     }
     
     
-    public int getCod_materia() {
-        return cod_materia;
+    public int getIdMateria() {
+        return id_materia;
     }
 
 

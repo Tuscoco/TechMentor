@@ -4,13 +4,13 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import service.Carga_horariaService;
 
-public class Carga_horariaController {
+public class CargaHorariaController {
     
     private Carga_horariaService carga_horariaService;
     Gson gson = new Gson();
 
 
-    public Carga_horariaController(Carga_horariaService carga_horariaService){
+    public CargaHorariaController(Carga_horariaService carga_horariaService){
 
         this.carga_horariaService = carga_horariaService;
 

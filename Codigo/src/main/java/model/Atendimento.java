@@ -1,23 +1,25 @@
 package model;
 
+import java.sql.Date;
+
 public class Atendimento {
     
     private int id;
-	private int matricula_a;
-    private int matricula_m;
-    private String data;
-    private int cod_materia;
+	private int id_monitor;
+    private int id_aluno;
+	private int id_materia;
+    private Date data;
     private String tema_duvida;
     private String descricao;
     private boolean duvida_sanada;
 
 
-    public Atendimento(int id, int matricula_a, int matricula_m, int cod_materia, String data, String tema_duvida, String descricao, boolean duvida_sanada) {
+    public Atendimento(int id, int id_monitor, int id_aluno, int id_materia, Date data, String tema_duvida, String descricao, boolean duvida_sanada) {
 
         this.id = id;
-		this.matricula_a = matricula_a;
-        this.matricula_m = matricula_m;
-		this.cod_materia = cod_materia;
+		this.id_monitor = id_monitor;
+        this.id_aluno = id_aluno;
+		this.id_materia = id_materia;
         this.data = data;
         this.tema_duvida = tema_duvida;
         this.descricao = descricao;
@@ -31,27 +33,27 @@ public class Atendimento {
 	}
 
 
-	public int getMatricula_a() {
-		return matricula_a;
+	public int getIdMonitor() {
+		return id_monitor;
 	}
 
 
-	public int getMatricula_m() {
-		return matricula_m;
+	public int getIdAluno() {
+		return id_aluno;
 	}
 
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
 
-	public int getCod_materia() {
-		return cod_materia;
+	public int getIdMateria() {
+		return id_materia;
 	}
 
 
-	public String getTema_duvida() {
+	public String getTemaDuvida() {
 		return tema_duvida;
 	}
 
@@ -61,7 +63,7 @@ public class Atendimento {
 	}
 
 
-	public boolean isDuvida_sanada() {
+	public boolean isDuvidaSanada() {
 		return duvida_sanada;
 	}
 

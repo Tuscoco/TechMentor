@@ -21,7 +21,7 @@ public class EventoDAO {
             pstmt.setInt(1, getNextId());
             pstmt.setString(2, evento.getNome());
             pstmt.setString(3, evento.getLocal());
-            pstmt.setString(4, evento.getData_hora());
+            pstmt.setDate(4, evento.getData());
             pstmt.setInt(5, evento.getMateria());
 
             pstmt.executeUpdate();
@@ -62,7 +62,7 @@ public class EventoDAO {
 
             while(result.next()){
 
-                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data_hora"), result.getInt("materia"));
+                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getDate("data_hora"), result.getInt("materia"));
                 lista.add(evento);
 
             }

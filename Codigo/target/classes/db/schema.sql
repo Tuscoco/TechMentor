@@ -32,7 +32,7 @@ CREATE TABLE materia_aluno (
 CREATE TABLE evento (
     id SERIAL PRIMARY KEY, 
     local VARCHAR(100) NOT NULL, 
-    data_hora TIMESTAMP, 
+    data_hora DATE, 
     id_materia INTEGER,
     nome VARCHAR(50), 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE SET NULL
@@ -63,7 +63,7 @@ CREATE TABLE atendimento (
     id SERIAL PRIMARY KEY, 
     id_monitor INTEGER NOT NULL, 
     id_aluno INTEGER NOT NULL, 
-    data TIMESTAMP NOT NULL, 
+    data DATE NOT NULL, 
     id_materia INTEGER NOT NULL, 
     descricao TEXT, 
     FOREIGN KEY(id_aluno) REFERENCES pessoa(id), 

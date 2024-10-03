@@ -1,6 +1,6 @@
 package dao;
 
-import model.Monitor;
+import model.Monitoria;
 import java.sql.*;
 import java.util.*;
 

@@ -1,19 +1,21 @@
 package model;
 
+import java.sql.Date;
+
 public class Evento {
     
     private int id;
 	private String local;
-    private String data_hora;
+    private Date data;
     private String nome;
     private int materia;
     
     
-	public Evento(int id, String nome, String local, String data_hora, int materia) {
+	public Evento(int id, String nome, String local, Date data, int materia) {
 
 		this.id = id;
 		this.local = local;
-		this.data_hora = data_hora;
+		this.data = data;
 		this.nome = nome;
 		this.materia = materia;
 
@@ -30,8 +32,8 @@ public class Evento {
 	}
 
 
-	public String getData_hora() {
-		return data_hora;
+	public Date getData() {
+		return data;
 	}
 
 

@@ -22,7 +22,7 @@ public class RepositorioDAO {
             pstmt.setString(2, repositorio.getNome());
             pstmt.setString(3, repositorio.getLink());
             pstmt.setString(4, repositorio.getDescricao());
-            pstmt.setInt(5, repositorio.getCod_materia());
+            pstmt.setInt(5, repositorio.getIdMateria());
 
             pstmt.executeUpdate();
 

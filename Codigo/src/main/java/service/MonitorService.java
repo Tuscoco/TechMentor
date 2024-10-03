@@ -1,7 +1,7 @@
 package service;
 
 import dao.MonitorDAO;
-import model.Monitor;
+import model.Monitoria;
 
 public class MonitorService {
     

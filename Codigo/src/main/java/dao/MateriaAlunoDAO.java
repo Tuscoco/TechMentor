@@ -1,10 +1,10 @@
 package dao;
 
-import model.Carga_horaria;
+import model.MateriaAluno;
 import java.sql.*;
 import java.util.*;
 
-public class Carga_horariaDAO {
+public class MateriaAlunoDAO {
     
     private String url = "jdbc:postgresql://localhost:5432/techmentor";
     private String user = "";
