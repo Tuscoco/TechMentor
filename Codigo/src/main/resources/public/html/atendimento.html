@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/atendimento.css">
     <link rel="stylesheet" href="../css/style.css">
-    <title>TechMentor   </title>
+    <title>TechMentor </title>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
+
 <body>
     <header>
         <a href="../html/home.html" id="logo">
@@ -20,31 +22,89 @@
     </header>
     <main>
         <p>Formulário de Acompanhamento de Monitoria 2024/2</p>
-        <p>Formulário para preenchimento pelos monitores para acompanhamento dos atendimentos na monitoria do segundo semestre de 2024. </p>
-        
-        <p>1. Campus da monitori:</p>
-        <select name="campus" id="campus">
-            <option value="" selected disabled>selecione uma opção</option>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
-        
-        <p>2. Disciplina abordada:</p>
-        <select name="disciplina" id="disciplina">
-            <option value="" selected disabled>selecione uma opção</option>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select>
+        <p>Formulário para preenchimento pelos monitores para acompanhamento dos atendimentos na monitoria do segundo
+            semestre de 2024. </p>
 
-        <p>1. Campus da monitoria</p>
-        <input type="date" placeholder="insira a data">
+        <div id="campus">
+            <p>1. Campus da monitori:</p>
+            <select name="campus" id="campus">
+                <option value="" class="default" selected disabled>selecione uma opção</option>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+
+        <div id="disciplina">
+            <p>2. Disciplina abordada:</p>
+            <select name="disciplina" id="disciplina">
+                <option value="" class="default" selected disabled>selecione uma opção</option>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+
+        <div id="data">
+            <p>3. Data do atendimento:</p>
+            <input type="date" placeholder="insira a data">
+        </div>
+
+        <div id="horario">
+            <p>4. Horario do atendimento:</p>
+            <input type="time" name="" id="">
+        </div>
+
+        <div id="tipo">
+            <p>5. Tipo de atendimento:</p>
+            <input type="radio" name="" id="" value="presencial">
+            <p class="valor">Presencial</p>
+            <input type="radio" name="" id="" value="virtual">
+            <p class="valor">Virtual</p>
+        </div>
+        ~
+        <div id="matricula">
+            <p>6. Matricula do aluno:</p>
+            <input type="number" name="" id="">
+        </div>
+
+        <div id="duvida">
+            <p>7. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
+                numeração).</p>
+            <input type="text" name="" id="">
+        </div>
+
+        <div id="duvidaDescr">
+            <p>9. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
+                declaração e aritmética de ponteiros; Aluno não sabia aplicar a regra da cadeia; Dificuldades em
+                conversão de bases binária e hexadecimal).</p>
+            <input type="text" name="" id="">
+        </div>
+
+        <div id="sanada">
+            <p>10. A duvida foi sanada?</p>
+            <input type="radio" name="" id="" value="sim">
+            <p class="valor">Sim</p>
+            <input type="radio" name="" id="" value="nao">
+            <p class="valor">Não</p>
+            <input type="radio" name="" id="" value="parcialmente">
+            <p class="valor">Parcialmente</p>
+        </div>
+
+        <siv id="observacoes">
+            <p>11. Observações adicionais:
+                Caso deseje colocar alguma observação adicional sobre o atendimento (problema com o atendimento,
+                sugestão de melhoria, etc...)</p>
+            <input type="text" name="" id="">
+        </siv>
+
+        <button>Enviar</button>
     </main>
-    
+
 </body>
 
-    <script src="../js/atendimento.js"></script>
+<script src="../js/atendimento.js"></script>
+
 </html>
