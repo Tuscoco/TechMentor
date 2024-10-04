@@ -46,6 +46,11 @@ public class Pessoa {
     }
 
 
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+
+
     public String getImagem() {
         return imagem;
     }

@@ -27,7 +27,7 @@ public class App
         PessoaController pessoa = new PessoaController(pessoaService);
         MateriaController materia = new MateriaController(materiaService);
         AtendimentoController atendimento = new AtendimentoController(atendimentoService);
-        Materia_alunoController materia_aluno = new Materia_alunoController(materia_alunoService);
+        MateriaAlunoController materia_aluno = new MateriaAlunoController(materia_alunoService);
         MonitorController monitor = new MonitorController(monitorService);
         CargaHorariaController carga_horaria = new CargaHorariaController(carga_horariaService);
         EventoController evento = new EventoController(eventoService);
