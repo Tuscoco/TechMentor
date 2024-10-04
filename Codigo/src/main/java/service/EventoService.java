@@ -3,6 +3,7 @@ package service;
 import dao.EventoDAO;
 import model.Evento;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.*;
 
 public class EventoService {
@@ -28,9 +29,15 @@ public class EventoService {
 
     }
 
-    public List<Evento> getTodos() throws SQLException{
+    public List<Evento> buscarTodos() throws SQLException{
 
-        return eventoDAO.getTodos();
+        return eventoDAO.buscarTodos();
+
+    }
+
+    public List<Evento> buscarEventosDoDia(Date data) throws SQLException{
+
+        return eventoDAO.buscarEventosDoDia(data);
 
     }
 

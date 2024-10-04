@@ -2,6 +2,7 @@ package dao;
 
 import model.Atendimento;
 import java.sql.*;
+import java.util.*;
 
 public class AtendimentoDAO {
  
@@ -50,6 +51,32 @@ public class AtendimentoDAO {
         }
 
         return 1;
+
+    }
+
+    public List<Atendimento> buscarAtendimentos(int id_monitor) throws SQLException{
+
+        List<Atendimento> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT * FROM atendimento WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id_monitor);
+
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Atendimento atendimento = new Atendimento(result.getInt("id"), result.getInt("id_monitor"), result.getInt("id_aluno"), result.getInt("id_materia"), result.getDate("data"), result.getString("tema_duvida"), result.getString("descricao"), result.getBoolean("duvida_sanada"));
+                lista.add(atendimento);
+
+            }
+
+        }
+
+        return lista;
 
     }
     

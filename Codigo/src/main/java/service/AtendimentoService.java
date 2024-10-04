@@ -2,6 +2,8 @@ package service;
 
 import dao.AtendimentoDAO;
 import model.Atendimento;
+import java.sql.SQLException;
+import java.util.*;
 
 public class AtendimentoService {
     
@@ -23,6 +25,12 @@ public class AtendimentoService {
             return false;
 
         }
+
+    }
+
+    public List<Atendimento> buscarAtendimentos(int id_monitor) throws SQLException{
+
+        return atendimentoDAO.buscarAtendimentos(id_monitor);
 
     }
 

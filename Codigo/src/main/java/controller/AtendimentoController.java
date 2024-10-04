@@ -4,6 +4,7 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import model.Atendimento;
 import service.AtendimentoService;
+import java.util.*;
 
 public class AtendimentoController {
     
@@ -35,6 +36,18 @@ public class AtendimentoController {
                 return gson.toJson("Falha ao enviar atendimento!");
 
             }
+
+        });
+
+        get("/buscaratendimentos", (req, res) -> {
+
+            res.type("application/json");
+
+            int id_monitor = gson.fromJson(req.body(), int.class);
+
+            List<Atendimento> lista = atendimentoService.buscarAtendimentos(id_monitor);
+
+            return new Gson().toJson(lista);
 
         });
 

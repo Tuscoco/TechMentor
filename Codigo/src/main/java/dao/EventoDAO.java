@@ -2,6 +2,7 @@ package dao;
 
 import model.Evento;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 public class EventoDAO {
@@ -50,7 +51,7 @@ public class EventoDAO {
 
     }
 
-    public List<Evento> getTodos() throws SQLException{
+    public List<Evento> buscarTodos() throws SQLException{
 
         List<Evento> lista = new ArrayList<>();
 
@@ -58,6 +59,32 @@ public class EventoDAO {
 
             String sql = "SELECT * FROM evento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getDate("data_hora"), result.getInt("materia"));
+                lista.add(evento);
+
+            }
+
+        }
+
+        return lista;
+
+    }
+
+    public List<Evento> buscarEventosDoDia(Date data) throws SQLException{
+
+        List<Evento> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT * FROM evento WHERE data = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setDate(1, data);
+
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
