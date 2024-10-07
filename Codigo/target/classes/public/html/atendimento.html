@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/atendimento.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/atendimento.css">
     <title>TechMentor </title>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -21,12 +21,12 @@
         </a>
     </header>
     <main>
-        <p>Formulário de Acompanhamento de Monitoria 2024/2</p>
+        <H1>Formulário de Acompanhamento de Monitoria 2024/2</H1>
         <p>Formulário para preenchimento pelos monitores para acompanhamento dos atendimentos na monitoria do segundo
             semestre de 2024. </p>
 
-        <div id="campus">
-            <p>1. Campus da monitori:</p>
+        <section id="campus">
+            <p>1. Campus da Monitoria:</p>
             <select name="campus" id="campus">
                 <option value="" class="default" selected disabled>selecione uma opção</option>
                 <option value="volvo">Volvo</option>
@@ -34,9 +34,9 @@
                 <option value="mercedes">Mercedes</option>
                 <option value="audi">Audi</option>
             </select>
-        </div>
+        </section>
 
-        <div id="disciplina">
+        <section id="disciplina">
             <p>2. Disciplina abordada:</p>
             <select name="disciplina" id="disciplina">
                 <option value="" class="default" selected disabled>selecione uma opção</option>
@@ -45,62 +45,74 @@
                 <option value="mercedes">Mercedes</option>
                 <option value="audi">Audi</option>
             </select>
-        </div>
+        </section>
 
-        <div id="data">
+        <section id="data">
             <p>3. Data do atendimento:</p>
             <input type="date" placeholder="insira a data">
-        </div>
+        </section>
 
-        <div id="horario">
+        <section id="horario">
             <p>4. Horario do atendimento:</p>
             <input type="time" name="" id="">
-        </div>
+        </section>
 
-        <div id="tipo">
+        <section id="tipo">
             <p>5. Tipo de atendimento:</p>
-            <input type="radio" name="" id="" value="presencial">
-            <p class="valor">Presencial</p>
-            <input type="radio" name="" id="" value="virtual">
-            <p class="valor">Virtual</p>
-        </div>
-        ~
-        <div id="matricula">
+            <div class="opc">
+                <input type="radio" name="" id="" value="presencial">
+                <p class="valor">Presencial</p>
+            </div>
+            <div class="opc">
+                <input type="radio" name="" id="" value="virtual">
+                <p class="valor">Virtual</p>
+            </div>
+        </section>
+
+        <section id="matricula">
             <p>6. Matricula do aluno:</p>
             <input type="number" name="" id="">
-        </div>
+        </section>
 
-        <div id="duvida">
+        <section id="duvida">
             <p>7. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
                 numeração).</p>
-            <input type="text" name="" id="">
-        </div>
+                <textarea id="duvidaTexto"></textarea>
+        </section>
 
-        <div id="duvidaDescr">
+        <section id="duvidaDescr">
             <p>9. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
                 declaração e aritmética de ponteiros; Aluno não sabia aplicar a regra da cadeia; Dificuldades em
                 conversão de bases binária e hexadecimal).</p>
-            <input type="text" name="" id="">
-        </div>
+                <textarea id="duvidaTexto"></textarea>
+        </section>
 
-        <div id="sanada">
+        <section id="sanada">
             <p>10. A duvida foi sanada?</p>
-            <input type="radio" name="" id="" value="sim">
-            <p class="valor">Sim</p>
-            <input type="radio" name="" id="" value="nao">
-            <p class="valor">Não</p>
-            <input type="radio" name="" id="" value="parcialmente">
-            <p class="valor">Parcialmente</p>
-        </div>
+            <div class="opc">
+                <input type="radio" name="" id="" value="sim">
+                <p class="valor">Sim</p>
+            </div>
 
-        <siv id="observacoes">
+            <div class="opc">
+                <input type="radio" name="" id="" value="nao">
+                <p class="valor">Não</p>
+            </div>
+
+            <div class="opc">
+                <input type="radio" name="" id="" value="parcialmente">
+                <p class="valor">Parcialmente</p>
+            </div>
+        </section>
+
+        <section id="observacoes">
             <p>11. Observações adicionais:
                 Caso deseje colocar alguma observação adicional sobre o atendimento (problema com o atendimento,
                 sugestão de melhoria, etc...)</p>
-            <input type="text" name="" id="">
-        </siv>
-
-        <button>Enviar</button>
+                <textarea id="duvidaTexto"></textarea>
+        </section>
+        
+        <button id="enviar">Enviar</button>
     </main>
 
 </body>
