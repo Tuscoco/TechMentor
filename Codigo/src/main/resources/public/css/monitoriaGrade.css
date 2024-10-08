@@ -51,7 +51,7 @@ button p{
 }
 
 button:hover{
-    /* scale: 1.05; */
+    scale: 1.05;
     background-color: #fff;
     outline: 5px solid #7F32A6;
 }

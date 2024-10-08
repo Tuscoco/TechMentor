@@ -106,9 +106,5 @@ function carregarRepositorios() {
             console.error('Erro:', error);
         });
 }
-
-
-
-
 // Carregar repositórios ao iniciar a página
 window.onload = carregarRepositorios;
