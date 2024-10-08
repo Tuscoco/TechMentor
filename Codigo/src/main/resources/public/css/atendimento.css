@@ -68,7 +68,7 @@ main input{
     color: #7F32A6;
 }
 
-#duvidaTexto {
+.duvidaTexto {
     margin-left: 30px;
     color: #7F32A6;
     width: 975px;
@@ -83,7 +83,7 @@ main input{
     box-sizing: border-box; */
 }
 
-#duvidaTexto:focus {
+.duvidaTexto:focus {
     outline: none;
 }
 

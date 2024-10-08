@@ -27,7 +27,7 @@
 
         <section id="campus">
             <p>1. Campus da Monitoria:</p>
-            <select name="campus" id="campus">
+            <select name="campus" id="elementCampus">
                 <option value="" class="default" selected disabled>selecione uma opção</option>
                 <option value="volvo">Volvo</option>
                 <option value="saab">Saab</option>
@@ -38,7 +38,7 @@
 
         <section id="disciplina">
             <p>2. Disciplina abordada:</p>
-            <select name="disciplina" id="disciplina">
+            <select name="disciplina" id="elementDisciplina">
                 <option value="" class="default" selected disabled>selecione uma opção</option>
                 <option value="volvo">Volvo</option>
                 <option value="saab">Saab</option>
@@ -49,42 +49,45 @@
 
         <section id="data">
             <p>3. Data do atendimento:</p>
-            <input type="date" placeholder="insira a data">
+            <input id="elementData" type="date" placeholder="insira a data">
         </section>
 
         <section id="horario">
             <p>4. Horario do atendimento:</p>
-            <input type="time" name="" id="">
+            <input id="elementHorario" type="time" name="" id="">
         </section>
 
-        <section id="tipo">
+        <!-- <section id="tipo">
             <p>5. Tipo de atendimento:</p>
+
             <div class="opc">
                 <input type="radio" name="" id="" value="presencial">
                 <p class="valor">Presencial</p>
             </div>
+
             <div class="opc">
                 <input type="radio" name="" id="" value="virtual">
                 <p class="valor">Virtual</p>
             </div>
-        </section>
+
+        </section> -->
 
         <section id="matricula">
             <p>6. Matricula do aluno:</p>
-            <input type="number" name="" id="">
+            <input id="elementMatricula" type="number" name="" id="">
         </section>
 
         <section id="duvida">
             <p>7. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
                 numeração).</p>
-                <textarea id="duvidaTexto"></textarea>
+                <textarea id="elementDuv" class="duvidaTexto"></textarea>
         </section>
 
         <section id="duvidaDescr">
             <p>9. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
                 declaração e aritmética de ponteiros; Aluno não sabia aplicar a regra da cadeia; Dificuldades em
                 conversão de bases binária e hexadecimal).</p>
-                <textarea id="duvidaTexto"></textarea>
+                <textarea id="elementDuvDesc" class="duvidaTexto"></textarea>
         </section>
 
         <section id="sanada">
@@ -99,17 +102,17 @@
                 <p class="valor">Não</p>
             </div>
 
-            <div class="opc">
+            <!-- <div class="opc">
                 <input type="radio" name="" id="" value="parcialmente">
                 <p class="valor">Parcialmente</p>
-            </div>
+            </div> -->
         </section>
 
         <section id="observacoes">
             <p>11. Observações adicionais:
                 Caso deseje colocar alguma observação adicional sobre o atendimento (problema com o atendimento,
                 sugestão de melhoria, etc...)</p>
-                <textarea id="duvidaTexto"></textarea>
+                <textarea id="elementObs" class="duvidaTexto"></textarea>
         </section>
         
         <button id="enviar">Enviar</button>
