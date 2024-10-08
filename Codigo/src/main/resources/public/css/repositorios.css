@@ -1,4 +1,68 @@
-main{
+#addRepo{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#addRepo input{
+    color: #7F32A6;
+    padding-left: 10px;
+    border: none;
+    outline: 3px solid #7F32A6;
+    border-radius: 2px;
+    height: 40px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+}
+
+#addRepo input::placeholder{
+    opacity: 50%;
+    padding-left: 10px; 
+    color: #7F32A6;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+}
+
+#nome{
+    width: 30%;
+}
+#link{
+    width: 60%;
+}
+
+#adicionar{
+    padding: 0;
+    width: 5%;
+    background-color: #7F32A6;
+    border: none;
+    border-radius: 4px;
+    font-size: 40px;
+    color: #fff;
+    transition:  .1s;
+}
+
+#adicionar:active{
+    background-color: #53216c;
+}
+
+#adicionar:hover{
+    scale: 1.05;
+}
+
+#adicionar #addHover{
+    display: none;
+}
+#adicionar:hover #addDefault{
+    display: none;
+}
+
+#adicionar:hover #addHover{
+    display: contents;
+}
+
+#repos{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
@@ -9,21 +73,60 @@ main{
 main a{
     text-decoration: none;
 }
-
-#repo{
+.repo {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
     display: flex;
     background-color: #7F32A6;
     color: #fff;
     border-radius: 10px;
-    transition: .1s ;
+    transition: .1s;
     align-items: center;
     justify-content: center;
 }
-
-#repo:hover{
+.repo:hover {
     background-color: #fff;
     color: #7F32A6;
     border-radius: 10px;
     scale: 1.05;
     outline: 5px solid #7F32A6;
+}
+
+.repo a{
+    color: #fff;
+}
+.repo:hover a{
+    color: #7F32A6;
+}
+
+.repo #apagar{
+    color: #fff;
+}
+
+.repo:hover #apagar{
+    color: #7F32A6;
+}
+
+#nomeRepo{
+    width: 80%;
+    resize: none;
+    color: #fff;
+    background-color: #7F32A6;
+    border: none;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    text-align: center;
+    transition: .1s;
+}
+
+.repo:hover #nomeRepo{
+    color: #7F32A6;
+    background-color: #fff;
+}
+
+.delete-btn{
+    font-size: 20px;
+    margin-left: 90%;
 }
