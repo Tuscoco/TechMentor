@@ -69,7 +69,6 @@ input {
     width: 450px;
     font-size: 30px;
     font-weight: bold;
-    font-style: italic;
     background-color: #7f32a6;
     color:#ffffff;
     border: none;
@@ -87,7 +86,6 @@ input {
     color: #7f32a6;
     font-size: 20px;
     font-weight: bold;
-    font-style: italic;
     transition: .2s;
 }
 
@@ -114,7 +112,6 @@ input {
     font-family: Arial, sans-serif;
     font-weight: 700;
     font-size: 15px;
-    font-style: italic;
     transition: .4s;
 }
 

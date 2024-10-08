@@ -33,7 +33,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
     transition: linear;
     transition-duration: 0.1s;
     border-bottom: solid #7F32A6;
@@ -70,7 +69,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
     transition-duration: 0.1s;
     margin-top: 120px;
 }
@@ -93,7 +91,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
     caret-color: #7F32A6;
     padding-left: 10px;
 }
@@ -103,7 +100,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
 }
 
 #cadastrar {
@@ -123,7 +119,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
     margin-top: 60px;
     transition: 0.1s;
 }
@@ -144,7 +139,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
     caret-color: #7F32A6;
     padding-left: 10px;
 }
@@ -154,7 +148,6 @@ body {
     font-size: 18px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
 }
 
 #cadastrar input[type="checkbox"] {
