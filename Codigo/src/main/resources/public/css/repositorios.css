@@ -129,4 +129,6 @@ main a{
 .delete-btn{
     font-size: 20px;
     margin-left: 90%;
+    cursor: pointer;
 }
+
