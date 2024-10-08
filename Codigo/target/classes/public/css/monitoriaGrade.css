@@ -47,12 +47,11 @@ button p{
     border-radius: 5px;
     font-family: Arial, sans-serif;
     font-weight: 900;
-    font-style: italic;
     background-color: #fff;
 }
 
 button:hover{
-    scale: 1.2;
+    scale: 1.05;
     background-color: #fff;
     outline: 5px solid #7F32A6;
 }

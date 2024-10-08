@@ -25,91 +25,95 @@
         <p>Formulário para preenchimento pelos monitores para acompanhamento dos atendimentos na monitoria do segundo
             semestre de 2024. </p>
 
-        <section id="campus">
-            <p>1. Campus da Monitoria:</p>
-            <select name="campus" id="elementCampus">
-                <option value="" class="default" selected disabled>selecione uma opção</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-        </section>
-
         <section id="disciplina">
-            <p>2. Disciplina abordada:</p>
+            <p>1. Disciplina abordada:</p>
             <select name="disciplina" id="elementDisciplina">
                 <option value="" class="default" selected disabled>selecione uma opção</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+                <option value="aeds1">Algoritmos e Estruturas de dados I</option>
+                <option value="aeds2">Algoritmos e Estruturas de dados II</option>
+                <option value="aeds3">Algoritmos e Estruturas de dados III</option>
+                <option value="ac1">Arquitetura de Computadores I</option>
+                <option value="ac2">Arquitetura de Computadores II</option>
+                <option value="ac3">Arquitetura de Computadores III</option>
+                <option value="bd">Banco de Dados</option>
+                <option value="calc1">Cálculo I</option>
+                <option value="calc2">Cálculo II</option>
+                <option value="compil">Compiladores</option>
+                <option value="cg">Computação Gráfica</option>
+                <option value="diw">Desenvolvimento de Interfaces Web</option>
+                <option value="ec">Eletrônica para Computação</option>
+                <option value="es1">Engenharia de Software I</option>
+                <option value="es2">Engenharia de Software II</option>
+                <option value="fm">Física Mecânica</option>
+                <option value="ftc">Fundamentos Teóricos da Computação</option>
+                <option value="gaal">Geometria Analítica e Álgebra Linear</option>
+                <option value="ia">Intêligencia Artificial</option>
+                <option value="inteCoi1">Internet das Coisas I</option>
+                <option value="inteCoi2">Internet das Coisas II</option>
+                <option value="itrComp">Introdução a Computação</option>
+                <option value="isi">Introdução aos Sistemas Inteligentes</option>
+                <option value="lddm">Laboratório de Desenvolvimento de Dispositivos Móveis</option>
+                <option value="lip">Laboratório de Iniciação a Programação</option>
+                <option value="liec">Laboratório de Introdução a Engenharia de Computação</option>
+                <option value="lp">Linguagens de Programação</option>
+                <option value="mad">Modelagem e Avaliação de Desempenho</option>
+                <option value="paa">Projeto e Análise de Algoritmos</option>
+                <option value="rc1">Redes de Computadores I</option>
+                <option value="rc2">Redes de Computadores II</option>
+                <option value="se">Sistemas Embarcados</option>
+                <option value="so">Sistemas Operacionais</option>
+                <option value="tgc">Teoria do Grafos e Computabilidade</option>
+                <option value="ti1">Trabalho Interdiciplinar I: Frontend</option>
+                <option value="ti2">Trabalho Interdiciplinar II: Backend</option>
+                <option value="os">Otimização de Sistemas</option>
+                <option value="sa">Segurança e Auditoria</option>
+
             </select>
         </section>
 
         <section id="data">
-            <p>3. Data do atendimento:</p>
+            <p>2. Data do atendimento:</p>
             <input id="elementData" type="date" placeholder="insira a data">
         </section>
 
         <section id="horario">
-            <p>4. Horario do atendimento:</p>
+            <p>3. Horario do atendimento:</p>
             <input id="elementHorario" type="time" name="" id="">
         </section>
 
-        <!-- <section id="tipo">
-            <p>5. Tipo de atendimento:</p>
-
-            <div class="opc">
-                <input type="radio" name="" id="" value="presencial">
-                <p class="valor">Presencial</p>
-            </div>
-
-            <div class="opc">
-                <input type="radio" name="" id="" value="virtual">
-                <p class="valor">Virtual</p>
-            </div>
-
-        </section> -->
-
         <section id="matricula">
-            <p>6. Matricula do aluno:</p>
+            <p>4. Matricula do aluno:</p>
             <input id="elementMatricula" type="number" name="" id="">
         </section>
 
         <section id="duvida">
-            <p>7. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
+            <p>5. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
                 numeração).</p>
                 <textarea id="elementDuv" class="duvidaTexto"></textarea>
         </section>
 
         <section id="duvidaDescr">
-            <p>9. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
+            <p>6. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
                 declaração e aritmética de ponteiros; Aluno não sabia aplicar a regra da cadeia; Dificuldades em
                 conversão de bases binária e hexadecimal).</p>
                 <textarea id="elementDuvDesc" class="duvidaTexto"></textarea>
         </section>
 
         <section id="sanada">
-            <p>10. A duvida foi sanada?</p>
+            <p>7. A dúvida foi sanada?</p>
             <div class="opc">
-                <input type="radio" name="" id="" value="sim">
-                <p class="valor">Sim</p>
+                <input type="radio" name="duvida" id="sim" value="sim">
+                <label for="sim" class="valor">Sim</label>
             </div>
-
             <div class="opc">
-                <input type="radio" name="" id="" value="nao">
-                <p class="valor">Não</p>
+                <input type="radio" name="duvida" id="nao" value="nao">
+                <label for="nao" class="valor">Não</label>
             </div>
-
-            <!-- <div class="opc">
-                <input type="radio" name="" id="" value="parcialmente">
-                <p class="valor">Parcialmente</p>
-            </div> -->
         </section>
+        
 
         <section id="observacoes">
-            <p>11. Observações adicionais:
+            <p>8. Observações adicionais:
                 Caso deseje colocar alguma observação adicional sobre o atendimento (problema com o atendimento,
                 sugestão de melhoria, etc...)</p>
                 <textarea id="elementObs" class="duvidaTexto"></textarea>

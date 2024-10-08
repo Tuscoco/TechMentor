@@ -4,7 +4,7 @@ let currentYear = today.getFullYear();
 let day;
 let mes;
 
-// Gerar calendario ao carregar a página
+// Gerar calendário ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
     generateCalendar(currentMonth, currentYear); // Gerar o calendário para o mês atual
 });
@@ -58,13 +58,13 @@ function generateCalendar(month, year) {
                 }
 
                 button.addEventListener('click', () => {
-                    eventos.innerHTML = "";
                     const selectedButton = document.querySelector('.selected');
                     if (selectedButton) {
                         selectedButton.classList.remove('selected');
                     }
                     button.classList.add('selected');
                     day = +button.textContent;
+                    loadEvents(day, month + 1); // Carregar eventos para o dia selecionado
                     openModal();
                 });
 
@@ -112,19 +112,11 @@ function openModal() {
 
     setTimeout(() => {
         modal.style.opacity = 1; // Aumenta a opacidade gradualmente
-    }   , 10);
+    }, 10);
 }
 
 // Função para fechar o modal
-// Função para fechar o modal com animação de fade out
 function closeModal() {
-
-    //desmarca o botao selecionado
-    // const selectedButton = document.querySelector('.selected');
-    // if (selectedButton) {
-    //     selectedButton.classList.remove('selected');
-    // }
-    
     const modal = document.getElementById('modal');
     modal.style.opacity = 0; // Inicia o fade out
 
@@ -134,7 +126,6 @@ function closeModal() {
         document.body.style.overflow = 'auto'; // Restaura a rolagem da página
     }, 250); // O tempo deve ser o mesmo definido para a transição no CSS
 }
-
 
 // Event listener para fechar o modal ao clicar no botão "X"
 document.getElementById('closeModal').addEventListener('click', closeModal);
@@ -146,3 +137,104 @@ window.addEventListener('click', (event) => {
         closeModal();
     }
 });
+
+// Adicionar evento ao botão "Adicionar"
+document.getElementById('novoEvento').querySelector('button').addEventListener('click', () => {
+    const eventoInput = document.getElementById('novoEvento').querySelector('input[type="text"]');
+    const horaInput = document.getElementById('novoEvento').querySelector('input[type="time"]');
+
+    const evento = eventoInput.value;
+    const hora = horaInput.value;
+
+    if (evento && hora) {
+        const dataToSend = {
+            id: generateId(), // Função para gerar um ID único
+            evento: evento,
+            dia: day,
+            mes: mes + 1, // Adiciona 1 porque os meses começam em 0
+            hora: hora
+        };
+
+        // Enviar dados para o JSON Server
+        fetch('http://localhost:3000/eventos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Evento adicionado:', data);
+            closeModal(); // Fecha o modal após adicionar o evento
+            eventoInput.value = ''; // Limpa o campo de evento
+            horaInput.value = ''; // Limpa o campo de hora
+            loadEvents(day, mes + 1); // Carregar eventos atualizados após adicionar
+        })
+        .catch(error => {
+            console.error('Erro ao adicionar evento:', error);
+        });
+    } else {
+        alert('Por favor, preencha todos os campos.');
+    }
+});
+
+// Função para gerar um ID único
+function generateId() {
+    return Math.random().toString(36).substr(2, 8); // Gera um ID aleatório
+}
+
+// Função para carregar eventos do JSON Server e exibir na div de mostrarEventos
+function loadEvents(selectedDay, selectedMonth) {
+    const mostrarEventosDiv = document.getElementById('mostrarEventos');
+    mostrarEventosDiv.innerHTML = ''; // Limpa eventos anteriores
+
+    fetch(`http://localhost:3000/eventos?dia=${selectedDay}&mes=${selectedMonth}`)
+        .then(response => response.json())
+        .then(events => {
+            events.forEach(event => {
+                const eventElement = document.createElement('p');
+                eventElement.innerHTML = `${event.evento} - ${event.hora} 
+                    <div class="apagar" data-id="${event.id}">
+                        <i id="trash" class="ph-fill ph-trash-simple"></i>
+                        <i id="recicle" class="ph-fill ph-recycle"></i>
+                    </div>`; // Formato desejado
+
+                // Adicionar o evento de clique ao ícone de exclusão
+                const deleteIcon = eventElement.querySelector('.apagar');
+                deleteIcon.addEventListener('click', () => {
+                    deleteEvent(event.id);
+                });
+
+                mostrarEventosDiv.appendChild(eventElement);
+            });
+
+            if (events.length === 0) {
+                const noEventsMessage = document.createElement('p');
+                noEventsMessage.innerHTML = 'Nenhum evento encontrado para hoje.';
+                mostrarEventosDiv.appendChild(noEventsMessage);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar eventos:', error);
+        });
+}
+
+// Função para deletar um evento
+function deleteEvent(eventId) {
+    fetch(`http://localhost:3000/eventos/${eventId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Evento deletado:', eventId);
+            // Recarregar os eventos para atualizar a lista
+            loadEvents(day, mes + 1);
+        } else {
+            console.error('Erro ao deletar evento:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao deletar evento:', error);
+    });
+}
