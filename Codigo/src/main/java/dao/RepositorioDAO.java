@@ -6,9 +6,9 @@ import java.util.*;
 
 public class RepositorioDAO {
  
-    private String url = "jdbc:postgresql://localhost:5432/techmentor";
-    private String user = "lucasmarinho";
-    private String password = "senhanova";
+    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
+    private String user = "tech";
+    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
 
     public void salvarRepositorio(Repositorio repositorio) throws SQLException{
@@ -21,6 +21,21 @@ public class RepositorioDAO {
             pstmt.setInt(1, getNextId());
             pstmt.setString(2, repositorio.getNome());
             pstmt.setString(3, repositorio.getLink());
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
+
+    public void deletarRepositorio(Repositorio repositorio) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "DELETE FROM repositorio WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, repositorio.getId());
 
             pstmt.executeUpdate();
 

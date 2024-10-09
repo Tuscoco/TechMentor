@@ -39,6 +39,25 @@ public class RepositorioController {
 
         });
 
+        post("/deletarrepositorio", (req, res) -> {
+
+            res.type("application/json");
+
+            Repositorio repositorio = gson.fromJson(req.body(), Repositorio.class);
+            boolean success = repositorioService.deletarRepositorio(repositorio);
+
+            if(success){
+
+                return gson.toJson("Repositorio deletado!");
+
+            }else{
+
+                return gson.toJson("Erro ao deletar repositorio!");
+
+            }
+
+        });
+
         get("/mostrarrepositorio", (req, res) -> {
 
             res.type("application/json");

@@ -28,6 +28,24 @@ public class RepositorioService {
 
     }
 
+    public boolean deletarRepositorio(Repositorio repositorio){
+
+        try{
+
+            repositorioDAO.deletarRepositorio(repositorio);
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+            return false;
+
+        }
+
+    }
+
     public List<Repositorio> getTodos() throws SQLException{
 
         return repositorioDAO.getTodos();
