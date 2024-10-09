@@ -9,13 +9,18 @@ public class Repositorio {
     private int id_materia;
 
 
-    public Repositorio(int id, String nome, String link, String descricao, int id_materia) {
+    public Repositorio(int id, String nome, String link) {
 
         this.id = id;
         this.nome = nome;
         this.link = link;
-        this.descricao = descricao;
-        this.id_materia = id_materia;
+
+    }
+
+    public Repositorio(String nome, String link){
+
+        this.nome = nome;
+        this.link = link;
 
     }
 

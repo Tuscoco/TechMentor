@@ -3,6 +3,7 @@ document.getElementById('adicionar').addEventListener('click', function() {
     // Capturar os valores dos inputs
     const nome = document.getElementById('nome').value;
     const link = document.getElementById('link').value;
+    const id = 0;
 
     // Validar se os campos não estão vazios
     if (!nome || !link) {
@@ -12,12 +13,15 @@ document.getElementById('adicionar').addEventListener('click', function() {
 
     // Criar objeto com os dados para enviar
     const dados = {
+        id: id,
         nome: nome,
         link: link
     };
 
+    console.log(dados);
+
     // Enviar os dados para o JSON Server
-    fetch('http://localhost:3000/repos', {
+    fetch('http://localhost:4567/salvarrepositorio', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -30,6 +34,7 @@ document.getElementById('adicionar').addEventListener('click', function() {
         }
         return response.json();
     })
+
     .then(data => {
         console.log('Sucesso:', data);
         // Adicionar o novo repositório à lista

@@ -12,7 +12,7 @@ public class App
 
         port(4567);
 
-        staticFiles.externalLocation("src/main/resources/public/html");
+        staticFiles.externalLocation("src/main/resources/public");
 
         PessoaService pessoaService = new PessoaService();
         MateriaService materiaService = new MateriaService();
