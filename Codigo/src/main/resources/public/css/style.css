@@ -153,3 +153,15 @@ main {
     content: '';
     left: calc(100% - 22px);
 }
+
+/* Para navegadores baseados em WebKit (Chrome, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Remove as setas */
+    margin: 0; /* Remove a margem */
+}
+
+/* Para Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; /* Remove as setas */
+}
