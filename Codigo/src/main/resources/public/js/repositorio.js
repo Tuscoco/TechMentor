@@ -80,8 +80,8 @@ function carregarRepositorios() {
                 deleteButton.className = 'delete-btn'; // Adiciona uma classe para estilização, se necessário
 
                 // Evento de clique para excluir o repositório
-                /*deleteButton.addEventListener('click', function() {
-                    fetch(`http://localhost:3000/repos/${repo.id}`, {
+                deleteButton.addEventListener('click', function() {
+                    fetch(`http://localhost:4567/deletarrepositorio/${repo.id}`, {
                         method: 'DELETE'
                     })
                     .then(response => {
@@ -94,7 +94,7 @@ function carregarRepositorios() {
                     .catch((error) => {
                         console.error('Erro:', error);
                     });
-                });*/
+                });
 
                 //newRepo.appendChild(deleteButton); // Adiciona o botão ao repositório
 

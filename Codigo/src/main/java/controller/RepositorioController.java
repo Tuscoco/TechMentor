@@ -39,12 +39,12 @@ public class RepositorioController {
 
         });
 
-        post("/deletarrepositorio", (req, res) -> {
+        delete("/deletarrepositorio/:id", (req, res) -> {
 
             res.type("application/json");
 
-            Repositorio repositorio = gson.fromJson(req.body(), Repositorio.class);
-            boolean success = repositorioService.deletarRepositorio(repositorio);
+            int id = Integer.parseInt(req.params(":id"));
+            boolean success = repositorioService.deletarRepositorio(id);
 
             if(success){
 
@@ -63,18 +63,6 @@ public class RepositorioController {
             res.type("application/json");
 
             List<Repositorio> lista = repositorioService.getTodos();
-
-            return new Gson().toJson(lista);
-
-        });
-
-        get("/mostrarrepositoriofiltrado", (req, res) -> {
-
-            res.type("application/json");
-
-            int cod_materia = gson.fromJson(req.body(), int.class);
-
-            List<Repositorio> lista = repositorioService.getAlguns(cod_materia);
 
             return new Gson().toJson(lista);
 

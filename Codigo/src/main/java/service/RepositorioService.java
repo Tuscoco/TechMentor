@@ -28,11 +28,11 @@ public class RepositorioService {
 
     }
 
-    public boolean deletarRepositorio(Repositorio repositorio){
+    public boolean deletarRepositorio(int id){
 
         try{
 
-            repositorioDAO.deletarRepositorio(repositorio);
+            repositorioDAO.deletarRepositorio(id);
 
             return true;
 
@@ -49,12 +49,6 @@ public class RepositorioService {
     public List<Repositorio> getTodos() throws SQLException{
 
         return repositorioDAO.getTodos();
-
-    }
-
-    public List<Repositorio> getAlguns(int cod_materia) throws SQLException{
-
-        return repositorioDAO.getAlguns(cod_materia);
 
     }
 

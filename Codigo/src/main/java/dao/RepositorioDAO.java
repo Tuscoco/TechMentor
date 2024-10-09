@@ -28,14 +28,14 @@ public class RepositorioDAO {
 
     }
 
-    public void deletarRepositorio(Repositorio repositorio) throws SQLException{
+    public void deletarRepositorio(int id) throws SQLException{
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
             String sql = "DELETE FROM repositorio WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setInt(1, repositorio.getId());
+            pstmt.setInt(1, id);
 
             pstmt.executeUpdate();
 
@@ -71,31 +71,6 @@ public class RepositorioDAO {
 
             String sql = "SELECT * FROM repositorio";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet result = pstmt.executeQuery();
-
-            while(result.next()){
-
-                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("name"), result.getString("link"));
-                lista.add(repositorio);
-
-            }
-
-        }
-
-        return lista;
-
-    }
-
-    public List<Repositorio> getAlguns(int cod_materia) throws SQLException{
-
-        List<Repositorio> lista = new ArrayList<>();
-
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-
-            String sql = "SELECT * FROM repositorio WHERE cod_materia = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setInt(1, cod_materia);
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
