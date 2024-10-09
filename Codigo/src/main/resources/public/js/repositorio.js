@@ -57,7 +57,7 @@ document.getElementById('adicionar').addEventListener('click', function() {
 
 // Função para carregar e exibir os repositórios
 function carregarRepositorios() {
-    fetch('http://localhost:3000/repos')
+    fetch('http://localhost:4567/mostrarrepositorio')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro na requisição');
@@ -80,7 +80,7 @@ function carregarRepositorios() {
                 deleteButton.className = 'delete-btn'; // Adiciona uma classe para estilização, se necessário
 
                 // Evento de clique para excluir o repositório
-                deleteButton.addEventListener('click', function() {
+                /*deleteButton.addEventListener('click', function() {
                     fetch(`http://localhost:3000/repos/${repo.id}`, {
                         method: 'DELETE'
                     })
@@ -94,9 +94,9 @@ function carregarRepositorios() {
                     .catch((error) => {
                         console.error('Erro:', error);
                     });
-                });
+                });*/
 
-                newRepo.appendChild(deleteButton); // Adiciona o botão ao repositório
+                //newRepo.appendChild(deleteButton); // Adiciona o botão ao repositório
 
                 // Criar link do repositório
                 const repoLink = document.createElement('a');
