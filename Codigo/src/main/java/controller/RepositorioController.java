@@ -62,9 +62,18 @@ public class RepositorioController {
 
             res.type("application/json");
 
-            List<Repositorio> lista = repositorioService.getTodos();
+            try{
 
-            return new Gson().toJson(lista);
+                List<Repositorio> lista = repositorioService.getTodos();
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+                return "{\"message\":\"Erro no servidor ao buscar os repositórios.\"}";
+
+            }
 
         });
 
