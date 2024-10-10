@@ -17,12 +17,12 @@ public class Repositorio {
 
     }
 
-    public Repositorio(String nome, String link){
+    /*public Repositorio(String nome, String link){
 
         this.nome = nome;
         this.link = link;
 
-    }
+    }*/
 
 
     public int getId() {

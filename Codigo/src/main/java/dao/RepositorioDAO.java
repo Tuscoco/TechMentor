@@ -75,7 +75,7 @@ public class RepositorioDAO {
 
             while(result.next()){
 
-                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("name"), result.getString("link"));
+                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("nome"), result.getString("link"));
                 lista.add(repositorio);
 
             }
