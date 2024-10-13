@@ -1,29 +1,5 @@
 {
   "repos": [],
   "eventos": [],
-  "atendimentos": [
-    {
-      "id": "fde8",
-      "campus": "Lourdes",
-      "disciplina": "fm",
-      "data": "2024-10-08",
-      "horario": "18:17",
-      "matricula": "123123",
-      "duvida": "sla",
-      "duvidaDesc": "cara é lelé",
-      "sanada": "sim",
-      "observacoes": "foi bao"
-    },
-    {
-      "id": "d02f",
-      "disciplina": "gaal",
-      "data": "2024-10-08",
-      "horario": "18:26",
-      "matricula": "123",
-      "duvida": "asd",
-      "duvidaDesc": "asd",
-      "sanada": "sim",
-      "observacoes": "asd"
-    }
-  ]
+  "atendimentos": []
 }

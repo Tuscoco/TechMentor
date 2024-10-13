@@ -32,3 +32,113 @@ article:hover{
     background-color: #fff;
     outline: 5px solid #7F32A6;
 }
+
+button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #7F32A6;
+    position: fixed;
+    margin-left: 1%;
+    margin-top: 110px;
+    font-size: 50px;
+    border: none;
+    cursor: pointer;
+    transition: width 0.5s, height 0.5s;
+    overflow: hidden; /* Evita que a barra branca apareça */
+}
+
+button #content {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, height 0.5s ease-out;
+}
+
+button.active #content {
+    opacity: 1;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+button.active {
+    border-radius: 10px;
+    height: 170px;
+    width: 150px;
+}
+
+button #icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transition: transform 0.5s;
+}
+
+button.active #icon {
+    transform: rotate(720deg);
+}
+
+
+#onOff {
+    margin: auto;
+    align-items: center;
+    display: flex;
+    margin-top: 35px;
+}
+
+.mudar {
+    display: none;
+}
+
+.mudar + label {
+    width: 72px;
+    height: 40px;
+    background: #7F32A6;
+    display: block;
+    position: relative;
+    border-radius: 20px;
+    padding: 2px;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.mudar + label::before {
+    font-size: 20px;
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: white;
+    display: block;
+    border-radius: 50%;
+    left: 5px;
+    top: 4px;
+    transition: 200ms;
+}
+
+.mudar:checked + label {
+    background: #00fff2;
+}
+
+.mudar:checked + label::before {
+    left: calc(100% - 40px);
+}
+
+#sala{
+    margin: 10px auto;
+    border: none;
+    outline: 3px solid #7F32A6;
+    width: 50%;
+    border-radius: 2px;
+    height: 20px;
+    color: #7F32A6;
+    font-weight: 900;
+    text-align: center;
+}
+

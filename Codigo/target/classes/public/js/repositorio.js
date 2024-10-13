@@ -103,7 +103,6 @@ function carregarRepositorios() {
                 repoLink.href = repo.link;
                 repoLink.innerHTML = `<textarea id="nomeRepo">${repo.nome}</textarea>`;
                 newRepo.appendChild(repoLink); // Adiciona o link ao repositório
-
                 reposDiv.appendChild(newRepo); // Adiciona o novo repositório à lista
             });
         })
