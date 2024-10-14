@@ -29,4 +29,51 @@ public class PessoaDAO {
 
     }
 
+    public boolean loginPessoa(Pessoa pessoa) throws SQLException{
+
+        boolean autenticado = false;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT * FROM pessoa WHERE id = ? AND senha = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, pessoa.getId());
+            pstmt.setString(2, pessoa.getSenha());
+
+            ResultSet result = pstmt.executeQuery();
+
+            autenticado = result.next();
+
+        }
+
+        return autenticado;
+
+    }
+
+    public int getTipoUsuario(Pessoa pessoa) throws SQLException{
+
+        int tipo = -1;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, pessoa.getId());
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                tipo = result.getInt("tipo_usuario");
+
+            }
+
+        }
+
+        return tipo;
+
+    }
+
 }

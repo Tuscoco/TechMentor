@@ -29,4 +29,18 @@ public class PessoaService {
 
     }
 
+    public boolean loginPessoa(Pessoa pessoa) throws Exception{
+
+        pessoa.setSenha(BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt()));
+
+        return pessoaDAO.loginPessoa(pessoa);
+
+    }
+
+    public int getTipoUsuario(Pessoa pessoa) throws Exception{
+
+        return pessoaDAO.getTipoUsuario(pessoa);
+
+    }
+
 }
