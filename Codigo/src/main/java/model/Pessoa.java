@@ -74,4 +74,9 @@ public class Pessoa {
         return tipo_usuario;
     }
 
+
+    public void setTipoUsuario(int tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
+    }
+
 }

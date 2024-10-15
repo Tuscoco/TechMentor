@@ -76,4 +76,83 @@ public class PessoaDAO {
 
     }
 
+    public int getTipoUsuario(int id) throws SQLException{
+
+        int tipo = -1;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                tipo = result.getInt("tipo_usuario");
+
+            }
+
+        }
+
+        return tipo;
+
+    }
+
+    public boolean alterarTipoUsuario(int id, int novoTipo) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET tipo_usuario = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, novoTipo);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
+    public boolean alterarSenha(String senha, int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET senha = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, senha);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
+    public boolean alterarEmail(String email, int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET email = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, email);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
 }

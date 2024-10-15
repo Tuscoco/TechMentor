@@ -2,6 +2,7 @@ package controller;
 
 import static spark.Spark.*;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import model.Pessoa;
 import service.PessoaService;
 
@@ -53,6 +54,109 @@ public class PessoaController {
             }else{
 
                 return gson.toJson("Falha no login!");
+
+            }
+
+        });
+
+        post("/alterartipousuario", (req, res) -> {
+
+            res.type("application/json");
+
+            JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+            int idAlterador = json.get("idAlterador").getAsInt();
+            int idAlvo = json.get("idAlvo").getAsInt();
+            int novoTipo = json.get("novoTipo").getAsInt();
+
+            try{
+
+                boolean success = pessoaService.alterarTipoUsuario(idAlterador, idAlvo, novoTipo);
+
+                if(success){
+
+                    res.status(200);
+                    return gson.toJson("Tipo de usuario alterado!");
+
+                }else{
+
+                    res.status(403);
+                    return gson.toJson("Não tem permissão!");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+                e.printStackTrace();
+                return gson.toJson("Erro ao alterar!");
+
+            }
+
+        });
+
+        post("/alterarsenha", (req, res) -> {
+
+            res.type("application/json");
+
+            JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+            String senha = json.get("senha").getAsString();
+            int id = json.get("id").getAsInt();
+
+            try{
+
+                boolean success = pessoaService.alterarSenha(senha, id);
+
+                if(success){
+
+                    res.status(200);
+                    return gson.toJson("Senha alterada!");
+
+                }else{
+
+                    res.status(403);
+                    return gson.toJson("Erro ao alterar senha!");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+                e.printStackTrace();
+                return gson.toJson("Erro!");
+
+            }
+
+        });
+
+        post("/alteraremail", (req, res) -> {
+
+            res.type("application/json");
+
+            JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+            String email = json.get("email").getAsString();
+            int id = json.get("id").getAsInt();
+
+            try{
+
+                boolean success = pessoaService.alterarEmail(email, id);
+
+                if(success){
+
+                    res.status(200);
+                    return gson.toJson("Email alterado!");
+
+                }else{
+
+                    res.status(403);
+                    return gson.toJson("Erro ao alterar Email!");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+                e.printStackTrace();
+                return gson.toJson("Erro!");
 
             }
 
