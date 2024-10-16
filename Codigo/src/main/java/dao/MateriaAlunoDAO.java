@@ -24,8 +24,8 @@ public class MateriaAlunoDAO {
 
             String sql = "INSERT INTO materia_aluno (id_aluno,id_materia) VALUES (?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, relacao.getId_aluno());
-            pstmt.setInt(2, relacao.getId_materia());
+            pstmt.setInt(1, relacao.getIdAluno());
+            pstmt.setInt(2, relacao.getIdMateria());
             pstmt.executeUpdate();
             
 
