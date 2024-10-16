@@ -112,3 +112,10 @@ button.menu-hamburger.open img {
 .dados p{
     margin: 2px !important;
 }
+
+.form-check-input {
+    background-color: #7F32A6;
+}
+.form-check-input:checked {
+    background-color: #7F32A6;
+}

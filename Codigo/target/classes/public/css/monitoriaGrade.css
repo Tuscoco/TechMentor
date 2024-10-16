@@ -74,3 +74,10 @@ button:hover p{
 .bar-open, .bar-close{
     display: none;
 }
+
+.form-check-input {
+    background-color: #7F32A6;
+}
+.form-check-input:checked {
+    background-color: #7F32A6;
+}

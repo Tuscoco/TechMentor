@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const checkbox = document.getElementById('toggle');
+    const checkbox = document.getElementById('switch'); // Altera o ID para 'switch'
     const gradeCSS = document.getElementById('grade-css');
     const pilhaCSS = document.getElementById('pilha-css');
 
