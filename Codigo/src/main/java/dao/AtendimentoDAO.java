@@ -1,14 +1,20 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Atendimento;
-import java.sql.*;
-import java.util.*;
 
 public class AtendimentoDAO {
  
-    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private String user = "tech";
-    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
+    private static final String user = "tech";
+    private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
 
     public void salvarAtendimento(Atendimento atendimento) throws SQLException{
