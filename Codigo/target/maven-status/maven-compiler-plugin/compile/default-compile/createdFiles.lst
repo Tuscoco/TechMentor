@@ -6,8 +6,8 @@ dao/PessoaDAO.class
 service/MonitorService.class
 service/EventoService.class
 model/Monitoria.class
-model/Materia.class
 service/PessoaService.class
+model/Materia.class
 controller/RepositorioController.class
 model/Evento.class
 controller/MateriaAlunoController.class
