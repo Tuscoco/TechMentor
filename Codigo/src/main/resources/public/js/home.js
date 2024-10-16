@@ -1,6 +1,7 @@
 const button = document.getElementById('btn');
 const salaInput = document.getElementById('sala');
-const mudarSwitch = document.getElementById('mudar');
+const mudarSwitch = document.getElementById('switch');
+const sendButton = document.getElementById('sendBtn');
 
 // Alterna a classe 'active' ao clicar no botão
 button.addEventListener('click', function(event) {
@@ -13,13 +14,19 @@ salaInput.addEventListener('click', function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique
 });
 
+// Impede o fechamento ao interagir com o switch
+mudarSwitch.addEventListener('click', function(event) {
+    event.stopPropagation(); // Impede a propagação do evento de clique
+});
+
+// Impede o fechamento ao interagir com o switch
+sendButton.addEventListener('click', function(event) {
+    event.stopPropagation(); // Impede a propagação do evento de clique
+});
+
 // Altera o valor do input number para 1011 quando o switch é movido para a esquerda
 mudarSwitch.addEventListener('change', function() {
     if (!mudarSwitch.checked) { // Verifica se o switch foi movido para a esquerda
         salaInput.value = 1011; // Define o valor para 1011
     }
-
-    // if(salaInput.value == null){
-    //     salaInput.value = 1011; // Define o valor para 1011
-    // }
 });

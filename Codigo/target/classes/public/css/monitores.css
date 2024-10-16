@@ -1,11 +1,13 @@
-search{
-    display: flex;
-    justify-content: center;
+search {
+    display: flex; /* Usando flexbox para alinhar os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    margin-bottom: 20px; /* Espaço entre a busca e a seção de alunos */
 }
 
-search input{
+search input {
     color: #7F32A6;
-    font-size:20px;
+    font-size: 20px;
     font-family: Arial, sans-serif;
     font-weight: 900;
     padding-left: 10px;
@@ -17,29 +19,22 @@ search input{
     height: 40px;
 }
 
-search button{
+search button {
     background-color: #7F32A6;
     border: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     color: #fff;
-    height: 50px;
-    width: 50px;
-    transform: translateY(-4.8px);
+    height: 47  px;
+    width: 47px;
     transition: .1s;
 }
 
-search button:active{
+search button:active {
     background-color: #53216c;
-    border: none;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     color: #c5c5c5;
-    height: 50px;
-    width: 50px;
 }
-
-#lupa{
+#lupa {
     font-size: 30px;
 }
 
@@ -53,10 +48,10 @@ search button:active{
     display: flex;
     outline: 5px solid #7F32A6;
     border-radius: 5px;
-    align-items: center;
 }
 
 #aluno img{
+    margin-top: 8px;
     margin-left: 20px;
     width: 35px;
     height: 35px;
@@ -72,17 +67,8 @@ search button:active{
 }
 
 #aluno input[type="checkbox"] {
-    margin-left: 20px;
-    appearance: none;
-    width: 35px;
-    height: 35px;
-    border: 3px solid #7F32A6;
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
-}
+    margin-top: 8px;
 
-#aluno input[type="checkbox"] {
     margin-left: 20px;
     appearance: none;
     width: 35px;

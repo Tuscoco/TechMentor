@@ -1,6 +1,6 @@
 package model;
 
-public class Materia {
+public class Materia implements Comparable<Materia>{
     
     private int id_materia;
     private String nome;
@@ -21,6 +21,13 @@ public class Materia {
 
     public String getNome() {
         return nome;
+    }
+
+
+    @Override
+    public int compareTo(Materia outra) {
+        // TODO Auto-generated method stub
+        return this.nome.compareTo(outra.getNome());
     }
 
 }

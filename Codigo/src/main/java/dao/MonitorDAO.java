@@ -10,135 +10,152 @@ import java.util.List;
 import model.Monitoria;
 
 public class MonitorDAO {
-    
+
     private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
     private static final String user = "tech";
     private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
-
-    public void adicionarMonitor(Monitoria monitor) throws SQLException{
-        
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-
-            String sql = "INSERT INTO monitoria (id_monitor, id_materia,sala) VALUES (?,?,?,?)";
+    public void adicionarMonitor(Monitoria monitor) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            String sql = "INSERT INTO monitoria (id_monitor, id_materia, sala, materia_principal) VALUES (?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-
             pstmt.setInt(1, monitor.getIdMonitor());
             pstmt.setInt(2, monitor.getIdMateria());
+<<<<<<< HEAD
             pstmt.setInt(3, 1101);
             //pstmt.setBoolean(4, monitor.GetIsMateriaprincipal());
 
+=======
+            pstmt.setInt(3, monitor.getSala());
+            pstmt.setBoolean(4, monitor.getIsMateriaPrincipal());
+>>>>>>> refs/remotes/origin/master
             pstmt.executeUpdate();
-
         }
     }
 
-    public void RemoverMonitor(Monitoria monitor) throws SQLException{
-        
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-
+    public void removerMonitor(Monitoria monitor) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "DELETE FROM monitoria WHERE id_monitor = ? AND id_materia = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-
             pstmt.setInt(1, monitor.getIdMonitor());
             pstmt.setInt(2, monitor.getIdMateria());
-
             pstmt.executeUpdate();
-
         }
     }
-    public List<Monitoria> getTodos() throws SQLException{
+
+    public List<Monitoria> getTodos() throws SQLException {
         List<Monitoria> monitores = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT * FROM monitoria";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet result = pstmt.executeQuery();
+<<<<<<< HEAD
 
             while(result.next()){
                 //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
+=======
+            while (result.next()) {
+                monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
+                        result.getInt("sala"), result.getBoolean("materia_principal")));
+>>>>>>> refs/remotes/origin/master
             }
-
         }
-
         return monitores;
     }
 
-    public List<Monitoria>getMonitor(int id) throws SQLException{
+    public List<Monitoria> getMonitor(int id) throws SQLException {
         List<Monitoria> monitor = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT * FROM monitoria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
-          
             ResultSet result = pstmt.executeQuery();
+<<<<<<< HEAD
             while(result.next()){
                 //monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
+=======
+            while (result.next()) {
+                monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
+                        result.getInt("sala"), result.getBoolean("materia_principal")));
+>>>>>>> refs/remotes/origin/master
             }
         }
         return monitor;
     }
 
+<<<<<<< HEAD
     /*public Monitoria getMonitorMateria(int id_monitor, int id_materia) throws SQLException{
+=======
+    public Monitoria getMonitorMateria(int id_monitor, int id_materia) throws SQLException {
+>>>>>>> refs/remotes/origin/master
         Monitoria monitor;
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT * FROM monitoria WHERE id_monitor = ? AND id_materia = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id_monitor);
             pstmt.setInt(2, id_materia);
             ResultSet result = pstmt.executeQuery();
+<<<<<<< HEAD
             //monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal"));
+=======
+            if (result.next()) {
+                monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
+                        result.getInt("sala"), result.getBoolean("materia_principal"));
+            } else {
+                monitor = null;  // Handle case where no record is found
+            }
+>>>>>>> refs/remotes/origin/master
         }
         //return monitor;
     }*/
 
-    public List<Monitoria> getMonitorPorMateria(int id) throws SQLException{
+    public List<Monitoria> getMonitorPorMateria(int id) throws SQLException {
         List<Monitoria> monitores = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT * FROM monitoria WHERE id_materia = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
+<<<<<<< HEAD
 
             while(result.next()){
                 //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
+=======
+            while (result.next()) {
+                monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
+                        result.getInt("sala"), result.getBoolean("materia_principal")));
+>>>>>>> refs/remotes/origin/master
             }
-
         }
-
         return monitores;
     }
 
-
-    public void ficarOnline(int id) throws SQLException{
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+    public void ficarOnline(int id) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "UPDATE monitoria SET online = true WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         }
-            
     }
 
-
-    public void alterarSala(int sala,int id) throws SQLException{
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+    public void alterarSala(int sala, int id) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
             String sql = "UPDATE monitoria SET sala = ? WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, sala);
-            pstmt.setInt(2,id);
+            pstmt.setInt(2, id);
             pstmt.executeUpdate();
         }
     }
 
-
-    public void ficarOffline(int id) throws SQLException{
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-            String sql = "UPDATE monitoria SET online = false AND sala = 1101 WHERE id_monitor = ?";
+    public void ficarOffline(int id) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            String sql = "UPDATE monitoria SET online = false, sala = 1101 WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         }
-            
     }
-
 }
+

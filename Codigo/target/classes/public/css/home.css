@@ -1,39 +1,39 @@
-
-main{
+main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 50px;
     padding: 50px;
 }
 
-main a{
+main a {
     text-decoration: none;
 }
-article{
+
+article {
     padding: 10px;
     color: white;
     background-color: #7F32A6;
     border-radius: 10px;
     text-align: center;
-    transition: .1s;
+    transition: 0.1s;
 }
 
-article p{
+article p {
     margin: 0;
 }
 
-article i{
+article i {
     font-size: 175px;
 }
 
-article:hover{
+article:hover {
     scale: 1.05;
     color: #7F32A6;
     background-color: #fff;
     outline: 5px solid #7F32A6;
 }
 
-button {
+#btn {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -52,93 +52,85 @@ button {
     overflow: hidden; /* Evita que a barra branca apareça */
 }
 
-button #content {
+#btn #content {
     opacity: 0;
     height: 0;
     overflow: hidden;
     transition: opacity 0.5s ease-out, height 0.5s ease-out;
-}
-
-button.active #content {
-    opacity: 1;
-    height: auto;
     display: flex;
     flex-direction: column;
-
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
 }
 
-button.active {
+#btn.active #content {
+    opacity: 1;
+    margin-top: 40px;
+    height: auto;
+}
+
+#btn.active {
     border-radius: 10px;
     height: 170px;
     width: 150px;
 }
 
-button #icon {
+#btn #icon {
     position: absolute;
     top: 10px;
     left: 10px;
     transition: transform 0.5s;
 }
 
-button.active #icon {
+#btn.active #icon {
     transform: rotate(720deg);
 }
-
-
 #onOff {
-    margin: auto;
-    align-items: center;
-    display: flex;
-    margin-top: 35px;
+    display: flex; /* Habilita o flexbox */
+    flex-direction: column; /* Organiza os itens na vertical */
+    align-items: center; /* Centraliza horizontalmente os itens */
+    margin: 10px 0; /* Margem para os itens do switch */
+    scale: 0.7;
+}
+.form-check-input {
+    background-color: #7F32A6;
+    opacity: .5;
+}
+.form-check-input:checked {
+    background-color: #7F32A6;
+    opacity: 1;
 }
 
-.mudar {
-    display: none;
-}
 
-.mudar + label {
-    width: 72px;
-    height: 40px;
-    background: #7F32A6;
-    display: block;
-    position: relative;
-    border-radius: 20px;
-    padding: 2px;
-    transition: 200ms;
-    cursor: pointer;
-}
-
-.mudar + label::before {
+#sala {
     font-size: 20px;
-    content: '';
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    background: white;
-    display: block;
-    border-radius: 50%;
-    left: 5px;
-    top: 4px;
-    transition: 200ms;
-}
-
-.mudar:checked + label {
-    background: #00fff2;
-}
-
-.mudar:checked + label::before {
-    left: calc(100% - 40px);
-}
-
-#sala{
-    margin: 10px auto;
+    margin: 10px 0; /* Margem acima e abaixo do input */
     border: none;
     outline: 3px solid #7F32A6;
-    width: 50%;
-    border-radius: 2px;
-    height: 20px;
+    width: 60%; /* Largura do input de número */
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    height: 30px; /* Altura do input de número */
     color: #7F32A6;
     font-weight: 900;
     text-align: center;
 }
-
+#send {
+    display: flex; /* Mantém os itens dentro de send em linha */
+    align-items: center; /* Alinha verticalmente os itens no centro */
+    justify-content: center; /* Centraliza horizontalmente */
+    width: 100%; /* Opcional: faz com que use toda a largura disponível */
+}
+#sendBtn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    background-color: #7F32A6;
+    color: #fff;
+    font-size: 10px;
+    width: 35px;
+    height: 34px;
+}
+#sendBtn:hover{
+    background-color: #53216c;
+}

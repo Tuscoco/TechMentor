@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.Materia;
@@ -12,9 +13,9 @@ import model.MateriaAluno;
 
 public class MateriaAlunoDAO {
     
-    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private String user = "tech";
-    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
+    private static final String user = "tech";
+    private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
 
 
@@ -52,14 +53,27 @@ public class MateriaAlunoDAO {
                 PreparedStatement materia_pstmt = conn.prepareStatement(sql);
                 materia_pstmt.setInt(1,result.getInt("id_materia"));
                 ResultSet result_materia = materia_pstmt.executeQuery();
-                //materias.add(MateriaDAO.findMateria(result_materia.getInt("id_materia")));
+                materias.add(MateriaDAO.findMateriaById(result_materia.getInt("id_materia")));
 
             }
 
         }
+        Collections.sort(materias);
 
         return materias;
 
+    }
+
+
+     public MateriaAluno getRelacao(int id) throws SQLException{
+        MateriaAluno relacao;
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+            String sql = "SELECT * FROM materia_aluno WHERE id_materia = ? AND id_aluno = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet result = pstmt.executeQuery();
+            relacao = new MateriaAluno(result.getInt("id_aluno"), result.getInt("id_materia"));
+        }
+        return relacao;
     }
 
 

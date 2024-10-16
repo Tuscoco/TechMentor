@@ -5,14 +5,28 @@ public class Monitoria {
     private int id_monitor;
     private int id_materia;
     private boolean online;
+    private int sala = 1101;
+    private boolean materia_principal;
 
 
-    public Monitoria(int id_monitor, int id_materia) {
+    public Monitoria(int id_monitor, int id_materia,int sala, boolean materia_principal) {
 
         this.id_monitor = id_monitor;
         this.id_materia = id_materia;
         this.online = false;
+        this.materia_principal = materia_principal;
+        this.sala = sala;
 
+    }
+
+
+    public int getSala() {
+        return sala;
+    }
+
+
+    public void setSala(int sala) {
+        this.sala = sala;
     }
 
 
@@ -33,6 +47,23 @@ public class Monitoria {
 
     public boolean isOnline() {
         return online;
+    
     }
 
+    
+
+    public void setIsMateriaPrincipal(boolean materia_principal) {
+    this.materia_principal = materia_principal;
+    }
+
+
+    public boolean GetIsMateriaprincipal() {
+        return materia_principal;
+    }
+
+
+    
+
 }
+
+
