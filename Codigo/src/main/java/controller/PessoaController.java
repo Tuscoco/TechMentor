@@ -213,13 +213,13 @@ public class PessoaController {
 
                     res.status(200);
 
-                    return gson.toJson(new String[] {Integer.toString(tipoUsuario), "true"});
+                    return gson.toJson(Integer.toString(tipoUsuario));
 
                 }else{
 
                     res.status(404);
 
-                    return gson.toJson(new String[] {"Pessoa não encontrada", "false"});
+                    return gson.toJson("Pessoa não encontrada");
 
                 }
 
@@ -227,7 +227,7 @@ public class PessoaController {
 
                 res.status(500);
 
-                return gson.toJson(new String[] {"Ocorreu um erro", "false"});
+                return gson.toJson("Ocorreu um erro");
 
             }
 

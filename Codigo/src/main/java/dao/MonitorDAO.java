@@ -26,7 +26,7 @@ public class MonitorDAO {
             pstmt.setInt(1, monitor.getIdMonitor());
             pstmt.setInt(2, monitor.getIdMateria());
             pstmt.setInt(3, 1101);
-            pstmt.setBoolean(4, monitor.GetIsMateriaprincipal());
+            //pstmt.setBoolean(4, monitor.GetIsMateriaprincipal());
 
             pstmt.executeUpdate();
 
@@ -55,7 +55,7 @@ public class MonitorDAO {
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
-                monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
+                //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
             }
 
         }
@@ -72,13 +72,13 @@ public class MonitorDAO {
           
             ResultSet result = pstmt.executeQuery();
             while(result.next()){
-                monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
+                //monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
             }
         }
         return monitor;
     }
 
-    public Monitoria getMonitorMateria(int id_monitor, int id_materia) throws SQLException{
+    /*public Monitoria getMonitorMateria(int id_monitor, int id_materia) throws SQLException{
         Monitoria monitor;
         try(Connection conn = DriverManager.getConnection(url, user, password)){
             String sql = "SELECT * FROM monitoria WHERE id_monitor = ? AND id_materia = ?";
@@ -86,10 +86,10 @@ public class MonitorDAO {
             pstmt.setInt(1, id_monitor);
             pstmt.setInt(2, id_materia);
             ResultSet result = pstmt.executeQuery();
-            monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal"));
+            //monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal"));
         }
-        return monitor;
-    }
+        //return monitor;
+    }*/
 
     public List<Monitoria> getMonitorPorMateria(int id) throws SQLException{
         List<Monitoria> monitores = new ArrayList<>();
@@ -100,7 +100,7 @@ public class MonitorDAO {
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
-                monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
+                //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
             }
 
         }

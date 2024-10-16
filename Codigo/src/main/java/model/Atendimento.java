@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 
 public class Atendimento {
     
@@ -8,13 +7,13 @@ public class Atendimento {
 	private int id_monitor;
     private int id_aluno;
 	private int id_materia;
-    private Date data;
+    private String data;
     private String tema_duvida;
     private String descricao;
     private boolean duvida_sanada;
 
 
-    public Atendimento(int id, int id_monitor, int id_aluno, int id_materia, Date data, String tema_duvida, String descricao, boolean duvida_sanada) {
+    public Atendimento(int id, int id_monitor, int id_aluno, int id_materia, String data, String tema_duvida, String descricao, boolean duvida_sanada) {
 
         this.id = id;
 		this.id_monitor = id_monitor;
@@ -27,7 +26,7 @@ public class Atendimento {
 
     }
 
-	public Atendimento(int id_monitor, int id_aluno, int id_materia, Date data, String tema_duvida, String descricao, boolean duvida_sanada) {
+	public Atendimento(int id_monitor, int id_aluno, int id_materia, String data, String tema_duvida, String descricao, boolean duvida_sanada) {
 
 		this.id_monitor = id_monitor;
         this.id_aluno = id_aluno;
@@ -55,7 +54,7 @@ public class Atendimento {
 	}
 
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 

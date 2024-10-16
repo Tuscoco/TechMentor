@@ -1,5 +1,4 @@
 package dao;
-
 import model.Atendimento;
 import java.sql.*;
 import java.util.*;
@@ -23,11 +22,7 @@ public class AtendimentoDAO {
             pstmt.setInt(2, atendimento.getIdMonitor());
             pstmt.setInt(3, atendimento.getIdAluno());
             pstmt.setInt(4, atendimento.getIdMateria());
-
-            java.util.Date utilDate = atendimento.getData();
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-            pstmt.setDate(5, sqlDate);
+            pstmt.setString(5, atendimento.getData());
             pstmt.setString(6, atendimento.getTemaDuvida());
             pstmt.setString(7, atendimento.getDescricao());
             pstmt.setBoolean(8, atendimento.isDuvidaSanada());
@@ -42,7 +37,7 @@ public class AtendimentoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELEXT MAX(id) AS max_id FROM atendimento";
+            String sql = "SELECT MAX(id) AS max_id FROM atendimento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet result = pstmt.executeQuery();
 
@@ -73,7 +68,7 @@ public class AtendimentoDAO {
 
             while(result.next()){
 
-                Atendimento atendimento = new Atendimento(result.getInt("id"), result.getInt("id_monitor"), result.getInt("id_aluno"), result.getInt("id_materia"), result.getDate("data"), result.getString("tema_duvida"), result.getString("descricao"), result.getBoolean("duvida_sanada"));
+                Atendimento atendimento = new Atendimento(result.getInt("id"), result.getInt("id_monitor"), result.getInt("id_aluno"), result.getInt("id_materia"), result.getString("data"), result.getString("tema_duvida"), result.getString("descricao"), result.getBoolean("duvida_sanada"));
                 lista.add(atendimento);
 
             }

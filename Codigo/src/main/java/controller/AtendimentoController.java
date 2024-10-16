@@ -39,11 +39,11 @@ public class AtendimentoController {
 
         });
 
-        get("/buscaratendimentos", (req, res) -> {
+        get("/buscaratendimentos/:idMonitor", (req, res) -> {
 
             res.type("application/json");
 
-            int id_monitor = gson.fromJson(req.body(), int.class);
+            int id_monitor = Integer.parseInt(req.params(":idMonitor"));
 
             List<Atendimento> lista = atendimentoService.buscarAtendimentos(id_monitor);
 
