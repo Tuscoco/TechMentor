@@ -127,6 +127,7 @@ main a{
 }
 
 .delete-btn{
+    color: red;
     font-size: 20px;
     margin-left: 90%;
     cursor: pointer;

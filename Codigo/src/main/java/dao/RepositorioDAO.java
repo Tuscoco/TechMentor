@@ -6,9 +6,9 @@ import java.util.*;
 
 public class RepositorioDAO {
  
-    private String url = "jdbc:postgresql://localhost:5432/techmentor";
-    private String user = "lucasmarinho";
-    private String password = "senhanova";
+    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
+    private String user = "tech";
+    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
 
     public void salvarRepositorio(Repositorio repositorio) throws SQLException{
@@ -21,6 +21,21 @@ public class RepositorioDAO {
             pstmt.setInt(1, getNextId());
             pstmt.setString(2, repositorio.getNome());
             pstmt.setString(3, repositorio.getLink());
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
+
+    public void deletarRepositorio(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "DELETE FROM repositorio WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
 
             pstmt.executeUpdate();
 
@@ -60,35 +75,37 @@ public class RepositorioDAO {
 
             while(result.next()){
 
-                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("name"), result.getString("link"));
+                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("nome"), result.getString("link"));
                 lista.add(repositorio);
 
             }
 
         }
 
+        lista = ordenar(lista);
+
         return lista;
 
     }
 
-    public List<Repositorio> getAlguns(int cod_materia) throws SQLException{
+    public List<Repositorio> ordenar(List<Repositorio> lista){
 
-        List<Repositorio> lista = new ArrayList<>();
+        int n = lista.size();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELECT * FROM repositorio WHERE cod_materia = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+        for(int i = 1;i < n;i++){
 
-            pstmt.setInt(1, cod_materia);
-            ResultSet result = pstmt.executeQuery();
+            Repositorio temp = lista.get(i);
+            int j = i - 1;
 
-            while(result.next()){
+            while((j >= 0) && (lista.get(j).getNome().compareTo(temp.getNome()) > 0)){
 
-                Repositorio repositorio = new Repositorio(result.getInt("id"), result.getString("name"), result.getString("link"));
-                lista.add(repositorio);
+                lista.set(j + 1, lista.get(j));
+                j--;
 
             }
+
+            lista.set(j + 1, temp);
 
         }
 

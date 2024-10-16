@@ -57,44 +57,54 @@ document.getElementById('adicionar').addEventListener('click', function() {
 
 // Função para carregar e exibir os repositórios
 function carregarRepositorios() {
-    fetch('http://localhost:3000/repos')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na requisição');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const reposDiv = document.getElementById('repos');
-            // Limpa a lista existente antes de adicionar os repositórios
-            reposDiv.innerHTML = '';
+    fetch('http://localhost:4567/mostrarrepositorio', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na requisição');
+        }
+        return response.json(); // Converte a resposta para JSON
+    })
+    .then(data => {
+        const reposDiv = document.getElementById('repos');
+        reposDiv.innerHTML = ''; // Limpa a lista antes de carregar novos dados
 
-            // Iterar sobre cada repositório e adicioná-lo à página
-            data.forEach(repo => {
-                const newRepo = document.createElement('div'); // Usar div para conter o repositório e o botão
-                newRepo.className = 'repo'; // Usando className
+        if (data.length === 0) {
+            reposDiv.innerHTML = '<p>Nenhum repositório encontrado.</p>';
+            return;
+        }
 
-                // Criar botão de excluir
-                const deleteButton = document.createElement('div');
-                deleteButton.innerHTML = '<i class="ph-fill ph-trash-simple"></i>'; // Adiciona o ícone
-                deleteButton.className = 'delete-btn'; // Adiciona uma classe para estilização, se necessário
+        data.forEach(repo => {
+            const newRepo = document.createElement('div');
+            newRepo.className = 'repo';
 
-                // Evento de clique para excluir o repositório
-                deleteButton.addEventListener('click', function() {
-                    fetch(`http://localhost:3000/repos/${repo.id}`, {
-                        method: 'DELETE'
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Erro na requisição ao excluir');
-                        }
-                        // Remover o repositório da lista
-                        newRepo.remove(); // Remove o elemento da interface
-                    })
-                    .catch((error) => {
-                        console.error('Erro:', error);
-                    });
+            // Criar botão de excluir
+            const deleteButton = document.createElement('div');
+            deleteButton.innerHTML = '<i class="ph-fill ph-trash-simple"></i>';
+            deleteButton.className = 'delete-btn';
+
+            // Evento de clique para excluir o repositório
+            deleteButton.addEventListener('click', function() {
+                fetch(`http://localhost:4567/deletarrepositorio/${repo.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json' // Cabeçalho opcional para DELETE
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na requisição ao excluir');
+                    }
+                    newRepo.remove(); // Remove o repositório da interface
+                })
+                .catch((error) => {
+                    console.error('Erro ao excluir:', error);
                 });
+<<<<<<< HEAD
 
                 newRepo.appendChild(deleteButton); // Adiciona o botão ao repositório
 
@@ -104,11 +114,25 @@ function carregarRepositorios() {
                 repoLink.innerHTML = `<textarea id="nomeRepo">${repo.nome}</textarea>`;
                 newRepo.appendChild(repoLink); // Adiciona o link ao repositório
                 reposDiv.appendChild(newRepo); // Adiciona o novo repositório à lista
+=======
+>>>>>>> 36b49b9d721a1c23347f51f719c24f195da4ad65
             });
-        })
-        .catch((error) => {
-            console.error('Erro:', error);
+
+            newRepo.appendChild(deleteButton);
+
+            // Criar link do repositório
+            const repoLink = document.createElement('a');
+            repoLink.href = repo.link;
+            repoLink.innerHTML = `<div>${repo.nome}</div>`;
+            newRepo.appendChild(repoLink);
+
+            reposDiv.appendChild(newRepo);
         });
+    })
+    .catch((error) => {
+        console.error('Erro:', error);
+    });
 }
+
 // Carregar repositórios ao iniciar a página
 window.onload = carregarRepositorios;

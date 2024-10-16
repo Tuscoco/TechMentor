@@ -5,9 +5,9 @@ import java.sql.*;
 
 public class PessoaDAO {
     
-    private String url = "jdbc:postgresql://localhost:5432/techmentor";
-    private String user = "";
-    private String password = "";
+    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
+    private String user = "tech";
+    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
 
     public void registrarPessoa(Pessoa pessoa) throws SQLException{

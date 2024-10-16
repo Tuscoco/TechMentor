@@ -28,15 +28,27 @@ public class RepositorioService {
 
     }
 
-    public List<Repositorio> getTodos() throws SQLException{
+    public boolean deletarRepositorio(int id){
 
-        return repositorioDAO.getTodos();
+        try{
+
+            repositorioDAO.deletarRepositorio(id);
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+            return false;
+
+        }
 
     }
 
-    public List<Repositorio> getAlguns(int cod_materia) throws SQLException{
+    public List<Repositorio> getTodos() throws SQLException{
 
-        return repositorioDAO.getAlguns(cod_materia);
+        return repositorioDAO.getTodos();
 
     }
 

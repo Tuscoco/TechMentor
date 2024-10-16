@@ -39,25 +39,41 @@ public class RepositorioController {
 
         });
 
+        delete("/deletarrepositorio/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+            boolean success = repositorioService.deletarRepositorio(id);
+
+            if(success){
+
+                return gson.toJson("Repositorio deletado!");
+
+            }else{
+
+                return gson.toJson("Erro ao deletar repositorio!");
+
+            }
+
+        });
+
         get("/mostrarrepositorio", (req, res) -> {
 
             res.type("application/json");
 
-            List<Repositorio> lista = repositorioService.getTodos();
+            try{
 
-            return new Gson().toJson(lista);
+                List<Repositorio> lista = repositorioService.getTodos();
 
-        });
+                return new Gson().toJson(lista);
 
-        get("/mostrarrepositoriofiltrado", (req, res) -> {
+            }catch(Exception e){
 
-            res.type("application/json");
+                res.status(500);
+                return "{\"message\":\"Erro no servidor ao buscar os repositórios.\"}";
 
-            int cod_materia = gson.fromJson(req.body(), int.class);
-
-            List<Repositorio> lista = repositorioService.getAlguns(cod_materia);
-
-            return new Gson().toJson(lista);
+            }
 
         });
 
