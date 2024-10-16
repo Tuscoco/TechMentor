@@ -10,6 +10,8 @@ public class Pessoa {
     private int tipo_usuario;
 
 
+    public Pessoa(){}
+    
     public Pessoa(int id, String nome, String email, String senha, int tipo_usuario) {
 
         this.id = id;
@@ -17,6 +19,13 @@ public class Pessoa {
         this.email = email;
         this.senha = senha;
         this.tipo_usuario = tipo_usuario;
+
+    }
+
+    public Pessoa(int id, String senha) {
+
+        this.id = id;
+        this.senha = senha;
 
     }
 
@@ -28,6 +37,11 @@ public class Pessoa {
 
     public int getId() {
         return id;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
@@ -58,6 +72,11 @@ public class Pessoa {
 
     public int getTipoUsuario() {
         return tipo_usuario;
+    }
+
+
+    public void setTipoUsuario(int tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
     }
 
 }

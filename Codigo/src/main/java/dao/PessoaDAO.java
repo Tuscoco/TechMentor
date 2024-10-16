@@ -29,4 +29,148 @@ public class PessoaDAO {
 
     }
 
+    public boolean loginPessoa(Pessoa pessoa) throws SQLException{
+
+        boolean autenticado = false;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT * FROM pessoa WHERE id = ? AND senha = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, pessoa.getId());
+            pstmt.setString(2, pessoa.getSenha());
+
+            ResultSet result = pstmt.executeQuery();
+
+            autenticado = result.next();
+
+        }
+
+        return autenticado;
+
+    }
+
+    public int getTipoUsuario(Pessoa pessoa) throws SQLException{
+
+        int tipo = -1;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, pessoa.getId());
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                tipo = result.getInt("tipo_usuario");
+
+            }
+
+        }
+
+        return tipo;
+
+    }
+
+    public int getTipoUsuario(int id) throws SQLException{
+
+        int tipo = -1;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                tipo = result.getInt("tipo_usuario");
+
+            }
+
+        }
+
+        return tipo;
+
+    }
+
+    public boolean alterarTipoUsuario(int id, int novoTipo) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET tipo_usuario = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, novoTipo);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
+    public boolean alterarSenha(String senha, int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET senha = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, senha);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
+    public boolean alterarEmail(String email, int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET email = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, email);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
+    public boolean alterarNome(String nome, int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET nome = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, nome);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
 }
