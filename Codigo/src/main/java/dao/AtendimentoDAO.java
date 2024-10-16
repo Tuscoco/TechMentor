@@ -1,21 +1,27 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Atendimento;
-import java.sql.*;
-import java.util.*;
 
 public class AtendimentoDAO {
  
-    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private String user = "tech";
-    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
+    private static final String user = "tech";
+    private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
 
 
     public void salvarAtendimento(Atendimento atendimento) throws SQLException{
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "INSERT INTO atendimento (id, id_monitor, id_aluno, cod_materia, data, tema_duvida, descricao, duvida_sanada) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO atendimento (id, id_monitor, id_aluno, id_materia, data, tema_duvida, descricao, duvida_sanada) VALUES (?,?,?,?,?,?,?,?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -23,7 +29,11 @@ public class AtendimentoDAO {
             pstmt.setInt(2, atendimento.getIdMonitor());
             pstmt.setInt(3, atendimento.getIdAluno());
             pstmt.setInt(4, atendimento.getIdMateria());
-            pstmt.setDate(5, atendimento.getData());
+
+            java.util.Date utilDate = atendimento.getData();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+            pstmt.setDate(5, sqlDate);
             pstmt.setString(6, atendimento.getTemaDuvida());
             pstmt.setString(7, atendimento.getDescricao());
             pstmt.setBoolean(8, atendimento.isDuvidaSanada());
@@ -38,7 +48,7 @@ public class AtendimentoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELEXT MAX(id) AS max_id FROM repositorio";
+            String sql = "SELEXT MAX(id) AS max_id FROM atendimento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet result = pstmt.executeQuery();
 
