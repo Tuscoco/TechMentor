@@ -104,18 +104,6 @@ function carregarRepositorios() {
                 .catch((error) => {
                     console.error('Erro ao excluir:', error);
                 });
-<<<<<<< HEAD
-
-                newRepo.appendChild(deleteButton); // Adiciona o botão ao repositório
-
-                // Criar link do repositório
-                const repoLink = document.createElement('a');
-                repoLink.href = repo.link;
-                repoLink.innerHTML = `<textarea id="nomeRepo">${repo.nome}</textarea>`;
-                newRepo.appendChild(repoLink); // Adiciona o link ao repositório
-                reposDiv.appendChild(newRepo); // Adiciona o novo repositório à lista
-=======
->>>>>>> 36b49b9d721a1c23347f51f719c24f195da4ad65
             });
 
             newRepo.appendChild(deleteButton);
