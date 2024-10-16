@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.Materia;
@@ -31,11 +32,11 @@ public class MateriaDAO {
                 materias.add(materia);
             }
         }
-
+        Collections.sort(materias);
         return materias;
     }
 
-    public static Materia findMateria(int id) throws SQLException{
+    public static Materia findMateriaById(int id) throws SQLException{
         Materia materia;
         try(Connection conn = DriverManager.getConnection(url, user, password)){
             
