@@ -23,10 +23,8 @@ body{
 }
 
 header {
+    all: unset;
     flex-shrink: 0;
-}
-
-header{
     align-items: center;
     color: #7F32A6;
     background-color: white;
@@ -40,6 +38,7 @@ header{
 }
 
 header a{
+    
     color: #7F32A6;
     text-decoration: none;
     display: flex;
@@ -57,6 +56,7 @@ header img{
     width: 40px;
     height: 40px;
     margin-right: 10px;
+    margin-top: 1%;
 }
 #logo{
     margin-left: 10px;

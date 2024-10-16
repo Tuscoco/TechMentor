@@ -76,15 +76,19 @@ button.menu-hamburger {
     display: flex;
     flex-direction: column;
     align-items: flex-start;  /* Alinha o conteúdo à esquerda */
-    padding: 10px;
     max-height: 60px;
     overflow: hidden;  /* Esconde o conteúdo extra inicialmente */
 }
 
 /* Estilo para quando o botão estiver "aberto" */
 button.menu-hamburger.open {
+    padding: 10px;
     font-size: 25px;
     max-height: 200px;
+}
+
+button.menu-hamburger img {
+    margin-top: .8%;
 }
 
 .dados {
@@ -94,7 +98,6 @@ button.menu-hamburger.open {
     font-size: 20px;
     align-items: flex-start;
 }
-
 
 /* Ajuste de estilo para o conteúdo adicional */
 button.menu-hamburger p {
@@ -106,6 +109,6 @@ button.menu-hamburger.open img {
     height: 175px;
     border-radius: 10px;
 }
-
-
-
+.dados p{
+    margin: 2px !important;
+}
