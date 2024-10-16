@@ -15,7 +15,7 @@ public class AtendimentoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "INSERT INTO atendimento (id, id_monitor, id_aluno, cod_materia, data, tema_duvida, descricao, duvida_sanada) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO atendimento (id, id_monitor, id_aluno, id_materia, data, tema_duvida, descricao, duvida_sanada) VALUES (?,?,?,?,?,?,?,?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -23,7 +23,11 @@ public class AtendimentoDAO {
             pstmt.setInt(2, atendimento.getIdMonitor());
             pstmt.setInt(3, atendimento.getIdAluno());
             pstmt.setInt(4, atendimento.getIdMateria());
-            pstmt.setDate(5, atendimento.getData());
+
+            java.util.Date utilDate = atendimento.getData();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+            pstmt.setDate(5, sqlDate);
             pstmt.setString(6, atendimento.getTemaDuvida());
             pstmt.setString(7, atendimento.getDescricao());
             pstmt.setBoolean(8, atendimento.isDuvidaSanada());
@@ -38,7 +42,7 @@ public class AtendimentoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELEXT MAX(id) AS max_id FROM repositorio";
+            String sql = "SELEXT MAX(id) AS max_id FROM atendimento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet result = pstmt.executeQuery();
 

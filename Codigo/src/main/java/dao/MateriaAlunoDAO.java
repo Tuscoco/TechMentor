@@ -52,7 +52,7 @@ public class MateriaAlunoDAO {
                 PreparedStatement materia_pstmt = conn.prepareStatement(sql);
                 materia_pstmt.setInt(1,result.getInt("id_materia"));
                 ResultSet result_materia = materia_pstmt.executeQuery();
-                materias.add(MateriaDAO.findMateria(result_materia.getInt("id_materia")));
+                //materias.add(MateriaDAO.findMateria(result_materia.getInt("id_materia")));
 
             }
 

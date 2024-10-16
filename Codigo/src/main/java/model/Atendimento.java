@@ -27,6 +27,18 @@ public class Atendimento {
 
     }
 
+	public Atendimento(int id_monitor, int id_aluno, int id_materia, Date data, String tema_duvida, String descricao, boolean duvida_sanada) {
+
+		this.id_monitor = id_monitor;
+        this.id_aluno = id_aluno;
+		this.id_materia = id_materia;
+        this.data = data;
+        this.tema_duvida = tema_duvida;
+        this.descricao = descricao;
+        this.duvida_sanada = duvida_sanada;
+
+    }
+
 
 	public int getId() {
 		return id;

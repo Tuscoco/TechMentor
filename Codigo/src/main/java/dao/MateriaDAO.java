@@ -32,7 +32,7 @@ public class MateriaDAO {
                 materias.add(materia);
             }
         }
-        Collections.sort(materias);
+        //Collections.sort(materias);
         return materias;
     }
 
