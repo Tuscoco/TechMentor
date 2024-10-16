@@ -155,4 +155,22 @@ public class PessoaDAO {
 
     }
 
+    public boolean alterarNome(String nome, int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET nome = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, nome);
+            pstmt.setInt(2, id);
+
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
+
+        }
+
+    }
+
 }

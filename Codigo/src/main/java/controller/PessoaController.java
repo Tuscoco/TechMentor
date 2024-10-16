@@ -162,6 +162,40 @@ public class PessoaController {
 
         });
 
+        post("/alterarnome", (req, res) -> {
+
+            res.type("application/json");
+
+            JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+            String nome = json.get("nome").getAsString();
+            int id = json.get("id").getAsInt();
+
+            try{
+
+                boolean success = pessoaService.alterarNome(nome, id);
+
+                if(success){
+
+                    res.status(200);
+                    return gson.toJson("Nome alterado!");
+
+                }else{
+
+                    res.status(403);
+                    return gson.toJson("Erro ao alterar nome!");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+                e.printStackTrace();
+                return gson.toJson("Erro!");
+
+            }
+
+        });
+
         get("/tipousuario/:id", (req, res) -> {
 
             res.type("application/json");

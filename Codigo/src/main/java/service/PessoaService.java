@@ -76,4 +76,10 @@ public class PessoaService {
 
     }
 
+    public boolean alterarNome(String nome, int id) throws Exception{
+
+        return pessoaDAO.alterarNome(nome, id);
+
+    }
+
 }
