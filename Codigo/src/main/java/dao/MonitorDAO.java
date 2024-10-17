@@ -54,6 +54,24 @@ public class MonitorDAO {
         return monitores;
     }
 
+
+
+    public Monitoria getMonitorEMateria(int id_monitor,int id_materia) throws SQLException {
+        Monitoria monitor;
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            String sql = "SELECT * FROM monitoria WHERE id_monitor = ? AND id_materia = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id_monitor);
+            pstmt.setInt(2, id_materia);
+            ResultSet result = pstmt.executeQuery();
+
+
+            monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"), result.getBoolean("materia_principal"));
+
+        }
+        return monitor;
+    }
+
     public List<Monitoria> getMonitor(int id) throws SQLException {
         List<Monitoria> monitor = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
@@ -96,6 +114,7 @@ public class MonitorDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            
         }
     }
 
@@ -117,5 +136,7 @@ public class MonitorDAO {
             pstmt.executeUpdate();
         }
     }
+
+  
 }
 
