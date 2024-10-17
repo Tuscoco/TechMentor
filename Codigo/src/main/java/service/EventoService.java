@@ -35,7 +35,7 @@ public class EventoService {
 
     }
 
-    public List<Evento> buscarEventosDoDia(Date data) throws SQLException{
+    public List<Evento> buscarEventosDoDia(String data) throws SQLException{
 
         return eventoDAO.buscarEventosDoDia(data);
 
