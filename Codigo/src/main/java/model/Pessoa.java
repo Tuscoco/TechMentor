@@ -6,7 +6,6 @@ public class Pessoa {
     private String nome;
     private String email;
     private String senha;
-    private String imagem;
     private int tipo_usuario;
 
 
@@ -27,11 +26,6 @@ public class Pessoa {
         this.id = id;
         this.senha = senha;
 
-    }
-
-
-    public void setImagem(String url) {
-        this.imagem = url;
     }
 
 
@@ -62,11 +56,6 @@ public class Pessoa {
 
     public void setSenha(String senha){
         this.senha = senha;
-    }
-
-
-    public String getImagem() {
-        return imagem;
     }
 
 

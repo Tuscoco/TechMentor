@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -173,6 +174,78 @@ public class PessoaDAO {
             int alterado = pstmt.executeUpdate();
 
             return alterado > 0;
+
+        }
+
+    }
+
+    public boolean alterarFoto(int id, InputStream foto, long tamanhoFoto) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET foto = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setBinaryStream(1, foto, tamanhoFoto);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+    public InputStream getFoto(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT foto FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                return result.getBinaryStream("foto");
+
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+
+    }
+
+    public boolean removerFoto(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "DELETE foto FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
 
         }
 
