@@ -55,6 +55,15 @@ public class MonitorService {
         }
     }
 
+    public List<Monitoria> getMonitor(int id_monitor){
+        try{
+            return monitorDAO.getMonitor(id_monitor);
+        } catch(Exception e){
+            e.printStackTrace();
+            return new ArrayList<Monitoria>();
+        }
+    }
+
 
     public List<Monitoria> getMonitorPorMateria(int id_materia){
 
@@ -87,7 +96,7 @@ public class MonitorService {
 
     public boolean alterarSala(int id_monitor,int sala) throws SQLException{
         try {
-            monitorDAO.alterarSala(id_monitor,sala);
+            monitorDAO.alterarSala(sala,id_monitor);
             return true;
         } catch (Exception e) {
             return false;

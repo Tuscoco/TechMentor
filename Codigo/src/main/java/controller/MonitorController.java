@@ -120,6 +120,29 @@ public class MonitorController {
         });
 
 
+        get("/monitorPorMateria" , (req,res) -> {
+            res.type("application/json");
+
+
+            try{
+                JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+
+                int idMateria = json.get("id_materia").getAsInt();
+
+                List<Monitoria> lista = monitorService.getMonitorPorMateria(idMateria);
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+                return "{\"message\":\"Erro no servidor ao buscar os monitores.\"}";
+
+            }
+
+        });
+
+
         post("/ficarOnline", (req,res) ->{
             res.type("application/json");
 
@@ -154,6 +177,35 @@ public class MonitorController {
             } catch (Exception e) {
                 return gson.toJson("Erro interno ao processar a requisição.");
             }
+        });
+
+        delete("/mudarSala", (req, res) -> {
+
+            res.type("application/json");
+        
+            try {
+                JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+                int idMonitor = json.get("id_monitor").getAsInt();
+                int sala = json.get("sala").getAsInt();
+        
+                List<Monitoria> monitor = monitorService.getMonitor(idMonitor);
+        
+                if (monitor.isEmpty()) {
+                    return gson.toJson("Monitor não encontrado!");
+                }
+        
+                boolean success = monitorService.alterarSala(idMonitor,sala);
+        
+                if (success) {
+                    return gson.toJson("Sala alterada com sucesso!");
+                } else {
+                    return gson.toJson("Erro ao mudar sala!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return gson.toJson("Erro interno ao processar a requisição.");
+            }
+        
         });
 
 
