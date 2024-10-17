@@ -233,7 +233,7 @@ public class PessoaDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "DELETE foto FROM pessoa WHERE id = ?";
+            String sql = "UPDATE pessoa SET foto = NULL WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, id);
