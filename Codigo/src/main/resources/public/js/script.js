@@ -1,24 +1,34 @@
 const usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado))
 
 if (usuarioLogado) {
-    
-    const id = usuarioLogado.id;
-    
-    const tipo = getTipoUsuario(id);
-    usuarioLogado.tipo = tipo;
-
-    const nome = getNomeUsuario(id);
-    usuarioLogado.nome = nome;
-
-    console.log(usuarioLogado)
-    console.log(`Bem-vindo, ${usuarioLogado.nome}!`);
-    document.querySelector('#username').textContent = 
-        `${usuarioLogado.nome}`;
+    inicializarUsuario(usuarioLogado); // Chama a função para iniciar
 } else {
     // Redireciona para login se o usuário não estiver logado
     alert('Faça login para acessar a página.');
     window.location.href = '../html/logCad.html'; // Ajuste para a URL correta da página de login
+}
+
+async function inicializarUsuario(usuarioLogado) {
+    try {
+        const id = usuarioLogado.id;
+
+        // Aguarda a resposta das funções assíncronas
+        usuarioLogado.tipo = await getTipoUsuario(id);
+        usuarioLogado.nome = await getNomeUsuario(id);
+
+        // Atualiza o sessionStorage com o objeto atualizado
+        sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+
+        console.log(usuarioLogado);
+        console.log(`Bem-vindo, ${usuarioLogado.nome}!`);
+
+        // Exibe o nome no elemento com ID 'username'
+        document.querySelector('#username').textContent = usuarioLogado.nome;
+        document.querySelector('#nameEdit').textContent = usuarioLogado.nome;
+        document.querySelector('#senhaEdit').textContent = usuarioLogado.senha;
+    } catch (error) {
+        console.error('Erro ao inicializar o usuário:', error);
+    }
 }
 
 async function getTipoUsuario(id) {
@@ -27,7 +37,6 @@ async function getTipoUsuario(id) {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
-        
 
         if (response.ok) {
             const result = await response.json();
@@ -56,13 +65,13 @@ async function getNomeUsuario(id) {
 
         if (response.ok) {
             const result = await response.json();
-            return result; // Retorna o tipo de usuário (0, 1, 2 ou 3)
+            return result; // Retorna o nome do usuário
         } else if (response.status === 404) {
             alert("Pessoa não encontrada");
             return null;
         } else {
-            console.error('Erro ao obter o tipo de usuário:', response.status);
-            alert('Erro ao obter o tipo de usuário: ' + response.status);
+            console.error('Erro ao obter o nome do usuário:', response.status);
+            alert('Erro ao obter o nome do usuário: ' + response.status);
             return null;
         }
     } catch (error) {

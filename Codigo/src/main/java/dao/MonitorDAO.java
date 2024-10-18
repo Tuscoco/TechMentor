@@ -165,27 +165,27 @@
 //             String sql = "UPDATE monitoria SET online = true WHERE id_monitor = ?";
 //             PreparedStatement pstmt = conn.prepareStatement(sql);
 //             pstmt.setInt(1, id);
-//             pstmt.executeUpdate();
+    //         pstmt.executeUpdate();
             
-//         }
-//     }
+    //     }
+    // }
 
-//     public void alterarSala(int sala, int id) throws SQLException {
-//         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-//             String sql = "UPDATE monitoria SET sala = ? WHERE id_monitor = ?";
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             pstmt.setInt(1, sala);
-//             pstmt.setInt(2, id);
-//             pstmt.executeUpdate();
-//         }
-//     }
+    // public void alterarSala(int sala, int id) throws SQLException {
+    //     try (Connection conn = DriverManager.getConnection(url, user, password)) {
+    //         String sql = "UPDATE monitoria SET sala = ? WHERE id_monitor = ?";
+    //         PreparedStatement pstmt = conn.prepareStatement(sql);
+    //         pstmt.setInt(1, sala);
+    //         pstmt.setInt(2, id);
+    //         pstmt.executeUpdate();
+    //     }
+    // }
 
-//     public void ficarOffline(int id) throws SQLException {
-//         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-//             String sql = "UPDATE monitoria SET online = false, sala = 1101 WHERE id_monitor = ?";
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             pstmt.setInt(1, id);
-//             pstmt.executeUpdate();
-//         }
+    // public void ficarOffline(int id) throws SQLException {
+    //     try (Connection conn = DriverManager.getConnection(url, user, password)) {
+    //         String sql = "UPDATE monitoria SET online = false, sala = 1101 WHERE id_monitor = ?";
+    //         PreparedStatement pstmt = conn.prepareStatement(sql);
+    //         pstmt.setInt(1, id);
+    //         pstmt.executeUpdate();
+    //     }
 // }
 

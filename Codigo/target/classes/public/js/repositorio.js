@@ -34,21 +34,23 @@ document.getElementById('adicionar').addEventListener('click', function() {
         }
         return response.json();
     })
-
-    .then(data => {
+    .then((data) => {
         console.log('Sucesso:', data);
-        // Adicionar o novo repositório à lista
         const reposDiv = document.getElementById('repos');
-        const newRepo = document.createElement('a');
-        newRepo.href = link; // Definindo o link do repositório
-        newRepo.className = 'repo'; // Usando className em vez de id
-        newRepo.innerHTML = `<p id="nomeRepo">${nome}</p>`; // Você pode manter o ID aqui se precisar
-        reposDiv.appendChild(newRepo); // Adiciona o novo repositório à lista
-        
 
-        // Limpar os campos de entrada
+        const newRepo = document.createElement('a');
+        newRepo.href = link;
+        newRepo.target = '_blank'; // Abre o link em uma nova aba
+        newRepo.rel = 'noopener noreferrer'; // Evita vulnerabilidades de segurança
+        newRepo.className = 'repo';
+        newRepo.innerHTML = `<p id="nomeRepo">${nome}</p>`;
+        reposDiv.appendChild(newRepo);
+
         document.getElementById('nome').value = '';
         document.getElementById('link').value = '';
+
+        // Recarregar os repositórios após adicionar um novo
+        carregarRepositorios();
     })
     .catch((error) => {
         console.error('Erro:', error);
@@ -111,7 +113,7 @@ function carregarRepositorios() {
             // Criar link do repositório
             const repoLink = document.createElement('a');
             repoLink.href = repo.link;
-            repoLink.innerHTML = `<div>${repo.nome}</div>`;
+            repoLink.innerHTML = `<div class="nome">${repo.nome}</div>`;
             newRepo.appendChild(repoLink);
 
             reposDiv.appendChild(newRepo);

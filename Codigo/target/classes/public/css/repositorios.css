@@ -77,14 +77,14 @@ main a{
 .repo {
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
     height: 150px;
-    display: flex;
     background-color: #7F32A6;
     color: #fff;
     border-radius: 10px;
-    transition: .1s;
-    align-items: center;
-    justify-content: center;
+    transition: 0.1s;
+    position: relative;
 }
 .repo:hover {
     background-color: #fff;
@@ -94,43 +94,31 @@ main a{
     outline: 5px solid #7F32A6;
 }
 
-.repo a{
-    color: #fff;
+.repo a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Garante que o link ocupe toda a div */
+    width: 100%; /* Para garantir alinhamento completo */
 }
 .repo:hover a{
     color: #7F32A6;
 }
-
-.repo #apagar{
-    color: #fff;
-}
-
-.repo:hover #apagar{
-    color: #7F32A6;
-}
-
-#nomeRepo{
-    width: 80%;
-    resize: none;
-    color: #fff;
-    background-color: #7F32A6;
-    border: none;
-    font-size: 30px;
-    font-family: Arial, sans-serif;
-    font-weight: 900;
-    text-align: center;
-    transition: .1s;
-}
-
-.repo:hover #nomeRepo{
-    color: #7F32A6;
-    background-color: #fff;
-}
-
 .delete-btn{
-    color: red;
-    font-size: 20px;
     margin-left: 90%;
+    height: 10%;
+    font-size: 20px;
     cursor: pointer;
 }
+.repo a .nome {
+    text-align: center; /* Centraliza o texto */
+    font-size: 25px;
+}
+
+
+
+
+
 

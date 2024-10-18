@@ -99,9 +99,8 @@ function toggleNewField() {
 
             if (resposta.ok) {
                 alert('Usuário cadastrado com sucesso!');
-                
-                sessionStorage.setItem('novoLogado', JSON.stringify(usuario));
-                window.location.href = '../assets/html/home.html';
+                sessionStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario));
+                window.location.href = '../html/home.html';
             } else {
                 alert('Erro ao cadastrar o usuário.');
             }
@@ -174,31 +173,3 @@ async function loginPessoa(id, senha, tipo, nome) {
         alert('Erro ao realizar o login');
     }
 }
-
-
-// async function getTipoUsuario(id) {
-//     try {
-//         const response = await fetch(`http://localhost:4567/tipousuario/${id}`, { 
-//             method: 'GET',
-//             headers: { 'Content-Type': 'application/json' }
-//         });
-        
-
-//         if (response.ok) {
-//             const result = await response.json();
-//             return result; // Retorna o tipo de usuário (0, 1, 2 ou 3)
-//         } else if (response.status === 404) {
-//             alert("Pessoa não encontrada");
-//             return null;
-//         } else {
-//             console.error('Erro ao obter o tipo de usuário:', response.status);
-//             alert('Erro ao obter o tipo de usuário: ' + response.status);
-//             return null;
-//         }
-//     } catch (error) {
-//         console.error('Erro ao realizar a requisição:', error);
-//         alert('Erro ao realizar a requisição');
-//         return null;
-//     }
-// }
-
