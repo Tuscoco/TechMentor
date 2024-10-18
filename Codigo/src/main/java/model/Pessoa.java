@@ -6,18 +6,17 @@ public class Pessoa {
     private String nome;
     private String email;
     private String senha;
-    private int tipo_usuario;
+    private int tipo_usuario = 3;
 
 
     public Pessoa(){}
     
-    public Pessoa(int id, String nome, String email, String senha, int tipo_usuario) {
+    public Pessoa(int id, String nome, String email, String senha) {
 
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.tipo_usuario = tipo_usuario;
 
     }
 

@@ -30,8 +30,6 @@ public class PessoaController {
 
             Pessoa pessoa = gson.fromJson(req.body(), Pessoa.class);
 
-            pessoa.setTipoUsuario(3);
-
             boolean success = pessoaService.registrarPessoa(pessoa);
 
             if(success){
