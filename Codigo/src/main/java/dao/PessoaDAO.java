@@ -36,7 +36,7 @@ public class PessoaDAO {
             pstmt.setString(2, pessoa.getNome());
             pstmt.setString(3, pessoa.getEmail());
             pstmt.setString(4, pessoa.getSenha());
-            pstmt.setInt(5, pessoa.getTipoUsuario());
+            pstmt.setInt(5, 3);
 
             pstmt.executeUpdate();
 
