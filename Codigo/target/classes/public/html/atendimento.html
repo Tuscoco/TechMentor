@@ -30,11 +30,11 @@
             <p>1. Disciplina abordada:</p>
             <select name="disciplina" id="elementDisciplina">
                 <option value="" class="default" selected disabled>selecione uma opção</option>
-                <option value="aeds1">Algoritmos e Estruturas de dados I</option>
-                <option value="aeds2">Algoritmos e Estruturas de dados II</option>
-                <option value="aeds3">Algoritmos e Estruturas de dados III</option>
-                <option value="ac1">Arquitetura de Computadores I</option>
-                <option value="ac2">Arquitetura de Computadores II</option>
+                <option value="1">Algoritmos e Estruturas de dados I</option>
+                <option value="2">Algoritmos e Estruturas de dados II</option>
+                <option value="3">Algoritmos e Estruturas de dados III</option>
+                <option value="4">Arquitetura de Computadores I</option>
+                <option value="5">Arquitetura de Computadores II</option>
                 <option value="ac3">Arquitetura de Computadores III</option>
                 <option value="bd">Banco de Dados</option>
                 <option value="calc1">Cálculo I</option>
@@ -77,31 +77,26 @@
             <input id="elementData" type="date" placeholder="insira a data">
         </section>
 
-        <section id="horario">
-            <p>3. Horario do atendimento:</p>
-            <input id="elementHorario" type="time" name="" id="">
-        </section>
-
         <section id="matricula">
-            <p>4. Matricula do aluno:</p>
+            <p>3. Matricula do aluno:</p>
             <input id="elementMatricula" type="number" name="" id="">
         </section>
 
         <section id="duvida">
-            <p>5. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
+            <p>4. Dúvida do aluno: Indique os temas separados por ponto e vírgula (Ex.: ponteiros; derivada; sistemas de
                 numeração).</p>
             <textarea id="elementDuv" class="duvidaTexto"></textarea>
         </section>
 
         <section id="duvidaDescr">
-            <p>6. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
+            <p>. Dúvida do aluno: Insira uma breve descrição a respeito da dúvida do aluno (Ex.: Dúvida sobre
                 declaração e aritmética de ponteiros; Aluno não sabia aplicar a regra da cadeia; Dificuldades em
                 conversão de bases binária e hexadecimal).</p>
             <textarea id="elementDuvDesc" class="duvidaTexto"></textarea>
         </section>
 
         <section id="sanada">
-            <p>7. A dúvida foi sanada?</p>
+            <p>6. A dúvida foi sanada?</p>
             <div class="opc">
                 <input type="radio" name="duvida" id="sim" value="sim">
                 <label for="sim" class="valor">Sim</label>
@@ -110,14 +105,6 @@
                 <input type="radio" name="duvida" id="nao" value="nao">
                 <label for="nao" class="valor">Não</label>
             </div>
-        </section>
-
-
-        <section id="observacoes">
-            <p>8. Observações adicionais:
-                Caso deseje colocar alguma observação adicional sobre o atendimento (problema com o atendimento,
-                sugestão de melhoria, etc...)</p>
-            <textarea id="elementObs" class="duvidaTexto"></textarea>
         </section>
 
         <button id="enviar">Enviar</button>

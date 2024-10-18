@@ -69,9 +69,6 @@ function toggleNewField() {
         const senha = document.querySelector('#cadastrar input[placeholder="Senha"]').value;
         const confirmarSenha = document.querySelector('#cadastrar input[placeholder="Confirmar Senha"]').value;
 
-        // Define o tipo de usuário como "3"
-        const tipoDeUsuario = 3;
-
         // Validação básica para verificar se as senhas coincidem
         if (senha !== confirmarSenha) {
             alert('As senhas não correspondem!');
@@ -84,7 +81,6 @@ function toggleNewField() {
             nome,
             email,
             senha,
-            tipoDeUsuario
         };
 
         try {

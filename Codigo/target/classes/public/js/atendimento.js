@@ -6,12 +6,10 @@ enviarButton.addEventListener('click', function () {
     // Coleta os valores dos campos do formulário
     const disciplina = document.getElementById('elementDisciplina').value;
     const data = document.getElementById('elementData').value;
-    const horario = document.getElementById('elementHorario').value;
     const matricula = document.getElementById('elementMatricula').value;
     const duvida = document.getElementById('elementDuv').value;
     const duvidaDesc = document.getElementById('elementDuvDesc').value;
     const sanada = document.querySelector('input[name="duvida"]:checked')?.value; // Obtém o valor do rádio selecionado
-    const observacoes = document.getElementById('elementObs').value;
 
     // Verifica se todos os campos estão preenchidos
     if (!disciplina || !data || !horario || !matricula || !duvida || !duvidaDesc || !sanada) {
@@ -23,16 +21,14 @@ enviarButton.addEventListener('click', function () {
     const dados = {
         disciplina,
         data,
-        horario,
         matricula,
         duvida,
         duvidaDesc,
-        sanada,
-        observacoes
+        sanada
     };
 
     // Envia os dados para o JSON Server
-    fetch('http://localhost:3000/atendimentos', { // Substitua pela URL do seu JSON Server
+    fetch('http://localhost:4567/salvaratendimento', { // Substitua pela URL do seu JSON Server
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
