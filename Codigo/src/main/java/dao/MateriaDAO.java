@@ -6,16 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
+import config.*;
 import java.util.List;
 
 import model.Materia;
 
 public class MateriaDAO {
     
-    private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private static final String user = "tech";
-    private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private String url;
+    private String user;
+    private String password;
+
+    public MateriaDAO(){
+
+        Config config = new Config("config/config.properties");
+        this.url = config.getProperty("db.url");
+        this.user = config.getProperty("db.user");
+        this.password = config.getProperty("db.password");
+
+    }
 
 
     public List<Materia> exibirMaterias() throws SQLException{
@@ -36,7 +45,7 @@ public class MateriaDAO {
         return materias;
     }
 
-    public static Materia findMateriaById(int id) throws SQLException{
+    public Materia findMateriaById(int id) throws SQLException{
         Materia materia;
         try(Connection conn = DriverManager.getConnection(url, user, password)){
             
@@ -51,7 +60,7 @@ public class MateriaDAO {
         return materia;
     }
 
-    public static List<Materia> findMateriaByName(String name) throws SQLException{
+    public List<Materia> findMateriaByName(String name) throws SQLException{
         List<Materia> materias = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(url, user, password)){
             

@@ -3,12 +3,22 @@ package dao;
 import model.Evento;
 import java.sql.*;
 import java.util.*;
+import config.*;
 
 public class EventoDAO {
     
-    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private String user = "tech";
-    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private String url;
+    private String user;
+    private String password;
+
+    public EventoDAO(){
+
+        Config config = new Config("config/config.properties");
+        this.url = config.getProperty("db.url");
+        this.user = config.getProperty("db.user");
+        this.password = config.getProperty("db.password");
+
+    }
 
 
     public void salvarEvento(Evento evento) throws SQLException{

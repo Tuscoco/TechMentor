@@ -5,11 +5,12 @@ model/Atendimento.class
 dao/PessoaDAO.class
 service/EventoService.class
 model/Monitoria.class
-service/PessoaService.class
 model/Materia.class
+service/PessoaService.class
 controller/RepositorioController.class
 model/Evento.class
 controller/MateriaAlunoController.class
+config/Config.class
 dao/CargaHorariaDAO.class
 model/Repositorio.class
 model/MateriaAluno.class

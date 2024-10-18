@@ -7,15 +7,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import config.*;
 import model.Materia;
 import model.MateriaAluno;
 
 public class MateriaAlunoDAO {
     
-    private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private static final String user = "tech";
-    private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private String url;
+    private String user;
+    private String password;
+
+    public MateriaAlunoDAO(){
+
+        Config config = new Config("config/config.properties");
+        this.url = config.getProperty("db.url");
+        this.user = config.getProperty("db.user");
+        this.password = config.getProperty("db.password");
+
+    }
 
 
 
@@ -53,7 +62,7 @@ public class MateriaAlunoDAO {
                 PreparedStatement materia_pstmt = conn.prepareStatement(sql);
                 materia_pstmt.setInt(1,result.getInt("id_materia"));
                 ResultSet result_materia = materia_pstmt.executeQuery();
-                materias.add(MateriaDAO.findMateriaById(result_materia.getInt("id_materia")));
+                //materias.add(MateriaDAO.findMateriaById(result_materia.getInt("id_materia")));
 
             }
 

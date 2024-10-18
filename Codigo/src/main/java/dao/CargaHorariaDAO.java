@@ -8,14 +8,23 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-
+import config.*;
 import model.CargaHoraria;
 
 public class CargaHorariaDAO {
     
-    private static final String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private static final String user = "tech";
-    private static final String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private String url;
+    private String user;
+    private String password;
+
+    public CargaHorariaDAO(){
+
+        Config config = new Config("config/config.properties");
+        this.url = config.getProperty("db.url");
+        this.user = config.getProperty("db.user");
+        this.password = config.getProperty("db.password");
+
+    }
 
 
     public void adicionarCargarHoraria(CargaHoraria cargaHoraria) throws SQLException{

@@ -7,12 +7,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Pessoa;
+import config.*;
 
 public class PessoaDAO {
     
-    private String url = "jdbc:postgresql://dpg-cs35gut6l47c73ea2a70-a.oregon-postgres.render.com:5432/techmentor_g8ly";
-    private String user = "tech";
-    private String password = "g1ZBH8AkXqgoSHDDpVSPhnpwF47r0Dx3";
+    private String url;
+    private String user;
+    private String password;
+
+    public PessoaDAO(){
+
+        Config config = new Config("config/config.properties");
+        this.url = config.getProperty("db.url");
+        this.user = config.getProperty("db.user");
+        this.password = config.getProperty("db.password");
+
+    }
 
 
     public void registrarPessoa(Pessoa pessoa) throws SQLException{
