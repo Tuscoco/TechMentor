@@ -310,6 +310,54 @@ public class PessoaController {
 
         });
 
+        get("/mostrarnome/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            String nome = pessoaService.getNome(id);
+
+            if(nome != null){
+
+                res.status(200);
+
+                return gson.toJson(nome);
+
+            }else{
+
+                res.status(404);
+
+                return gson.toJson("Erro ao procurar o nome!");
+
+            }
+
+        });
+
+        get("/mostraremail/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            String email = pessoaService.getEmail(id);
+
+            if(email != null){
+
+                res.status(200);
+
+                return gson.toJson(email);
+
+            }else{
+
+                res.status(404);
+
+                return gson.toJson("Erro ao procurar o email!");
+
+            }
+
+        });
+
         delete("/removerfoto/:id", (req, res) -> {
 
             res.type("application/json");

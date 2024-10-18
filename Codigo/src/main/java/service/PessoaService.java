@@ -102,4 +102,16 @@ public class PessoaService {
 
     }
 
+    public String getNome(int id) throws Exception{
+
+        return pessoaDAO.getNome(id);
+
+    }
+
+    public String getEmail(int id) throws Exception{
+
+        return pessoaDAO.getEmail(id);
+
+    }
+
 }
