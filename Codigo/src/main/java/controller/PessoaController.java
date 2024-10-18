@@ -5,6 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import model.Pessoa;
 import service.PessoaService;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
+import java.io.InputStream;
+import java.util.Base64;
 
 public class PessoaController {
     
@@ -196,6 +200,52 @@ public class PessoaController {
 
         });
 
+        post("/salvarfoto", (req, res) -> {
+
+            res.type("application/json");
+
+            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            int id = Integer.parseInt(req.queryParams("id"));
+            Part filePart = req.raw().getPart("foto");
+
+            if(filePart != null){
+
+                try(InputStream inputStream = filePart.getInputStream()){
+
+                    long tamanhoFoto = filePart.getSize();
+                    
+                    boolean sucesso = pessoaService.alterarFoto(id, inputStream, tamanhoFoto);
+                    
+                    if(sucesso){
+
+                        res.status(200);
+                        return "Foto atualizada com sucesso!";
+
+                    }else{
+
+                        res.status(500);
+                        return "Erro ao atualizar a foto no banco de dados.";
+
+                    }
+
+                }catch(Exception e){
+
+                    e.printStackTrace();
+                    res.status(500);
+                    return "Erro ao processar a foto.";
+
+                }
+
+            }else{
+
+                res.status(400);
+                return "Nenhuma foto foi enviada.";
+
+            }
+
+        });
+
         get("/tipousuario/:id", (req, res) -> {
 
             res.type("application/json");
@@ -228,6 +278,101 @@ public class PessoaController {
                 res.status(500);
 
                 return gson.toJson("Ocorreu um erro");
+
+            }
+
+        });
+
+        get("/mostrarfoto/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+            InputStream fotoStream = pessoaService.getFoto(id);
+
+            if(fotoStream != null){
+
+                byte[] fotoBytes = fotoStream.readAllBytes();
+
+                String fotoB64 = Base64.getEncoder().encodeToString(fotoBytes);
+
+                String jsonRes = "{\"foto\":\"" + fotoB64 + "\"}";
+
+                res.status(200);
+                return jsonRes;
+
+            }else{
+
+                res.status(404);
+                return "{\"erro\": \"Foto não encontrada.\"}";
+
+            }
+
+        });
+
+        get("/mostrarnome/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            String nome = pessoaService.getNome(id);
+
+            if(nome != null){
+
+                res.status(200);
+
+                return gson.toJson(nome);
+
+            }else{
+
+                res.status(404);
+
+                return gson.toJson("Erro ao procurar o nome!");
+
+            }
+
+        });
+
+        get("/mostraremail/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            String email = pessoaService.getEmail(id);
+
+            if(email != null){
+
+                res.status(200);
+
+                return gson.toJson(email);
+
+            }else{
+
+                res.status(404);
+
+                return gson.toJson("Erro ao procurar o email!");
+
+            }
+
+        });
+
+        delete("/removerfoto/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            boolean success = pessoaService.removerFoto(id);
+
+            if(success){
+
+                return gson.toJson("Foto removida com sucesso!");
+
+            }else{
+
+                return gson.toJson("Erro ao alterar foto!");
 
             }
 

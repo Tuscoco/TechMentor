@@ -1,11 +1,11 @@
 package dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import model.Pessoa;
 
 public class PessoaDAO {
@@ -160,6 +160,31 @@ public class PessoaDAO {
 
     }
 
+    public String getEmail(int id) throws SQLException{
+
+        String email = null;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT email FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                email = result.getString("email");
+
+            }
+
+        }
+
+        return email;
+
+    }
+
     public boolean alterarNome(String nome, int id) throws SQLException{
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
@@ -173,6 +198,103 @@ public class PessoaDAO {
             int alterado = pstmt.executeUpdate();
 
             return alterado > 0;
+
+        }
+
+    }
+
+    public String getNome(int id) throws SQLException{
+
+        String nome = null;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT nome FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                nome = result.getString("nome");
+
+            }
+
+        }
+
+        return nome;
+
+    }
+
+    public boolean alterarFoto(int id, InputStream foto, long tamanhoFoto) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET foto = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setBinaryStream(1, foto, tamanhoFoto);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+    public InputStream getFoto(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT foto FROM pessoa WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                return result.getBinaryStream("foto");
+
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+
+    }
+
+    public boolean removerFoto(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE pessoa SET foto = NULL WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
 
         }
 

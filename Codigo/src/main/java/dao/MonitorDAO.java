@@ -22,12 +22,8 @@ public class MonitorDAO {
             pstmt.setInt(1, monitor.getIdMonitor());
             pstmt.setInt(2, monitor.getIdMateria());
             pstmt.setInt(3, 1101);
-            //pstmt.setBoolean(4, monitor.GetIsMateriaprincipal());
+            pstmt.setBoolean(4, monitor.getIsMateriaprincipal());
 
-=======
-            pstmt.setInt(3, monitor.getSala());
-            pstmt.setBoolean(4, monitor.getIsMateriaPrincipal());
->>>>>>> refs/remotes/origin/master
             pstmt.executeUpdate();
         }
     }
@@ -49,16 +45,37 @@ public class MonitorDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet result = pstmt.executeQuery();
 
-            while(result.next()){
-                //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
-=======
             while (result.next()) {
+<<<<<<< HEAD
                 //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
                         //result.getInt("sala"), result.getBoolean("materia_principal")));
 >>>>>>> refs/remotes/origin/master
+=======
+                monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
+                        result.getInt("sala"), result.getBoolean("materia_principal")));
+
+>>>>>>> ab199aaf8b02ad7ae1ef6ac3ac4e48a7dd6b987e
             }
         }
         return monitores;
+    }
+
+
+
+    public Monitoria getMonitorEMateria(int id_monitor,int id_materia) throws SQLException {
+        Monitoria monitor;
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            String sql = "SELECT * FROM monitoria WHERE id_monitor = ? AND id_materia = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id_monitor);
+            pstmt.setInt(2, id_materia);
+            ResultSet result = pstmt.executeQuery();
+
+
+            monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"), result.getBoolean("materia_principal"));
+
+        }
+        return monitor;
     }
 
     public List<Monitoria> getMonitor(int id) throws SQLException {
@@ -68,6 +85,7 @@ public class MonitorDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
+<<<<<<< HEAD
             while(result.next()){
                 //monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
 =======
@@ -75,11 +93,20 @@ public class MonitorDAO {
                 //monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
                         //result.getInt("sala"), result.getBoolean("materia_principal")));
 >>>>>>> refs/remotes/origin/master
+=======
+
+
+            while (result.next()) {
+                monitor.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
+                        result.getInt("sala"), result.getBoolean("materia_principal")));
+
+>>>>>>> ab199aaf8b02ad7ae1ef6ac3ac4e48a7dd6b987e
             }
         }
         return monitor;
     }
 
+<<<<<<< HEAD
     /*public Monitoria getMonitorMateria(int id_monitor, int id_materia) throws SQLException{
 =======
     public Monitoria getMonitorMateria(int id_monitor, int id_materia) throws SQLException {
@@ -103,6 +130,8 @@ public class MonitorDAO {
         }
         //return monitor;
     }
+=======
+>>>>>>> ab199aaf8b02ad7ae1ef6ac3ac4e48a7dd6b987e
 
     public List<Monitoria> getMonitorPorMateria(int id) throws SQLException {
         List<Monitoria> monitores = new ArrayList<>();
@@ -112,13 +141,10 @@ public class MonitorDAO {
             pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
 
-            while(result.next()){
-                //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),result.getInt("sala"),result.getBoolean("materia_principal")));
-=======
             while (result.next()) {
                 monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
                         result.getInt("sala"), result.getBoolean("materia_principal")));
->>>>>>> refs/remotes/origin/master
+
             }
         }
         return monitores;
@@ -130,6 +156,7 @@ public class MonitorDAO {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            
         }
     }
 
@@ -150,6 +177,12 @@ public class MonitorDAO {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         }
+<<<<<<< HEAD
     }*/
+=======
+    }
+
+  
+>>>>>>> ab199aaf8b02ad7ae1ef6ac3ac4e48a7dd6b987e
 }
 

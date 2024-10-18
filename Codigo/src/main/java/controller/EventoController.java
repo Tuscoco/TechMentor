@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import model.Evento;
 import service.EventoService;
 import java.util.*;
-import java.sql.Date;
 
 public class EventoController {
     
@@ -54,7 +53,7 @@ public class EventoController {
 
             res.type("application/json");
 
-            Date data = gson.fromJson(req.body(), Date.class);
+            String data = gson.fromJson(req.body(), String.class);
 
             List<Evento> lista = eventoService.buscarEventosDoDia(data);
 

@@ -1,5 +1,7 @@
 package service;
 
+import java.io.InputStream;
+
 import dao.PessoaDAO;
 import model.Pessoa;
 //import org.mindrot.jbcrypt.BCrypt;
@@ -79,6 +81,36 @@ public class PessoaService {
     public boolean alterarNome(String nome, int id) throws Exception{
 
         return pessoaDAO.alterarNome(nome, id);
+
+    }
+
+    public boolean alterarFoto(int id, InputStream foto, long tamanhoFoto) throws Exception{
+
+        return pessoaDAO.alterarFoto(id, foto, tamanhoFoto);
+
+    }
+
+    public InputStream getFoto(int id) throws Exception{
+
+        return pessoaDAO.getFoto(id);
+
+    }
+
+    public boolean removerFoto(int id) throws Exception{
+
+        return pessoaDAO.removerFoto(id);
+
+    }
+
+    public String getNome(int id) throws Exception{
+
+        return pessoaDAO.getNome(id);
+
+    }
+
+    public String getEmail(int id) throws Exception{
+
+        return pessoaDAO.getEmail(id);
 
     }
 

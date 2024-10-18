@@ -53,6 +53,8 @@ CREATE TABLE monitoria (
     id_monitor INTEGER, 
     id_materia INTEGER, 
     online BOOLEAN, 
+    sala INTEGER,
+    materia_principal BOOLEAN,
     PRIMARY KEY(id_monitor, id_materia), 
     FOREIGN KEY(id_monitor) REFERENCES pessoa(id) ON DELETE CASCADE, 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE

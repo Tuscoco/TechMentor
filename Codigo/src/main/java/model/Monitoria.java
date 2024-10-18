@@ -57,7 +57,7 @@ public class Monitoria {
     }
 
 
-    public boolean GetIsMateriaprincipal() {
+    public boolean getIsMateriaprincipal() {
         return materia_principal;
     }
 

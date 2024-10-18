@@ -2,7 +2,6 @@ package dao;
 
 import model.Evento;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 public class EventoDAO {
@@ -16,13 +15,13 @@ public class EventoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "INSERT INTO evento (id, nome, local, data_hora, cod_materia) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO evento (id, nome, local, data_hora, id_materia) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, getNextId());
             pstmt.setString(2, evento.getNome());
             pstmt.setString(3, evento.getLocal());
-            pstmt.setDate(4, evento.getData());
+            pstmt.setString(4, evento.getDataHora());
             pstmt.setInt(5, evento.getMateria());
 
             pstmt.executeUpdate();
@@ -35,7 +34,7 @@ public class EventoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELEXT MAX(id) AS max_id FROM repositorio";
+            String sql = "SELECT MAX(id) AS max_id FROM evento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet result = pstmt.executeQuery();
 
@@ -63,7 +62,7 @@ public class EventoDAO {
 
             while(result.next()){
 
-                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getDate("data_hora"), result.getInt("materia"));
+                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data_hora"), result.getInt("id_materia"));
                 lista.add(evento);
 
             }
@@ -74,22 +73,22 @@ public class EventoDAO {
 
     }
 
-    public List<Evento> buscarEventosDoDia(Date data) throws SQLException{
+    public List<Evento> buscarEventosDoDia(String data) throws SQLException{
 
         List<Evento> lista = new ArrayList<>();
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELECT * FROM evento WHERE data = ?";
+            String sql = "SELECT * FROM evento WHERE data_hora = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setDate(1, data);
+            pstmt.setString(1, data);
 
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
 
-                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getDate("data_hora"), result.getInt("materia"));
+                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data_hora"), result.getInt("id_materia"));
                 lista.add(evento);
 
             }
