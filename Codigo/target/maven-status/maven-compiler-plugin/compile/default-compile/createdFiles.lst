@@ -3,7 +3,6 @@ service/MateriaService.class
 dao/MateriaDAO.class
 model/Atendimento.class
 dao/PessoaDAO.class
-service/MonitorService.class
 service/EventoService.class
 model/Monitoria.class
 service/PessoaService.class
@@ -11,7 +10,6 @@ model/Materia.class
 controller/RepositorioController.class
 model/Evento.class
 controller/MateriaAlunoController.class
-controller/MonitorController.class
 dao/CargaHorariaDAO.class
 model/Repositorio.class
 model/MateriaAluno.class
@@ -24,7 +22,6 @@ service/AtendimentoService.class
 service/Carga_horariaService.class
 dao/AtendimentoDAO.class
 service/RepositorioService.class
-dao/MonitorDAO.class
 model/CargaHoraria.class
 controller/MateriaController.class
 controller/CargaHorariaController.class
