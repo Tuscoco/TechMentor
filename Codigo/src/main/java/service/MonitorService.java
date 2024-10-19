@@ -1,40 +1,47 @@
-// package service;
+package service;
 
-// import java.sql.SQLException;
-// import java.util.ArrayList;
-// import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-// import dao.MonitorDAO;
-// import model.Monitoria;
+import dao.MonitorDAO;
+import model.Monitoria;
 
-// public class MonitorService {
+public class MonitorService{
     
-//     private MonitorDAO monitorDAO = new MonitorDAO();
+    private MonitorDAO monitorDAO = new MonitorDAO();
 
 
-//     public boolean registrarMonitor(Monitoria monitor){
-//         boolean resp;
-//         try {
-//             monitorDAO.adicionarMonitor(monitor);
-//             resp = true;
-//         } catch (Exception e) {
-//             resp = false;
-//             e.printStackTrace();
-//         }
-//         return resp;
-//     }
+    public boolean registrarMonitor(Monitoria monitor){
 
-//     public boolean deletarMonitor(Monitoria monitor){
-//         boolean resp;
-//         try {
-//             monitorDAO.removerMonitor(monitor);
-//             resp = true;
-//         } catch (Exception e) {
-//             resp = false;
-//             e.printStackTrace();
-//         }
-//         return resp;
-//     }
+        try{
+
+            monitorDAO.adicionarMonitor(monitor);
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+    public boolean deletarMonitor(int id){
+
+        try{
+
+            return monitorDAO.removerMonitor(id);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
 
 //     public List<Monitoria> getTodos() throws SQLException{
 //         try {
@@ -103,18 +110,7 @@
 //         }
 //     }
 
-    
-
-
-
-
-
-    
-
-
-
-
-// }
+}
     
 
 

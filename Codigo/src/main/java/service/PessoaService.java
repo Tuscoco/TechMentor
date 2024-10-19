@@ -67,6 +67,12 @@ public class PessoaService {
 
     }
 
+    public int getTipoUsuario(int id) throws Exception{
+
+        return pessoaDAO.getTipoUsuario(id);
+
+    }
+
     public boolean alterarSenha(String senha, int id) throws Exception{
 
         return pessoaDAO.alterarSenha(senha, id);

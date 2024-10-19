@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Pessoa;
-import model.Repositorio;
 import config.*;
 import java.util.*;
 

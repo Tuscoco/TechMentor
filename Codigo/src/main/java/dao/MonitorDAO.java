@@ -1,52 +1,60 @@
-// package dao;
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-// import java.sql.SQLException;
-// import java.util.ArrayList;
-// import java.util.List;
-//import config.*;
+package dao;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import config.*;
+import model.Monitoria;
 
-// import model.Monitoria;
+public class MonitorDAO{
 
-// public class MonitorDAO {
+    private String url;
+    private String user;
+    private String password;
 
-//     private String url;
-//     private String user;
-//     private String password;
-
-    /*public MonitorDAO(){
+    public MonitorDAO(){
 
         Config config = new Config("config/config.properties");
         this.url = config.getProperty("db.url");
         this.user = config.getProperty("db.user");
         this.password = config.getProperty("db.password");
 
-    }*/
+    }
 
-//     public void adicionarMonitor(Monitoria monitor) throws SQLException {
-//         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-//             String sql = "INSERT INTO monitoria (id_monitor, id_materia, sala, materia_principal) VALUES (?,?,?,?)";
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             pstmt.setInt(1, monitor.getIdMonitor());
-//             pstmt.setInt(2, monitor.getIdMateria());
-//             pstmt.setInt(3, 1101);
-//             pstmt.setBoolean(4, monitor.getIsMateriaprincipal());
+    public void adicionarMonitor(Monitoria monitor) throws SQLException{
 
-//             pstmt.executeUpdate();
-//         }
-//     }
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-//     public void removerMonitor(Monitoria monitor) throws SQLException {
-//         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-//             String sql = "DELETE FROM monitoria WHERE id_monitor = ? AND id_materia = ?";
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             pstmt.setInt(1, monitor.getIdMonitor());
-//             pstmt.setInt(2, monitor.getIdMateria());
-//             pstmt.executeUpdate();
-//         }
-//     }
+            String sql = "INSERT INTO monitoria (id_monitor, id_materia, online) VALUES (?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, monitor.getIdMonitor());
+            pstmt.setInt(2, monitor.getIdMateria());
+            pstmt.setBoolean(3, false);
+
+            pstmt.executeUpdate();
+        }
+
+    }
+
+    public boolean removerMonitor(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "DELETE FROM monitoria WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            int removido = pstmt.executeUpdate();
+
+            return removido > 0;
+            
+        }
+    }
 
 //     public List<Monitoria> getTodos() throws SQLException {
 //         List<Monitoria> monitores = new ArrayList<>();
@@ -187,5 +195,5 @@
     //         pstmt.setInt(1, id);
     //         pstmt.executeUpdate();
     //     }
-// }
+}
 

@@ -19,6 +19,13 @@ public class Monitoria {
 
     }
 
+    public Monitoria(int id_monitor, int id_materia){
+
+        this.id_monitor = id_monitor;
+        this.id_materia = id_materia;
+
+    }
+
 
     public int getSala() {
         return sala;
