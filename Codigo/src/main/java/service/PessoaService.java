@@ -1,6 +1,7 @@
 package service;
 
 import java.io.InputStream;
+import java.util.List;
 
 import dao.PessoaDAO;
 import model.Pessoa;
@@ -111,6 +112,12 @@ public class PessoaService {
     public String getEmail(int id) throws Exception{
 
         return pessoaDAO.getEmail(id);
+
+    }
+
+    public List<Pessoa> getAlunos() throws Exception{
+
+        return pessoaDAO.getAlunos();
 
     }
 

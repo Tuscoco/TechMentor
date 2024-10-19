@@ -8,7 +8,7 @@ import service.PessoaService;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 import java.io.InputStream;
-import java.util.Base64;
+import java.util.*;
 
 public class PessoaController {
     
@@ -354,6 +354,26 @@ public class PessoaController {
                 res.status(404);
 
                 return gson.toJson("Erro ao procurar o email!");
+
+            }
+
+        });
+
+        get("/mostraralunos", (req, res) -> {
+
+            res.type("application/json");
+
+            try{
+
+                List<Pessoa> lista = pessoaService.getAlunos();
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+
+                return "{\"message\":\"Erro no servidor ao buscar os alunos.\"}";
 
             }
 

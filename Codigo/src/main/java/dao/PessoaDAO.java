@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Pessoa;
+import model.Repositorio;
 import config.*;
+import java.util.*;
 
 public class PessoaDAO {
     
@@ -307,6 +309,57 @@ public class PessoaDAO {
             return false;
 
         }
+
+    }
+
+    public List<Pessoa> getAlunos() throws SQLException{
+
+        List<Pessoa> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT nome, tipo_usuario FROM pessoa WHERE tipo_usuario > 1";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Pessoa pessoa = new Pessoa(result.getString("nome"), result.getInt("tipo_usuario"));
+                lista.add(pessoa);
+
+            }
+
+        }
+
+        lista = ordenar(lista);
+
+        return lista;
+
+    }
+
+    public List<Pessoa> ordenar(List<Pessoa> lista){
+
+        int n = lista.size();
+
+
+        for(int i = 1;i < n;i++){
+
+            Pessoa temp = lista.get(i);
+            int j = i - 1;
+
+            while((j >= 0) && (lista.get(j).getNome().compareTo(temp.getNome()) > 0)){
+
+                lista.set(j + 1, lista.get(j));
+                j--;
+
+            }
+
+            lista.set(j + 1, temp);
+
+        }
+
+        return lista;
 
     }
 
