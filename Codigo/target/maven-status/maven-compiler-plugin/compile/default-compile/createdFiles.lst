@@ -11,6 +11,7 @@ service/PessoaService.class
 controller/RepositorioController.class
 model/Evento.class
 controller/MateriaAlunoController.class
+controller/MonitorController.class
 config/Config.class
 dao/CargaHorariaDAO.class
 model/Repositorio.class

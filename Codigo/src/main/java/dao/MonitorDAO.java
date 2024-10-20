@@ -56,29 +56,99 @@ public class MonitorDAO{
         }
     }
 
-//     public List<Monitoria> getTodos() throws SQLException {
-//         List<Monitoria> monitores = new ArrayList<>();
-//         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-//             String sql = "SELECT * FROM monitoria";
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             ResultSet result = pstmt.executeQuery();
+    public List<Monitoria> getMonitoresOnline() throws SQLException{
 
-//             while (result.next()) {
-// <<<<<<< HEAD
-//                 //monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
-//                         //result.getInt("sala"), result.getBoolean("materia_principal")));
-// >>>>>>> refs/remotes/origin/master
-// =======
-//                 monitores.add(new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"),
-//                         result.getInt("sala"), result.getBoolean("materia_principal")));
+        List<Monitoria> lista = new ArrayList<>();
 
-// >>>>>>> ab199aaf8b02ad7ae1ef6ac3ac4e48a7dd6b987e
-//             }
-//         }
-//         return monitores;
-//     }
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
 
+            String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online = true";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Monitoria monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"));
+                lista.add(monitor);
+
+            }
+
+        }
+
+        return lista;
+
+    }
+
+    public List<Monitoria> getMonitoresOffline() throws SQLException{
+
+        List<Monitoria> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online = false";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Monitoria monitor = new Monitoria(result.getInt("id"), result.getInt("id_materia"));
+                lista.add(monitor);
+
+            }
+
+        }
+
+        return lista;
+
+    }
+
+    public void ficarOnline(int id) throws SQLException{
+    
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE monitoria SET online = true, sala = 1101 WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
+
+    public void ficarOffline(int id) throws SQLException{
+    
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE monitoria SET online = false WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
+
+    public void alterarSala(int id, int sala) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "UPDATE monitoria SET sala = ? WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, sala);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
 
 //     public Monitoria getMonitorEMateria(int id_monitor,int id_materia) throws SQLException {
 //         Monitoria monitor;
@@ -168,32 +238,5 @@ public class MonitorDAO{
 //         return monitores;
 //     }
 
-//     pub lic void ficarOnline(int id) throws SQLException {
-//         try (Connection conn = DriverManager.getConnection(url, user, password)) {
-//             String sql = "UPDATE monitoria SET online = true WHERE id_monitor = ?";
-//             PreparedStatement pstmt = conn.prepareStatement(sql);
-//             pstmt.setInt(1, id);
-    //         pstmt.executeUpdate();
-            
-    //     }
-    // }
-
-    // public void alterarSala(int sala, int id) throws SQLException {
-    //     try (Connection conn = DriverManager.getConnection(url, user, password)) {
-    //         String sql = "UPDATE monitoria SET sala = ? WHERE id_monitor = ?";
-    //         PreparedStatement pstmt = conn.prepareStatement(sql);
-    //         pstmt.setInt(1, sala);
-    //         pstmt.setInt(2, id);
-    //         pstmt.executeUpdate();
-    //     }
-    // }
-
-    // public void ficarOffline(int id) throws SQLException {
-    //     try (Connection conn = DriverManager.getConnection(url, user, password)) {
-    //         String sql = "UPDATE monitoria SET online = false, sala = 1101 WHERE id_monitor = ?";
-    //         PreparedStatement pstmt = conn.prepareStatement(sql);
-    //         pstmt.setInt(1, id);
-    //         pstmt.executeUpdate();
-    //     }
 }
 
