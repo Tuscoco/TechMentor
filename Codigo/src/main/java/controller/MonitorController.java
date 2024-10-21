@@ -67,6 +67,52 @@ public class MonitorController{
 
         });
 
+        get("/mostrarsala/:id", (req, res) -> {
+
+            try{
+
+                int id = Integer.parseInt(req.params(":id"));
+
+                int sala = monitorService.getSala(id);
+
+                return gson.toJson(Integer.toString(sala));
+
+            }catch(Exception e){
+
+                res.status(500);
+                return gson.toJson("Erro ao buscar a sala!");
+
+            }
+
+        });
+
+        get("/mostraronline/:id", (req, res) -> {
+
+            try{
+
+                int id = Integer.parseInt(req.params(":id"));
+
+                boolean online = monitorService.getOnline(id);
+
+                if(online){
+
+                    return gson.toJson("1");
+
+                }else{
+
+                    return gson.toJson("0");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+                return gson.toJson("Erro ao buscar status!");
+
+            }
+
+        });
+
 //         get("/monitorPorMateria" , (req,res) -> {
 //             res.type("application/json");
 

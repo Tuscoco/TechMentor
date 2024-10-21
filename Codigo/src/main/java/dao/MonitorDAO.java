@@ -150,6 +150,56 @@ public class MonitorDAO{
 
     }
 
+    public int getSala(int id) throws SQLException{
+
+        int sala = 0;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT sala FROM monitoria WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                sala = result.getInt("sala");
+
+            }
+
+        }
+
+        return sala;
+
+    }
+
+    public boolean getOnline(int id) throws SQLException{
+
+        boolean online = false;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT online FROM monitoria WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                online = result.getBoolean("online");
+
+            }
+
+        }
+
+        return online;
+
+    }
+
 //     public Monitoria getMonitorEMateria(int id_monitor,int id_materia) throws SQLException {
 //         Monitoria monitor;
 //         try (Connection conn = DriverManager.getConnection(url, user, password)) {

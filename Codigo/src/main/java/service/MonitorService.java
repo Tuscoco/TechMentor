@@ -102,6 +102,18 @@ public class MonitorService{
 
     }
 
+    public int getSala(int id) throws Exception{
+
+        return monitorDAO.getSala(id);
+
+    }
+
+    public boolean getOnline(int id) throws Exception{
+
+        return monitorDAO.getOnline(id);
+
+    }
+
 //     public Monitoria getMonitorEMateria(int id_monitor,int id_materia){
 //         try{
 //             return monitorDAO.getMonitorEMateria(id_monitor, id_materia);
