@@ -5,9 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import config.*;
-import java.util.List;
 
 import model.Materia;
 
@@ -26,55 +24,24 @@ public class MateriaDAO {
 
     }
 
-
-    public List<Materia> exibirMaterias() throws SQLException{
-
-        List<Materia> materias = new ArrayList<>();
-
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-            
-            String sql = "SELECT * FROM materia";
-            PreparedStatement materia_pstmt = conn.prepareStatement(sql);
-            ResultSet result = materia_pstmt.executeQuery();
-            while (result.next()) {
-               Materia materia = new Materia(result.getInt("id_materia"),result.getString("nome"));
-                materias.add(materia);
-            }
-        }
-        //Collections.sort(materias);
-        return materias;
-    }
-
     public Materia findMateriaById(int id) throws SQLException{
-        Materia materia;
+        Materia materia = null;
         try(Connection conn = DriverManager.getConnection(url, user, password)){
             
             String sql = "SELECT * FROM materia WHERE id_materia = ?";
             PreparedStatement materia_pstmt = conn.prepareStatement(sql);
             materia_pstmt.setInt(1, id);
             ResultSet result = materia_pstmt.executeQuery();
-            materia = new Materia(result.getInt("id_materia"),result.getString("nome") );
-
             
-        }
-        return materia;
-    }
+            if(result.next()){
 
-    public List<Materia> findMateriaByName(String name) throws SQLException{
-        List<Materia> materias = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-            
-            String sql = "SELECT * FROM materia WHERE nome = ?";
-            PreparedStatement materia_pstmt = conn.prepareStatement(sql);
-            materia_pstmt.setString(1, "name");
-            ResultSet result = materia_pstmt.executeQuery();
-            while(result.next()){
-                materias.add(new Materia(result.getInt("id_materia"),result.getString("nome") ));
+                materia = new Materia(result.getInt("id_materia"),result.getString("nome"));
+
             }
 
             
         }
-        return materias;
+        return materia;
     }
 
 }

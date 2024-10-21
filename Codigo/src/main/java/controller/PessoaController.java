@@ -4,11 +4,13 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import model.Pessoa;
+import model.Monitoria;
+import service.MonitorService;
 import service.PessoaService;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 import java.io.InputStream;
-import java.util.Base64;
+import java.util.*;
 
 public class PessoaController {
     
@@ -72,6 +74,7 @@ public class PessoaController {
             int idAlterador = json.get("idAlterador").getAsInt();
             int idAlvo = json.get("idAlvo").getAsInt();
             int novoTipo = json.get("novoTipo").getAsInt();
+            int tipoantigo = pessoaService.getTipoUsuario(idAlvo);
 
             try{
 
@@ -79,8 +82,47 @@ public class PessoaController {
 
                 if(success){
 
-                    res.status(200);
-                    return gson.toJson("Tipo de usuario alterado!");
+                    if(novoTipo == 2){
+
+                        int idMateria = json.get("idMateria").getAsInt();
+                        
+                        Monitoria monitor = new Monitoria(idAlvo, idMateria);
+
+                        MonitorService monitorService = new MonitorService();
+
+                        boolean success2 = monitorService.registrarMonitor(monitor);
+
+                        if(success2){
+
+                            return gson.toJson("Monitor Adicionado!");
+
+                        }else{
+
+                            return gson.toJson("Erro ao adicionar monitor!");
+
+                        }
+
+                    }else{
+
+                        if(tipoantigo == 2){
+                            
+                            MonitorService monitorService = new MonitorService();
+
+                            boolean success3 = monitorService.deletarMonitor(idAlvo);
+
+                            if(success3){
+
+                                return gson.toJson("Monitor removido!");
+
+                            }else{
+
+                                return gson.toJson("Falha ao remover monitor!");
+
+                            }
+
+                        }
+
+                    }
 
                 }else{
 
@@ -96,6 +138,8 @@ public class PessoaController {
                 return gson.toJson("Erro ao alterar!");
 
             }
+
+            return req;
 
         });
 
@@ -354,6 +398,46 @@ public class PessoaController {
                 res.status(404);
 
                 return gson.toJson("Erro ao procurar o email!");
+
+            }
+
+        });
+
+        get("/mostraralunos", (req, res) -> {
+
+            res.type("application/json");
+
+            try{
+
+                List<Pessoa> lista = pessoaService.getAlunos();
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+
+                return "{\"message\":\"Erro no servidor ao buscar os alunos.\"}";
+
+            }
+
+        });
+
+        get("/mostrartodos", (req, res) -> {
+
+            res.type("application/json");
+
+            try{
+
+                List<Pessoa> lista = pessoaService.getTodos();
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+
+                return "{\"message\":\"Erro no servidor ao buscar os usuarios.\"}";
 
             }
 

@@ -20,6 +20,14 @@ public class Pessoa {
 
     }
 
+    public Pessoa(int id, String nome, int tipo_usuario){
+
+        this.id = id;
+        this.nome = nome;
+        this.tipo_usuario = tipo_usuario;
+
+    }
+
     public Pessoa(int id, String senha) {
 
         this.id = id;

@@ -1,6 +1,7 @@
 package service;
 
 import java.io.InputStream;
+import java.util.List;
 
 import dao.PessoaDAO;
 import model.Pessoa;
@@ -66,6 +67,12 @@ public class PessoaService {
 
     }
 
+    public int getTipoUsuario(int id) throws Exception{
+
+        return pessoaDAO.getTipoUsuario(id);
+
+    }
+
     public boolean alterarSenha(String senha, int id) throws Exception{
 
         return pessoaDAO.alterarSenha(senha, id);
@@ -111,6 +118,18 @@ public class PessoaService {
     public String getEmail(int id) throws Exception{
 
         return pessoaDAO.getEmail(id);
+
+    }
+
+    public List<Pessoa> getAlunos() throws Exception{
+
+        return pessoaDAO.getAlunos();
+
+    }
+
+    public List<Pessoa> getTodos() throws Exception{
+
+        return pessoaDAO.getTodos();
 
     }
 

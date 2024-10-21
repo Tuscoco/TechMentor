@@ -3,7 +3,6 @@ package service;
 import dao.EventoDAO;
 import model.Evento;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.*;
 
 public class EventoService {
