@@ -3,6 +3,7 @@ const salaInput = document.getElementById('sala');
 const mudarSwitch = document.getElementById('switch');
 const sendButton = document.getElementById('sendBtn');
 
+
 // Alterna a classe 'active' ao clicar no botão
 button.addEventListener('click', function(event) {
     event.stopPropagation(); // Impede o clique de fechar o botão imediatamente
@@ -30,3 +31,36 @@ mudarSwitch.addEventListener('change', function() {
         salaInput.value = 1011; // Define o valor para 1011
     }
 });
+
+// Verificação de tipo para esconder funções
+
+// tipo 3
+
+const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+
+let tipoVer;
+
+if (usuarioLogadoHome && usuarioLogadoHome.tipo !== undefined) {
+    tipoVer = usuarioLogadoHome.tipo; // Atribui o valor dentro do 'if'
+} else {
+    console.error('Usuário inválido ou tipo não definido.');
+}
+
+
+    //tipo 3
+
+    function toggleDisplay() {
+        const btn = document.getElementById('btn');
+        const attVer = document.getElementById('attVer');
+        const monVer = document.getElementById('monVer');
+
+        if (tipoVer == 3) {
+
+            btn.style.display = 'none';
+            attVer.style.display = 'none';
+            monVer.style.display = 'none';
+        }
+    }
+
+    toggleDisplay()
+        

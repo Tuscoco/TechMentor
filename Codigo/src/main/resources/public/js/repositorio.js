@@ -62,18 +62,18 @@ function carregarRepositorios() {
     fetch('http://localhost:4567/mostrarrepositorio', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json' // Define o tipo de conteúdo como JSON
+            'Content-Type': 'application/json' 
         }
     })
     .then(response => {
         if (!response.ok) {
             throw new Error('Erro na requisição');
         }
-        return response.json(); // Converte a resposta para JSON
+        return response.json(); 
     })
     .then(data => {
         const reposDiv = document.getElementById('repos');
-        reposDiv.innerHTML = ''; // Limpa a lista antes de carregar novos dados
+        reposDiv.innerHTML = ''; 
 
         if (data.length === 0) {
             reposDiv.innerHTML = '<p>Nenhum repositório encontrado.</p>';
@@ -84,24 +84,22 @@ function carregarRepositorios() {
             const newRepo = document.createElement('div');
             newRepo.className = 'repo';
 
-            // Criar botão de excluir
             const deleteButton = document.createElement('div');
             deleteButton.innerHTML = '<i class="ph-fill ph-trash-simple"></i>';
-            deleteButton.className = 'delete-btn';
+            deleteButton.className = 'deleteBtn';
 
-            // Evento de clique para excluir o repositório
             deleteButton.addEventListener('click', function() {
                 fetch(`http://localhost:4567/deletarrepositorio/${repo.id}`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json' // Cabeçalho opcional para DELETE
+                        'Content-Type': 'application/json' 
                     }
                 })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erro na requisição ao excluir');
                     }
-                    newRepo.remove(); // Remove o repositório da interface
+                    newRepo.remove();
                 })
                 .catch((error) => {
                     console.error('Erro ao excluir:', error);
@@ -110,7 +108,6 @@ function carregarRepositorios() {
 
             newRepo.appendChild(deleteButton);
 
-            // Criar link do repositório
             const repoLink = document.createElement('a');
             repoLink.href = repo.link;
             repoLink.innerHTML = `<div class="nome">${repo.nome}</div>`;
@@ -118,11 +115,46 @@ function carregarRepositorios() {
 
             reposDiv.appendChild(newRepo);
         });
+
+        // Chamar toggleDisplay após os repositórios serem carregados
+        toggleDisplay();
     })
     .catch((error) => {
         console.error('Erro:', error);
     });
 }
 
+
 // Carregar repositórios ao iniciar a página
+window.onload = carregarRepositorios;
+
+
+
+
+// Verificação de tipo para esconder funções
+
+const usuarioLogadoRepositorios = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+let tipoVer;
+
+if (usuarioLogadoRepositorios && usuarioLogadoRepositorios.tipo !== undefined) {
+    tipoVer = usuarioLogadoRepositorios.tipo; // Atribui o valor dentro do 'if'
+} else {
+    console.error('Usuário inválido ou tipo não definido.');
+}
+
+    // tipo 3
+    function toggleDisplay() {
+        const addRepo = document.getElementById('addRepo');
+        const deleteBtns = document.getElementsByClassName('deleteBtn'); 
+
+        if (tipoVer == 3) {
+            addRepo.style.display = 'none'; 
+
+            Array.from(deleteBtns).forEach(btn => {
+                btn.style.display = 'none'; 
+            });
+        }
+    }
+
+// Carregar os repositórios ao iniciar a página
 window.onload = carregarRepositorios;

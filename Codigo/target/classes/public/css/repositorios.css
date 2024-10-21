@@ -106,7 +106,7 @@ main a{
 .repo:hover a{
     color: #7F32A6;
 }
-.delete-btn{
+.deleteBtn{
     margin-left: 90%;
     height: 10%;
     font-size: 20px;

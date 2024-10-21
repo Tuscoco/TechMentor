@@ -238,3 +238,27 @@ function deleteEvent(eventId) {
         console.error('Erro ao deletar evento:', error);
     });
 }
+
+const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+
+let tipoVer;
+
+if (usuarioLogadoHome && usuarioLogadoHome.tipo !== undefined) {
+    tipoVer = usuarioLogadoHome.tipo; // Atribui o valor dentro do 'if'
+} else {
+    console.error('Usuário inválido ou tipo não definido.');
+}
+
+    //tipo 3
+
+    function toggleDisplay() {
+        const novoEvento = document.getElementById('novoEvento');
+
+        if (tipoVer == 3) {
+
+            novoEvento.style.display = 'none';
+        }
+    }
+
+    toggleDisplay()
+        
