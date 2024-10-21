@@ -46,14 +46,19 @@ public class MateriaDAO {
     }
 
     public Materia findMateriaById(int id) throws SQLException{
-        Materia materia;
+        Materia materia = null;
         try(Connection conn = DriverManager.getConnection(url, user, password)){
             
             String sql = "SELECT * FROM materia WHERE id_materia = ?";
             PreparedStatement materia_pstmt = conn.prepareStatement(sql);
             materia_pstmt.setInt(1, id);
             ResultSet result = materia_pstmt.executeQuery();
-            materia = new Materia(result.getInt("id_materia"),result.getString("nome") );
+            
+            if(result.next()){
+
+                materia = new Materia(result.getInt("id_materia"),result.getString("nome"));
+
+            }
 
             
         }
