@@ -1,7 +1,6 @@
 package service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import dao.MonitorDAO;
@@ -113,36 +112,6 @@ public class MonitorService{
         return monitorDAO.getOnline(id);
 
     }
-
-//     public Monitoria getMonitorEMateria(int id_monitor,int id_materia){
-//         try{
-//             return monitorDAO.getMonitorEMateria(id_monitor, id_materia);
-//         } catch(Exception e){
-//             e.printStackTrace();
-//             return null;
-//         }
-//     }
-
-//     public List<Monitoria> getMonitor(int id_monitor){
-//         try{
-//             return monitorDAO.getMonitor(id_monitor);
-//         } catch(Exception e){
-//             e.printStackTrace();
-//             return new ArrayList<Monitoria>();
-//         }
-//     }
-
-
-//     public List<Monitoria> getMonitorPorMateria(int id_materia){
-
-//         List<Monitoria> monitor = new ArrayList<>();
-
-//         try {
-//             return monitorDAO.getMonitorPorMateria(id_materia);
-//         } catch (Exception e) {
-//             return new ArrayList<>();
-//         }
-//     }
 
 }
     

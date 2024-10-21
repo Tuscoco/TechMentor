@@ -317,14 +317,40 @@ public class PessoaDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELECT nome, tipo_usuario FROM pessoa WHERE tipo_usuario > 1";
+            String sql = "SELECT id, nome, tipo_usuario FROM pessoa WHERE tipo_usuario > 1";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
 
-                Pessoa pessoa = new Pessoa(result.getString("nome"), result.getInt("tipo_usuario"));
+                Pessoa pessoa = new Pessoa(result.getInt("id"),result.getString("nome"), result.getInt("tipo_usuario"));
+                lista.add(pessoa);
+
+            }
+
+        }
+
+        lista = ordenar(lista);
+
+        return lista;
+
+    }
+
+    public List<Pessoa> getTodos() throws SQLException{
+
+        List<Pessoa> lista = new ArrayList<>();
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT id, nome, tipo_usuario FROM pessoa WHERE tipo_usuario > 0";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            
+            ResultSet result = pstmt.executeQuery();
+
+            while(result.next()){
+
+                Pessoa pessoa = new Pessoa(result.getInt("id"),result.getString("nome"), result.getInt("tipo_usuario"));
                 lista.add(pessoa);
 
             }

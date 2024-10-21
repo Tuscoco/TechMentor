@@ -8,9 +8,7 @@ import com.google.gson.JsonObject;
 
 import model.Monitoria;
 import service.MonitorService;
-import static spark.Spark.delete;
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 
 
@@ -112,52 +110,6 @@ public class MonitorController{
             }
 
         });
-
-//         get("/monitorPorMateria" , (req,res) -> {
-//             res.type("application/json");
-
-
-//             try{
-//                 JsonObject json = gson.fromJson(req.body(), JsonObject.class);
-
-//                 int idMateria = json.get("id_materia").getAsInt();
-
-//                 List<Monitoria> lista = monitorService.getMonitorPorMateria(idMateria);
-
-//                 return new Gson().toJson(lista);
-
-//             }catch(Exception e){
-
-//                 res.status(500);
-//                 return "{\"message\":\"Erro no servidor ao buscar os monitores.\"}";
-
-//             }
-
-//         });
-
-
-//         get("/monitorPorMateria" , (req,res) -> {
-//             res.type("application/json");
-
-
-//             try{
-//                 JsonObject json = gson.fromJson(req.body(), JsonObject.class);
-
-//                 int idMateria = json.get("id_materia").getAsInt();
-
-//                 List<Monitoria> lista = monitorService.getMonitorPorMateria(idMateria);
-
-//                 return new Gson().toJson(lista);
-
-//             }catch(Exception e){
-
-//                 res.status(500);
-//                 return "{\"message\":\"Erro no servidor ao buscar os monitores.\"}";
-
-//             }
-
-//         });
-
 
         post("/ficaronline/:id", (req, res) -> {
 

@@ -423,6 +423,26 @@ public class PessoaController {
 
         });
 
+        get("/mostrartodos", (req, res) -> {
+
+            res.type("application/json");
+
+            try{
+
+                List<Pessoa> lista = pessoaService.getTodos();
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+
+                return "{\"message\":\"Erro no servidor ao buscar os usuarios.\"}";
+
+            }
+
+        });
+
         delete("/removerfoto/:id", (req, res) -> {
 
             res.type("application/json");

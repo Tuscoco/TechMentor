@@ -10,16 +10,13 @@ model/Materia.class
 service/PessoaService.class
 controller/RepositorioController.class
 model/Evento.class
-controller/MateriaAlunoController.class
 controller/MonitorController.class
 config/Config.class
 dao/CargaHorariaDAO.class
 model/Repositorio.class
-model/MateriaAluno.class
 controller/EventoController.class
 dao/EventoDAO.class
 controller/PessoaController.class
-service/MateriaAlunoService.class
 model/Pessoa.class
 service/AtendimentoService.class
 service/Carga_horariaService.class
@@ -30,5 +27,4 @@ model/CargaHoraria.class
 controller/MateriaController.class
 controller/CargaHorariaController.class
 app/App.class
-dao/MateriaAlunoDAO.class
 controller/AtendimentoController.class

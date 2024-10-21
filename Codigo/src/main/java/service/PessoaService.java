@@ -127,4 +127,10 @@ public class PessoaService {
 
     }
 
+    public List<Pessoa> getTodos() throws Exception{
+
+        return pessoaDAO.getTodos();
+
+    }
+
 }
