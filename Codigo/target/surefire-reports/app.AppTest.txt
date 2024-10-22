@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: app.AppTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 sec
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec
->>>>>>> 950bbbc0a3a5dfc07a3aa6da1d44b4730e299e2a
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 sec
