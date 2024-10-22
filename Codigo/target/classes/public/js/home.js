@@ -60,6 +60,17 @@ if (usuarioLogadoHome && usuarioLogadoHome.tipo !== undefined) {
             attVer.style.display = 'none';
             monVer.style.display = 'none';
         }
+
+        if (tipoVer == 2) {
+
+            monVer.style.display = 'none';
+        }
+
+        if(tipoVer == 1) {
+            
+            btn.style.display = 'none';
+            
+        }
     }
 
     toggleDisplay()

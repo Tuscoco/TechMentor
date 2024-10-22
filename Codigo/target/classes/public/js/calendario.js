@@ -140,23 +140,28 @@ window.addEventListener('click', (event) => {
 
 // Adicionar evento ao botão "Adicionar"
 document.getElementById('novoEvento').querySelector('button').addEventListener('click', () => {
-    const eventoInput = document.getElementById('novoEvento').querySelector('input[type="text"]');
-    const horaInput = document.getElementById('novoEvento').querySelector('input[type="time"]');
-
-    const evento = eventoInput.value;
-    const hora = horaInput.value;
-
+    const evento = document.getElementById('evento');
+    const local = document.getElementById('local');
+    const data = document.getElementById('data')
+    const hora = document.getElementById('hora')
+    const materia = document.getElementById('materia')
+    
     if (evento && hora) {
         const dataToSend = {
             id: generateId(), // Função para gerar um ID único
-            evento: evento,
             dia: day,
             mes: mes + 1, // Adiciona 1 porque os meses começam em 0
-            hora: hora
+            
+            evento: evento,
+            local: local,
+            data: data,
+            hora: hora,
+            materia: materia
+
         };
 
         // Enviar dados para o JSON Server
-        fetch('http://localhost:3000/eventos', {
+        fetch('http://localhost:4567/salvarevento', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

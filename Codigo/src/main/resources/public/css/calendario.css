@@ -216,13 +216,12 @@ main {
     color: #fff;
     background-color: #7F32A6;
     padding: 10px 20px 20px 20px;
-    width: 700px;
+    width: 720px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
 
 .modalContent button {
-    margin-right: 30px;
     font-size: 15px;
     font-family: Arial, sans-serif;
     font-weight: 900;
@@ -238,6 +237,7 @@ main {
 }
 
 .modalContent input{
+    height: 25px;
     font-family: Arial, sans-serif;
     font-weight: 900;
     font-size: 15px;
@@ -245,11 +245,8 @@ main {
     border-radius: 5px;
     color: #7F32A6;
     outline: none;
-    padding-left: 10px; 
-}
-
-.modalContent input[type="time"]{
-    height: 25px;
+    padding-left: 10px;
+    width: 49%;
 }
 
 .modalContent input::placeholder{
@@ -324,4 +321,36 @@ main {
 
 .apagar:hover #trash{
     display: none;
+}
+
+select{
+    border: none;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    height: 25px;
+    color: #7F32A6;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.modalContent button, select{
+    width: 49%;
+}
+
+select option{
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    height: 25px;
+}
+
+select .default{
+    display: none;
+}
+
+#novoEvento{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
