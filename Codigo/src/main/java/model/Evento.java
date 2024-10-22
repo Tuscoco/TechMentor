@@ -5,25 +5,27 @@ public class Evento {
     
     private int id;
 	private String local;
-    private String data_hora;
+    private String data;
+	private String hora;
     private String nome;
     private int materia;
     
     
-	public Evento(int id, String nome, String local, String data_hora, int materia) {
+	public Evento(int id, String nome, String local, String data, String hora, int materia) {
 
 		this.id = id;
 		this.local = local;
-		this.data_hora = data_hora;
+		this.data = data;
+		this.hora = hora;
 		this.nome = nome;
 		this.materia = materia;
 
 	}
 
-	public Evento(String nome, String local, String data_hora, int materia) {
+	public Evento(String nome, String local, String data, int materia) {
 
 		this.local = local;
-		this.data_hora = data_hora;
+		this.data = data;
 		this.nome = nome;
 		this.materia = materia;
 
@@ -40,13 +42,23 @@ public class Evento {
 	}
 
 
-	public String getDataHora() {
-		return data_hora;
+	public String getData() {
+		return data;
 	}
 
 
-	public void setDataHora(String data_hora) {
-		this.data_hora = data_hora;
+	public void setData(String data) {
+		this.data = data;
+	}
+
+
+	public String getHora() {
+		return hora;
+	}
+
+
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
 
 

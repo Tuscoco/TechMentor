@@ -49,11 +49,11 @@ public class EventoController {
 
         });
 
-        get("/mostrareventosdodia", (req, res) -> {
+        get("/mostrareventosdodia/:data", (req, res) -> {
 
             res.type("application/json");
 
-            String data = gson.fromJson(req.body(), String.class);
+            String data = req.params(":data");
 
             List<Evento> lista = eventoService.buscarEventosDoDia(data);
 

@@ -25,14 +25,15 @@ public class EventoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "INSERT INTO evento (id, nome, local, data_hora, id_materia) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO evento (id, nome, local, data, hora, id_materia) VALUES (?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, getNextId());
             pstmt.setString(2, evento.getNome());
             pstmt.setString(3, evento.getLocal());
-            pstmt.setString(4, evento.getDataHora());
-            pstmt.setInt(5, evento.getMateria());
+            pstmt.setString(4, evento.getData());
+            pstmt.setString(5, evento.getHora());
+            pstmt.setInt(6, evento.getMateria());
 
             pstmt.executeUpdate();
 
@@ -72,7 +73,7 @@ public class EventoDAO {
 
             while(result.next()){
 
-                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data_hora"), result.getInt("id_materia"));
+                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data"), result.getString("hora"), result.getInt("id_materia"));
                 lista.add(evento);
 
             }
@@ -89,7 +90,7 @@ public class EventoDAO {
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELECT * FROM evento WHERE data_hora = ?";
+            String sql = "SELECT * FROM evento WHERE data = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, data);
@@ -98,7 +99,7 @@ public class EventoDAO {
 
             while(result.next()){
 
-                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data_hora"), result.getInt("id_materia"));
+                Evento evento = new Evento(result.getInt("id"), result.getString("nome"), result.getString("local"), result.getString("data"), result.getString("hora"), result.getInt("id_materia"));
                 lista.add(evento);
 
             }
