@@ -4,11 +4,11 @@ CREATE DATABASE techmentor;
 -- CRIAR TABELA DE PESSOA
 CREATE TABLE pessoa (
     id INTEGER NOT NULL, 
-    nome VARCHAR(50) NOT NULL, 
-    email VARCHAR(50) NOT NULL, 
-    imagem VARCHAR(60), 
-    tipo_usuario INTEGER NOT NULL, 
-    matricula INTEGER NOT NULL, 
+    nome VARCHAR(100) NOT NULL, 
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(20),
+    foto BYTEA, 
+    tipo_usuario INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -19,21 +19,13 @@ CREATE TABLE materia (
     PRIMARY KEY(id_materia)
 );
 
--- CRIAR TABELA MATERIA_ALUNO
-CREATE TABLE materia_aluno (
-    id_aluno INTEGER NOT NULL, 
-    id_materia INTEGER NOT NULL, 
-    PRIMARY KEY(id_aluno, id_materia), 
-    FOREIGN KEY(id_aluno) REFERENCES pessoa(id) ON DELETE CASCADE, 
-    FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
-);
-
 -- CRIAR TABELA EVENTO
 CREATE TABLE evento (
     id SERIAL PRIMARY KEY, 
     local VARCHAR(100) NOT NULL, 
-    data_hora TIMESTAMP, 
-    id_materia INTEGER,  -- Permitir NULL devido ao ON DELETE SET NULL
+    data TEXT,
+    hora TEXT, 
+    id_materia INTEGER,
     nome VARCHAR(50), 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE SET NULL
 );
@@ -42,10 +34,7 @@ CREATE TABLE evento (
 CREATE TABLE repositorio (
     id SERIAL PRIMARY KEY, 
     nome VARCHAR(50) NOT NULL, 
-    link TEXT NOT NULL, 
-    descricao TEXT, 
-    id_materia INTEGER, 
-    FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE SET NULL
+    link TEXT NOT NULL
 );
 
 -- CRIAR TABELA MONITORIA
@@ -54,7 +43,6 @@ CREATE TABLE monitoria (
     id_materia INTEGER, 
     online BOOLEAN, 
     sala INTEGER,
-    materia_principal BOOLEAN,
     PRIMARY KEY(id_monitor, id_materia), 
     FOREIGN KEY(id_monitor) REFERENCES pessoa(id) ON DELETE CASCADE, 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
@@ -65,9 +53,11 @@ CREATE TABLE atendimento (
     id SERIAL PRIMARY KEY, 
     id_monitor INTEGER NOT NULL, 
     id_aluno INTEGER NOT NULL, 
-    data TIMESTAMP NOT NULL, 
+    data TEXT, 
     id_materia INTEGER NOT NULL, 
-    descricao TEXT, 
+    descricao TEXT,
+    tema_duvida TEXT,
+    duvida_sanada BOOLEAN,
     FOREIGN KEY(id_aluno) REFERENCES pessoa(id), 
     FOREIGN KEY(id_monitor, id_materia) REFERENCES monitoria(id_monitor, id_materia)
 );
