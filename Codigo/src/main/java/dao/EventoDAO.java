@@ -110,4 +110,26 @@ public class EventoDAO {
 
     }
 
+    public boolean removerEvento(int id) throws SQLException{
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "DELETE FROM evento WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
 }

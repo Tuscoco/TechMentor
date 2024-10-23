@@ -40,4 +40,10 @@ public class EventoService {
 
     }
 
+    public boolean removerEvento(int id) throws Exception{
+
+        return eventoDAO.removerEvento(id);
+
+    }
+
 }

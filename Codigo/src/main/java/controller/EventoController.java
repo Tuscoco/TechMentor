@@ -61,6 +61,36 @@ public class EventoController {
 
         });
 
+        delete("/removerevento/:id", (req, res) -> {
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            try{
+
+                boolean success = eventoService.removerEvento(id);
+
+                if(success){
+
+                    res.status(200);
+                    return gson.toJson("Evento removido!");
+
+                }else{
+
+                    res.status(403);
+                    return gson.toJson("Erro ao remover evento!");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+                e.printStackTrace();
+                return gson.toJson("Erro!");
+
+            }
+
+        });
+
     }
 
 }
