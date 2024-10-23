@@ -64,7 +64,6 @@ function generateCalendar(month, year) {
                     }
                     button.classList.add('selected');
                     day = +button.textContent;
-                    loadEvents(day, month + 1); // Carregar eventos para o dia selecionado
                     openModal();
                 });
 
@@ -138,112 +137,13 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Adicionar evento ao botão "Adicionar"
-document.getElementById('novoEvento').querySelector('button').addEventListener('click', () => {
-    const evento = document.getElementById('evento');
-    const local = document.getElementById('local');
-    const data = document.getElementById('data')
-    const hora = document.getElementById('hora')
-    const materia = document.getElementById('materia')
-    
-    if (evento && hora) {
-        const dataToSend = {
-            id: generateId(), // Função para gerar um ID único
-            dia: day,
-            mes: mes + 1, // Adiciona 1 porque os meses começam em 0
-            
-            evento: evento,
-            local: local,
-            data: data,
-            hora: hora,
-            materia: materia
 
-        };
 
-        // Enviar dados para o JSON Server
-        fetch('http://localhost:4567/salvarevento', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataToSend)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Evento adicionado:', data);
-            closeModal(); // Fecha o modal após adicionar o evento
-            eventoInput.value = ''; // Limpa o campo de evento
-            horaInput.value = ''; // Limpa o campo de hora
-            loadEvents(day, mes + 1); // Carregar eventos atualizados após adicionar
-        })
-        .catch(error => {
-            console.error('Erro ao adicionar evento:', error);
-        });
-    } else {
-        alert('Por favor, preencha todos os campos.');
-    }
-});
 
-// Função para gerar um ID único
-function generateId() {
-    return Math.random().toString(36).substr(2, 8); // Gera um ID aleatório
-}
 
-// Função para carregar eventos do JSON Server e exibir na div de mostrarEventos
-function loadEvents(selectedDay, selectedMonth) {
-    const mostrarEventosDiv = document.getElementById('mostrarEventos');
-    mostrarEventosDiv.innerHTML = ''; // Limpa eventos anteriores
 
-    fetch(`http://localhost:3000/eventos?dia=${selectedDay}&mes=${selectedMonth}`)
-        .then(response => response.json())
-        .then(events => {
-            events.forEach(event => {
-                const eventElement = document.createElement('p');
-                eventElement.innerHTML = `${event.evento} - ${event.hora} 
-                    <div class="apagar" data-id="${event.id}">
-                        <i id="trash" class="ph-fill ph-trash-simple"></i>
-                        <i id="recicle" class="ph-fill ph-recycle"></i>
-                    </div>`; // Formato desejado
 
-                // Adicionar o evento de clique ao ícone de exclusão
-                const deleteIcon = eventElement.querySelector('.apagar');
-                deleteIcon.addEventListener('click', () => {
-                    deleteEvent(event.id);
-                });
-
-                mostrarEventosDiv.appendChild(eventElement);
-            });
-
-            if (events.length === 0) {
-                const noEventsMessage = document.createElement('p');
-                noEventsMessage.innerHTML = 'Nenhum evento encontrado para hoje.';
-                mostrarEventosDiv.appendChild(noEventsMessage);
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao carregar eventos:', error);
-        });
-}
-
-// Função para deletar um evento
-function deleteEvent(eventId) {
-    fetch(`http://localhost:3000/eventos/${eventId}`, {
-        method: 'DELETE',
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Evento deletado:', eventId);
-            // Recarregar os eventos para atualizar a lista
-            loadEvents(day, mes + 1);
-        } else {
-            console.error('Erro ao deletar evento:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Erro ao deletar evento:', error);
-    });
-}
-
+//ESCONDER DEPENDENDO DO USUARIO
 const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 
 let tipoVer;
@@ -254,16 +154,15 @@ if (usuarioLogadoHome && usuarioLogadoHome.tipo !== undefined) {
     console.error('Usuário inválido ou tipo não definido.');
 }
 
-    //tipo 3
+//tipo 3
+function toggleDisplay() {
+    const novoEvento = document.getElementById('novoEvento');
 
-    function toggleDisplay() {
-        const novoEvento = document.getElementById('novoEvento');
+    if (tipoVer == 3) {
 
-        if (tipoVer == 3) {
-
-            novoEvento.style.display = 'none';
-        }
+        novoEvento.style.display = 'none';
     }
+}
 
-    toggleDisplay()
+toggleDisplay()
         
