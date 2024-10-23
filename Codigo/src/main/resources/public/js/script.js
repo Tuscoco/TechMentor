@@ -10,22 +10,22 @@ if (usuarioLogado) {
 
 async function inicializarUsuario(usuarioLogado) {
     try {
+        
         const id = usuarioLogado.id;
-
+        
         // Aguarda a resposta das funções assíncronas
         usuarioLogado.tipo = await getTipoUsuario(id);
         usuarioLogado.nome = await getNomeUsuario(id);
-
+        
         // Atualiza o sessionStorage com o objeto atualizado
         sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+        
+        document.querySelector('#username').textContent = usuarioLogado.nome;
 
         console.log(usuarioLogado);
         console.log(`Bem-vindo, ${usuarioLogado.nome}!`);
 
         // Exibe o nome no elemento com ID 'username'
-        document.querySelector('#username').textContent = usuarioLogado.nome;
-        document.querySelector('#nameEdit').textContent = usuarioLogado.nome;
-        document.querySelector('#senhaEdit').textContent = usuarioLogado.senha;
     } catch (error) {
         console.error('Erro ao inicializar o usuário:', error);
     }

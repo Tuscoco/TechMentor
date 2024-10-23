@@ -52,4 +52,14 @@ main{
     background-color: #7F32A6;
     color: #fff;
     border-radius: 10px;
+    width: 70%;
+}
+
+#sair{
+    background-color: #7F32A6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 80%;
+
 }
