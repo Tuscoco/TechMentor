@@ -113,6 +113,12 @@ public class MonitorService{
 
     }
 
+    public int getMateriaMonitor(int id) throws Exception{
+
+        return monitorDAO.getMateriaMonitor(id);
+
+    }
+
 }
     
 

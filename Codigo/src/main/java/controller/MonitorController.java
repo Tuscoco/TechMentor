@@ -111,6 +111,38 @@ public class MonitorController{
 
         });
 
+        get("/buscarmateriamonitor/:id", (req, res) -> {
+
+            int id = Integer.parseInt(req.params(":id"));
+            
+            try{
+
+                int materia = monitorService.getMateriaMonitor(id);
+
+                if(materia != -1){
+
+                    res.status(200);
+
+                    return gson.toJson(Integer.toString(materia));
+
+                }else{
+
+                    res.status(404);
+
+                    return gson.toJson("Monitor não encontrado");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+
+                return gson.toJson("Ocorreu um erro");
+
+            }
+
+        });
+
         post("/ficaronline/:id", (req, res) -> {
 
             try{

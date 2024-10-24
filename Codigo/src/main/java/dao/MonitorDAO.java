@@ -200,5 +200,30 @@ public class MonitorDAO{
 
     }
 
+    public int getMateriaMonitor(int id) throws SQLException{
+
+        int materia = -1;
+
+        try(Connection conn = DriverManager.getConnection(url, user, password)){
+
+            String sql = "SELECT id_materia FROM monitoria WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                materia = result.getInt("id_materia");
+
+            }
+
+        }
+
+        return materia;
+
+    }
+
 }
 
