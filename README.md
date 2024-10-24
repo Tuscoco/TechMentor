@@ -1,6 +1,11 @@
 # Techmentor
 
-[Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
+O TechMentor tem como objetivo facilitar a interação dos universitários com a monitoria. O projeto apresenta várias funções que facilitam a vida universitária do usuário, como por exemplo:<br>
+.Calendário: Nele podemos colocar datas de aulões, provas, eventos, palestra, etc.<br>
+.Monitores: O usuário pode consultar todos os monitores que são separados entre online e offline.<br>
+.Repositórios: O usuário tem acesso a uma página com varios repositórios importantes ou úteis para o dia a dia.<br>
+.Atendimento: Para os monitores, o projeto apresenta uma página de formulário onde o monitor pode preencher o atendimento que ele fez.<br>
+.Gestão: O projeto tambem apresenta funcionalidades de gestão, como contas Coordenadores que podem adicionar e retirar monitores.<br>
 
 ## Alunos integrantes da equipe
 
