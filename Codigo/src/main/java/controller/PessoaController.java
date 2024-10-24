@@ -403,33 +403,15 @@ public class PessoaController {
 
         });
 
-        get("/mostraralunos", (req, res) -> {
+        get("/mostrarusuarios/:tipo", (req, res) -> {
 
             res.type("application/json");
 
             try{
 
-                List<Pessoa> lista = pessoaService.getAlunos();
+                int tipo = Integer.parseInt(req.params(":tipo"));
 
-                return new Gson().toJson(lista);
-
-            }catch(Exception e){
-
-                res.status(500);
-
-                return "{\"message\":\"Erro no servidor ao buscar os alunos.\"}";
-
-            }
-
-        });
-
-        get("/mostrartodos", (req, res) -> {
-
-            res.type("application/json");
-
-            try{
-
-                List<Pessoa> lista = pessoaService.getTodos();
+                List<Pessoa> lista = pessoaService.getUsuarios(tipo);
 
                 return new Gson().toJson(lista);
 

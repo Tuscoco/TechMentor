@@ -121,15 +121,9 @@ public class PessoaService {
 
     }
 
-    public List<Pessoa> getAlunos() throws Exception{
+    public List<Pessoa> getUsuarios(int tipo) throws Exception{
 
-        return pessoaDAO.getAlunos();
-
-    }
-
-    public List<Pessoa> getTodos() throws Exception{
-
-        return pessoaDAO.getTodos();
+        return pessoaDAO.getUsuarios(tipo);
 
     }
 
