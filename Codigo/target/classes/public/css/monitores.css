@@ -38,21 +38,23 @@ search button:active {
     font-size: 30px;
 }
 
-#alunos{
+.alunos, .monitores{
+    display: flex;
+    flex-direction: column;
     margin-top: 30px;
 }
 
-#aluno{
+.aluno, .monitor{
     height: 50px;
     margin-bottom: 30px;
     display: flex;
+    justify-content: space-around;
     outline: 5px solid #7F32A6;
     border-radius: 5px;
 }
 
-#aluno img{
+.aluno img, .monitor img{
     margin-top: 8px;
-    margin-left: 20px;
     width: 35px;
     height: 35px;
     object-fit: cover;
@@ -61,33 +63,78 @@ search button:active {
     outline: 3px solid #7F32A6;
 }
 
-#nome{
-    margin-left: 20px;
-    margin-right: 727px;
+
+.info{
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    
 }
 
-#aluno input[type="checkbox"] {
-    margin-top: 8px;
+.dados{
+    text-align: center;
+    width: 45%;
 
-    margin-left: 20px;
-    appearance: none;
-    width: 35px;
+}
+
+select{
+    border: none;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
     height: 35px;
-    border: 3px solid #7F32A6;
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
+    color: #7F32A6;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 85% !important;
+}
+select option{
+    font-size: 50%;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    height: 35px;
 }
 
-#aluno input[type="checkbox"]:checked {
+select .default{
+    display: none;
+}
+
+main{
+    text-align: center;
+}
+
+.materiaMonitor{
+    width: 45% !important;
+}
+
+.addBtn, .rmvBtn{
     background-color: #7F32A6;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    height: 40px;    
+    width: 40px;
+    transition: .1s;
 }
 
-#aluno input[type="checkbox"]:checked::after {
-    color: #fff;
-    content: '✔';
-    display: block;
-    font-size: 30px;
-    margin-top: -6px;
-    margin-left: 3px;
+.addBtn:hover, .rmvBtn:hover{
+    width: 140px;
+}
+
+.addSection, .rmvSection{
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}
+
+.addBtn .btnHover, .rmvBtn .btnHover{
+    display: none;
+}
+
+.addBtn:hover .btnHover, .rmvBtn:hover .btnHover{
+    display: contents;
+}
+
+.addBtn:hover .btnDefault, .rmvBtn:hover .btnDefault{
+    display: none;
 }
