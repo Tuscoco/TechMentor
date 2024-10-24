@@ -43,7 +43,7 @@ CREATE TABLE monitoria (
     id_materia INTEGER, 
     online BOOLEAN, 
     sala INTEGER,
-    PRIMARY KEY(id_monitor, id_materia), 
+    PRIMARY KEY(id_monitor), 
     FOREIGN KEY(id_monitor) REFERENCES pessoa(id) ON DELETE CASCADE, 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
 );
@@ -59,7 +59,8 @@ CREATE TABLE atendimento (
     tema_duvida TEXT,
     duvida_sanada BOOLEAN,
     FOREIGN KEY(id_aluno) REFERENCES pessoa(id), 
-    FOREIGN KEY(id_monitor, id_materia) REFERENCES monitoria(id_monitor, id_materia)
+    FOREIGN KEY(id_monitor) REFERENCES monitoria(id_monitor),
+    FOREIGN KEY(id_materia) REFERENCES materia(id_materia)
 );
 
 -- CRIAR TABELA CARGA_HORARIA
