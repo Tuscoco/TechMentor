@@ -179,9 +179,7 @@ async function fetchUsuarios() {
     }
 }
 
-async function fetchMonitores() {   
-
-    
+async function fetchMonitores() {
     try {
         const tipoLogado = usLogMon.tipo;
 
@@ -203,7 +201,7 @@ async function fetchMonitores() {
         alunosDiv.innerHTML = '';
 
         // Iterando sobre cada usuário e criando a estrutura desejada
-        usuarios.forEach(usuario => {
+        for (const usuario of usuarios) {
             // Criando a div 'aluno'
             const alunoDiv = document.createElement('div');
             alunoDiv.classList.add('monitor');
@@ -214,8 +212,6 @@ async function fetchMonitores() {
 
             // Dividindo o nome completo em partes (usando espaço como separador)
             const nomeCompleto = usuario.nome.split(' ');
-
-            // Pegando apenas o primeiro e segundo nome (se houver)
             const primeiroNome = nomeCompleto[0];
             const segundoNome = nomeCompleto[1] ? nomeCompleto[1] : '';
 
@@ -233,11 +229,10 @@ async function fetchMonitores() {
             materia.textContent = 'Carregando...'; // Texto temporário enquanto a matéria é carregada
             dadosSection.appendChild(materia);
 
-            // Fazendo a requisição para obter o nome da matéria com base no id_materia do monitor
-            const idUserMateria = usuario.id_materia; // Verifique que o ID da matéria está no campo correto 
-            const nomeMateria = fetchMateria(idUserMateria); // Chamando a função para buscar a matéria
-            materia.textContent = nomeMateria;
-
+            // Buscando o nome da matéria e atualizando o texto
+            const idMateria = await buscarMateria(usuario.id);
+            const nomeMateria = await fetchMateria(idMateria);
+            materia.textContent = nomeMateria; // Atualiza o texto com o nome da matéria
 
             // Seção de botão 'Adicionar'
             const rmvSection = document.createElement('section');
@@ -251,7 +246,7 @@ async function fetchMonitores() {
 
             const btnHover = document.createElement('p');
             btnHover.classList.add('btnHover');
-            btnHover.textContent = 'Adicionar';
+            btnHover.textContent = 'Remover';
 
             const idUsuario = usuario.id;
 
@@ -259,48 +254,36 @@ async function fetchMonitores() {
             rmvButton.appendChild(btnHover);
             rmvSection.appendChild(rmvButton);
 
-            // Adicionando o event listener ao botão
+            // Event listener para remover monitor
             rmvButton.addEventListener('click', async () => {
-
                 if (tipoLogado == 0) {
                     try {
-
                         // Criando o objeto com os dados para a requisição
                         const alteraTipo = {
-                            idAlterador: tipoLogado, // O ID a ser enviado
+                            idAlterador: tipoLogado,
                             idAlvo: idUsuario,
                             novoTipo: 3,
                             idMateria: 0
                         };
 
-                        console.log(alteraTipo);
-
                         // Fazendo a requisição POST
                         const response = await fetch('http://localhost:4567/alterartipousuario', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(alteraTipo) // Convertendo o objeto em JSON
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(alteraTipo)
                         });
 
-                        // Verificando se a resposta foi bem-sucedida
                         if (!response.ok) {
                             throw new Error(`Erro na requisição: ${response.status}`);
                         }
 
-                        // Processando a resposta se necessário
-                        const data = await response.json();
-                        console.log('Resposta do servidor:', data);
-
+                        // Recarregar a página após sucesso
                         window.location.reload();
-
-
                     } catch (error) {
                         console.error('Erro ao alterar tipo de usuário:', error);
                     }
                 } else {
-                    console.log('sem permissão');
+                    console.log('Sem permissão');
                 }
             });
 
@@ -311,16 +294,17 @@ async function fetchMonitores() {
 
             // Adicionando a div 'aluno' à div 'alunos'
             alunosDiv.appendChild(alunoDiv);
-        });
+        }
 
     } catch (error) {
         console.error('Erro ao buscar os usuários:', error);
     }
 }
 
-async function fetchMateria(idUserMateria) {
+
+async function fetchMateria(id_materia) {
     try {
-        const response = await fetch(`http://localhost:4567/mostrarmateria/${idUserMateria}`);
+        const response = await fetch(`http://localhost:4567/mostrarmateria/${id_materia}`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -339,6 +323,29 @@ async function fetchMateria(idUserMateria) {
         return 'Matéria não encontrada'; // Valor padrão em caso de erro
     }
 }       
+
+async function buscarMateria(id_monitor) {
+    const url = `http://localhost:4567/buscarmateriamonitor/${id_monitor}`;
+
+    try {
+        // Fazendo a requisição GET
+        const response = await fetch(url);
+        
+        // Verificando se a resposta foi bem-sucedida
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        // Convertendo a resposta para JSON
+        const data = await response.json();
+
+        // Exibindo o resultado no console (ou retornando os dados)
+        console.log("Matéria vinculada:", data);
+        return data;
+    } catch (error) {
+        console.error("Erro ao buscar a matéria:", error);
+    }
+}
 
 fetchMonitores();
 fetchUsuarios();

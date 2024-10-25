@@ -119,3 +119,10 @@ button.menu-hamburger.open img {
 .form-check-input:checked {
     background-color: #7F32A6;
 }
+
+.bar-open img{
+    margin: 0 !important;
+}
+.materia{
+    width: 450px;
+}

@@ -138,3 +138,16 @@ main{
 .addBtn:hover .btnDefault, .rmvBtn:hover .btnDefault{
     display: none;
 }
+
+.nome, .materia{
+    font-size: 80% !important;
+    margin-bottom: 0 !important;
+}
+
+#aluno{
+    height: max-content;
+}
+
+#aluno section{
+    height: max-content;
+}
