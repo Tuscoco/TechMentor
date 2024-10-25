@@ -93,7 +93,7 @@ public class MonitorDAO{
 
             while(result.next()){
 
-                Monitoria monitor = new Monitoria(result.getInt("id"), result.getInt("id_materia"));
+                Monitoria monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"));
                 lista.add(monitor);
 
             }
