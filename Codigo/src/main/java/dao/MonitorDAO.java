@@ -86,7 +86,7 @@ public class MonitorDAO{
 
         try(Connection conn = DriverManager.getConnection(url, user, password)){
 
-            String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online = false";
+            String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online != true";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet result = pstmt.executeQuery();
