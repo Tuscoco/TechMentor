@@ -63,3 +63,38 @@ main{
     width: 80%;
 
 }
+
+#fileInput{
+    display: none;
+}
+
+#escFoto{
+    justify-content: center;
+    display: flex;
+    width: 50%;
+    gap: 3px;
+}
+
+#escFoto button{
+    border: none;
+    background-color: #7F32A6;
+    color: #fff;
+    font-weight: 900;
+    font-size: 70%;
+    text-align: center;
+    padding: 0 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#labelEsc{
+    padding: 0 10px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 70%;
+    background-color: #7F32A6;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+

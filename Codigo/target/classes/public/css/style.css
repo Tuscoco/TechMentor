@@ -79,6 +79,11 @@ header img{
     transition: .1s;
 }
 
+#perfil p{
+    display: flex;
+    align-items: center;
+}
+
 #perfil:hover{
     translate: -20px;
     background-color: #7F32A6;

@@ -1,11 +1,13 @@
-const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-const tipoVer = usuarioLogadoHome.tipo;
 const button = document.getElementById('btn');
 const salaInput = document.getElementById('sala');
 const mudarSwitch = document.getElementById('switch');
 const sendButton = document.getElementById('sendBtn');
+const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 
+const tipoVer = usuarioLogadoHome.tipo;
 toggleDisplay(tipoVer);
+
+
 
 // Alterna a classe 'active' ao clicar no botão
 button.addEventListener('click', function(event) {
@@ -26,7 +28,8 @@ mudarSwitch.addEventListener('click', function(event) {
 
 
 // Função para alternar a exibição com base no tipo de usuário
-function toggleDisplay(tipoVer) {   
+function toggleDisplay(tipoVer) {
+     
     const btn = document.getElementById('btn');
     const attVer = document.getElementById('attVer');
     const monVer = document.getElementById('monVer');
