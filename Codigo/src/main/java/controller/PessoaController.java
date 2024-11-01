@@ -296,13 +296,10 @@ public class PessoaController {
             res.type("application/json");
 
             int id = Integer.parseInt(req.params(":id"));
-            
-            Pessoa pessoa = new Pessoa();
-            pessoa.setId(id);
 
             try{
 
-                int tipoUsuario = pessoaService.getTipoUsuario(pessoa);
+                int tipoUsuario = pessoaService.getTipoUsuario(id);
 
                 if(tipoUsuario != -1){
 

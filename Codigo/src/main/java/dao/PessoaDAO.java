@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.InputStream;
+import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,13 +16,14 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
+            String senhaCripto = BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt());
             String sql = "INSERT INTO pessoa (id, nome, email, senha, tipo_usuario) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
             pstmt.setString(2, pessoa.getNome());
             pstmt.setString(3, pessoa.getEmail());
-            pstmt.setString(4, pessoa.getSenha());
+            pstmt.setString(4, senhaCripto);
             pstmt.setInt(5, pessoa.getTipoUsuario());
 
             pstmt.executeUpdate();
@@ -36,29 +38,7 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT * FROM pessoa WHERE id = ? AND senha = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setInt(1, pessoa.getId());
-            pstmt.setString(2, pessoa.getSenha());
-
-            ResultSet result = pstmt.executeQuery();
-
-            autenticado = result.next();
-
-        }
-
-        return autenticado;
-
-    }
-
-    public int getTipoUsuario(Pessoa pessoa) throws SQLException{
-
-        int tipo = -1;
-
-        try(Connection conn = DataBaseConnection.getConnection()){
-
-            String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
+            String sql = "SELECT * FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
@@ -67,13 +47,14 @@ public class PessoaDAO {
 
             if(result.next()){
 
-                tipo = result.getInt("tipo_usuario");
+                String senhaCripto = result.getString("senha");
+                autenticado = BCrypt.checkpw(pessoa.getSenha(), senhaCripto);
 
             }
 
         }
 
-        return tipo;
+        return autenticado;
 
     }
 
@@ -124,10 +105,11 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
+            String senhaCripto = BCrypt.hashpw(senha, BCrypt.gensalt());
             String sql = "UPDATE pessoa SET senha = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, senha);
+            pstmt.setString(1, senhaCripto);
             pstmt.setInt(2, id);
 
             int alterado = pstmt.executeUpdate();
