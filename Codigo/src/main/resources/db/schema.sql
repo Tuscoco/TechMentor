@@ -6,8 +6,8 @@ CREATE TABLE pessoa (
     id INTEGER NOT NULL, 
     nome VARCHAR(100) NOT NULL, 
     email VARCHAR(100) NOT NULL,
-    senha VARCHAR(20),
-    foto BYTEA, 
+    senha VARCHAR(100),
+    foto TEXT, 
     tipo_usuario INTEGER NOT NULL,
     PRIMARY KEY(id)
 );
@@ -15,7 +15,7 @@ CREATE TABLE pessoa (
 -- CRIAR TABELA MATERIA
 CREATE TABLE materia (
     id_materia INTEGER NOT NULL, 
-    nome VARCHAR(50) NOT NULL, 
+    nome VARCHAR(100) NOT NULL, 
     PRIMARY KEY(id_materia)
 );
 
@@ -43,6 +43,8 @@ CREATE TABLE monitoria (
     id_materia INTEGER, 
     online BOOLEAN, 
     sala INTEGER,
+    foto1 TEXT,
+    foto2 TEXT,
     PRIMARY KEY(id_monitor), 
     FOREIGN KEY(id_monitor) REFERENCES pessoa(id) ON DELETE CASCADE, 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
@@ -71,5 +73,5 @@ CREATE TABLE carga_horaria (
     horario_entrada TIME, 
     horario_saida TIME, 
     PRIMARY KEY(id_monitor, id_materia, dia_semana), 
-    FOREIGN KEY(id_monitor, id_materia) REFERENCES monitoria(id_monitor, id_materia)
+    FOREIGN KEY(id_monitor) REFERENCES monitoria(id_monitor)
 );
