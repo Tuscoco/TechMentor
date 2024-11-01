@@ -1,6 +1,5 @@
 package dao;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,22 +10,9 @@ import model.Monitoria;
 
 public class MonitorDAO{
 
-    private String url;
-    private String user;
-    private String password;
-
-    public MonitorDAO(){
-
-        Config config = new Config("config/config.properties");
-        this.url = config.getProperty("db.url");
-        this.user = config.getProperty("db.user");
-        this.password = config.getProperty("db.password");
-
-    }
-
     public void adicionarMonitor(Monitoria monitor) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "INSERT INTO monitoria (id_monitor, id_materia, online) VALUES (?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -42,7 +28,7 @@ public class MonitorDAO{
 
     public boolean removerMonitor(int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "DELETE FROM monitoria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -60,7 +46,7 @@ public class MonitorDAO{
 
         List<Monitoria> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online = true";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -84,7 +70,7 @@ public class MonitorDAO{
 
         List<Monitoria> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online IS DISTINCT FROM true";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -106,7 +92,7 @@ public class MonitorDAO{
 
     public void ficarOnline(int id) throws SQLException{
     
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE monitoria SET online = true, sala = 1101 WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -121,7 +107,7 @@ public class MonitorDAO{
 
     public void ficarOffline(int id) throws SQLException{
     
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE monitoria SET online = false WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -136,7 +122,7 @@ public class MonitorDAO{
 
     public void alterarSala(int id, int sala) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE monitoria SET sala = ? WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -154,7 +140,7 @@ public class MonitorDAO{
 
         int sala = 0;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT sala FROM monitoria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -179,7 +165,7 @@ public class MonitorDAO{
 
         boolean online = false;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT online FROM monitoria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -204,7 +190,7 @@ public class MonitorDAO{
 
         int materia = -1;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT id_materia FROM monitoria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);

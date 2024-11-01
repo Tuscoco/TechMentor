@@ -6,25 +6,10 @@ import java.util.*;
 import config.*;
 
 public class RepositorioDAO {
- 
-    private String url;
-    private String user;
-    private String password;
-
-
-    public RepositorioDAO(){
-
-        Config config = new Config("config/config.properties");
-        this.url = config.getProperty("db.url");
-        this.user = config.getProperty("db.user");
-        this.password = config.getProperty("db.password");
-
-    }
-
 
     public void salvarRepositorio(Repositorio repositorio) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "INSERT INTO repositorio (id, nome, link) VALUES (?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -41,7 +26,7 @@ public class RepositorioDAO {
 
     public void deletarRepositorio(int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "DELETE FROM repositorio WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -56,7 +41,7 @@ public class RepositorioDAO {
 
     public int getNextId() throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT MAX(id) AS max_id FROM repositorio";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -78,7 +63,7 @@ public class RepositorioDAO {
 
         List<Repositorio> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT * FROM repositorio";
             PreparedStatement pstmt = conn.prepareStatement(sql);

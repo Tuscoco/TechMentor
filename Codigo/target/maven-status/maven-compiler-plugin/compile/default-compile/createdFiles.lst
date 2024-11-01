@@ -6,8 +6,8 @@ dao/PessoaDAO.class
 service/MonitorService.class
 service/EventoService.class
 model/Monitoria.class
-service/PessoaService.class
 model/Materia.class
+service/PessoaService.class
 controller/RepositorioController.class
 model/Evento.class
 controller/MonitorController.class
@@ -17,6 +17,7 @@ model/Repositorio.class
 controller/EventoController.class
 dao/EventoDAO.class
 controller/PessoaController.class
+config/DataBaseConnection.class
 model/Pessoa.class
 service/AtendimentoService.class
 service/Carga_horariaService.class

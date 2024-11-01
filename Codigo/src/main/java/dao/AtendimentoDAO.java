@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,24 +10,10 @@ import model.Atendimento;
 import config.*;
 
 public class AtendimentoDAO {
- 
-    private String url;
-    private String user;
-    private String password;
-
-    public AtendimentoDAO(){
-
-        Config config = new Config("config/config.properties");
-        this.url = config.getProperty("db.url");
-        this.user = config.getProperty("db.user");
-        this.password = config.getProperty("db.password");
-
-    }
-
 
     public void salvarAtendimento(Atendimento atendimento) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "INSERT INTO atendimento (id, id_monitor, id_aluno, id_materia, data, tema_duvida, descricao, duvida_sanada) VALUES (?,?,?,?,?,?,?,?)";
 
@@ -51,7 +36,7 @@ public class AtendimentoDAO {
 
     public int getNextId() throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT MAX(id) AS max_id FROM atendimento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -73,7 +58,7 @@ public class AtendimentoDAO {
 
         List<Atendimento> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT * FROM atendimento WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);

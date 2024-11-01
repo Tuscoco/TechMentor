@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,23 +11,9 @@ import config.*;
 import model.CargaHoraria;
 
 public class CargaHorariaDAO {
-    
-    private String url;
-    private String user;
-    private String password;
-
-    public CargaHorariaDAO(){
-
-        Config config = new Config("config/config.properties");
-        this.url = config.getProperty("db.url");
-        this.user = config.getProperty("db.user");
-        this.password = config.getProperty("db.password");
-
-    }
-
 
     public void adicionarCargarHoraria(CargaHoraria cargaHoraria) throws SQLException{
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
            String sql = "INSERT INTO cargaHoraria (id_monitor, id_materia, dia_semana, horario_entrada,horario_saida) VALUES (?,?,?,?,?)";
 
             Time sqlTimeEntrada = Time.valueOf(cargaHoraria.getHorarioE());
@@ -43,7 +28,7 @@ public class CargaHorariaDAO {
         }
     }
     public void deletarCargarHorariaDia(CargaHoraria cargaHoraria) throws SQLException{
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
            String sql = "DELETE FROM cargaHoraria WHERE id_monitor = ? AND id_materia=? AND dia_semana = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,cargaHoraria.getIdMonitor());
@@ -55,7 +40,7 @@ public class CargaHorariaDAO {
 
 
     public void deletarCargarHorariaAluno(CargaHoraria cargaHoraria) throws SQLException{
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
            String sql = "DELETE FROM cargaHoraria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,cargaHoraria.getIdMonitor());
@@ -65,7 +50,7 @@ public class CargaHorariaDAO {
 
     public List<CargaHoraria> getCargaHorariaAluno(int id) throws SQLException{
         List<CargaHoraria> cargaHoraria = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+        try (Connection conn = DataBaseConnection.getConnection()) {
             String sql = "SELECT * FROM carga_horaria WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
