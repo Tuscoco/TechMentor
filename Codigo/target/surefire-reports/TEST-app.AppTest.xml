@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <testsuite tests="1" failures="0" name="app.AppTest" time="0.004" errors="0" skipped="0">
+=======
+<testsuite tests="1" failures="0" name="app.AppTest" time="0.003" errors="0" skipped="0">
+>>>>>>> b6d52fe76572c2c192562d6e6fccea4c3a4f9cbf
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.24+8-post-Ubuntu-1ubuntu322.04"/>
@@ -59,5 +63,9 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
+<<<<<<< HEAD
   <testcase classname="app.AppTest" name="shouldAnswerWithTrue" time="0.004"/>
+=======
+  <testcase classname="app.AppTest" name="shouldAnswerWithTrue" time="0.003"/>
+>>>>>>> b6d52fe76572c2c192562d6e6fccea4c3a4f9cbf
 </testsuite>

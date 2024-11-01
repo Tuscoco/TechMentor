@@ -31,6 +31,11 @@ public class App
         EventoController evento = new EventoController(eventoService);
         RepositorioController repositorio = new RepositorioController(repositorioService);
 
+        get("/", (req, res) -> {
+            res.redirect("html/logCad.html");
+            return null;
+        });        
+
 
         pessoa.setup();
         materia.setup();
