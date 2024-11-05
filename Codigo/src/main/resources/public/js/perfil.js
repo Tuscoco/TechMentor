@@ -60,18 +60,23 @@ async function uploadImage() {
 
 async function salvarFoto(userId, photoUrl) {
     try {   
-                // Passo 2b: Se o usuário não possui uma foto, insira uma nova (POST)
-                const insertResponse = await fetch(`http://localhost:4567/salvarfoto/${userId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ userId, photoUrl })
-                });
-                
-                const insertData = await insertResponse.json();
-                console.log('Foto salva com sucesso:', insertData.message);
-         
+        const response = await fetch(`http://localhost:4567/salvarfoto/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId, photoUrl })
+        });
+        
+        if (!response.ok) {
+            // Exibe uma mensagem de erro se o status da resposta não for "ok"
+            console.error('Erro na resposta do servidor:', response.status, response.statusText);
+            return;
+        }
+
+        const data = await response.json();
+        console.log('Foto salva com sucesso:', data.message);
+
     } catch (error) {
         console.error('Erro ao salvar ou atualizar a foto:', error);
     }
