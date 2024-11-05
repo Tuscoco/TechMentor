@@ -1,8 +1,8 @@
 package dao;
 
 import java.io.InputStream;
+import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,32 +11,19 @@ import config.*;
 import java.util.*;
 
 public class PessoaDAO {
-    
-    private String url;
-    private String user;
-    private String password;
-
-    public PessoaDAO(){
-
-        Config config = new Config("config/config.properties");
-        this.url = config.getProperty("db.url");
-        this.user = config.getProperty("db.user");
-        this.password = config.getProperty("db.password");
-
-    }
-
 
     public void registrarPessoa(Pessoa pessoa) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
+            String senhaCripto = BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt());
             String sql = "INSERT INTO pessoa (id, nome, email, senha, tipo_usuario) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
             pstmt.setString(2, pessoa.getNome());
             pstmt.setString(3, pessoa.getEmail());
-            pstmt.setString(4, pessoa.getSenha());
+            pstmt.setString(4, senhaCripto);
             pstmt.setInt(5, pessoa.getTipoUsuario());
 
             pstmt.executeUpdate();
@@ -49,31 +36,9 @@ public class PessoaDAO {
 
         boolean autenticado = false;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT * FROM pessoa WHERE id = ? AND senha = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            pstmt.setInt(1, pessoa.getId());
-            pstmt.setString(2, pessoa.getSenha());
-
-            ResultSet result = pstmt.executeQuery();
-
-            autenticado = result.next();
-
-        }
-
-        return autenticado;
-
-    }
-
-    public int getTipoUsuario(Pessoa pessoa) throws SQLException{
-
-        int tipo = -1;
-
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
-
-            String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
+            String sql = "SELECT * FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
@@ -82,13 +47,14 @@ public class PessoaDAO {
 
             if(result.next()){
 
-                tipo = result.getInt("tipo_usuario");
+                String senhaCripto = result.getString("senha");
+                autenticado = BCrypt.checkpw(pessoa.getSenha(), senhaCripto);
 
             }
 
         }
 
-        return tipo;
+        return autenticado;
 
     }
 
@@ -96,7 +62,7 @@ public class PessoaDAO {
 
         int tipo = -1;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT tipo_usuario FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -119,7 +85,7 @@ public class PessoaDAO {
 
     public boolean alterarTipoUsuario(int id, int novoTipo) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE pessoa SET tipo_usuario = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -137,12 +103,13 @@ public class PessoaDAO {
 
     public boolean alterarSenha(String senha, int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
+            String senhaCripto = BCrypt.hashpw(senha, BCrypt.gensalt());
             String sql = "UPDATE pessoa SET senha = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, senha);
+            pstmt.setString(1, senhaCripto);
             pstmt.setInt(2, id);
 
             int alterado = pstmt.executeUpdate();
@@ -155,7 +122,7 @@ public class PessoaDAO {
 
     public boolean alterarEmail(String email, int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE pessoa SET email = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -175,7 +142,7 @@ public class PessoaDAO {
 
         String email = null;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT email FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -198,7 +165,7 @@ public class PessoaDAO {
 
     public boolean alterarNome(String nome, int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE pessoa SET nome = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -218,7 +185,7 @@ public class PessoaDAO {
 
         String nome = null;
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT nome FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -241,7 +208,7 @@ public class PessoaDAO {
 
     public boolean alterarFoto(int id, InputStream foto, long tamanhoFoto) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE pessoa SET foto = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -264,7 +231,7 @@ public class PessoaDAO {
 
     public InputStream getFoto(int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT foto FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -291,7 +258,7 @@ public class PessoaDAO {
 
     public boolean removerFoto(int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE pessoa SET foto = NULL WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -315,7 +282,7 @@ public class PessoaDAO {
 
         List<Pessoa> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT id, nome, tipo_usuario FROM pessoa WHERE tipo_usuario = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);

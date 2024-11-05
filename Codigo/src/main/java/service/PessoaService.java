@@ -16,10 +16,6 @@ public class PessoaService {
 
         try{
 
-            //String cripto = BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt());
-            
-            //pessoa.setSenha(cripto);
-
             pessoaDAO.registrarPessoa(pessoa);
 
             return true;
@@ -36,15 +32,7 @@ public class PessoaService {
 
     public boolean loginPessoa(Pessoa pessoa) throws Exception{
 
-        //pessoa.setSenha(BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt()));
-
         return pessoaDAO.loginPessoa(pessoa);
-
-    }
-
-    public int getTipoUsuario(Pessoa pessoa) throws Exception{
-
-        return pessoaDAO.getTipoUsuario(pessoa);
 
     }
 

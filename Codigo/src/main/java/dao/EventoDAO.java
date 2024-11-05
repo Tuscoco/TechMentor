@@ -6,24 +6,10 @@ import java.util.*;
 import config.*;
 
 public class EventoDAO {
-    
-    private String url;
-    private String user;
-    private String password;
-
-    public EventoDAO(){
-
-        Config config = new Config("config/config.properties");
-        this.url = config.getProperty("db.url");
-        this.user = config.getProperty("db.user");
-        this.password = config.getProperty("db.password");
-
-    }
-
 
     public void salvarEvento(Evento evento) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "INSERT INTO evento (id, nome, local, data, hora, id_materia) VALUES (?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -43,7 +29,7 @@ public class EventoDAO {
 
     public int getNextId() throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT MAX(id) AS max_id FROM evento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -65,7 +51,7 @@ public class EventoDAO {
 
         List<Evento> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT * FROM evento";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -88,7 +74,7 @@ public class EventoDAO {
 
         List<Evento> lista = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "SELECT * FROM evento WHERE data = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -112,7 +98,7 @@ public class EventoDAO {
 
     public boolean removerEvento(int id) throws SQLException{
 
-        try(Connection conn = DriverManager.getConnection(url, user, password)){
+        try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "DELETE FROM evento WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
