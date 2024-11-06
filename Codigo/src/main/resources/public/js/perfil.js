@@ -1,5 +1,5 @@
 const usuarioLogadoPerfil = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-
+fetchAndDisplayImage();
 document.querySelector('#nameEdit').textContent = usuarioLogadoPerfil.nome;
 document.querySelector('#senhaEdit').textContent = usuarioLogadoPerfil.senha;
 
@@ -58,14 +58,20 @@ async function uploadImage() {
     }
 }
 
-async function salvarFoto(userId, photoUrl) {
+async function salvarFoto(userId, fotoUrl) {
     try {   
-        const response = await fetch(`http://localhost:4567/salvarfoto/${userId}`, {
+
+        const fotoUsuario = {
+            id: userId,
+            foto: fotoUrl
+        };
+
+        const response = await fetch(`http://localhost:4567/salvarfoto/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId, photoUrl })
+            body: JSON.stringify(fotoUsuario)
         });
         
         if (!response.ok) {
@@ -79,5 +85,24 @@ async function salvarFoto(userId, photoUrl) {
 
     } catch (error) {
         console.error('Erro ao salvar ou atualizar a foto:', error);
+    }
+}
+
+
+async function fetchAndDisplayImage() {
+    try {
+        const response = await fetch('http://localhost:4567/mostrarfoto/1525533');
+        
+        if (!response.ok) {
+            throw new Error('Erro ao buscar a imagem');
+        }
+
+        const data = await response.json(); // Converte a resposta para JSON
+        const imageUrlBase64 = data.foto; // Acessa a URL em Base64
+        const imageUrl = atob(imageUrlBase64); // Decodifica a URL
+
+        document.getElementById('profileImage').src = imageUrl;
+    } catch (error) {
+        console.error('Erro:', error);
     }
 }
