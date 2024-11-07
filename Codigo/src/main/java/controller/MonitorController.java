@@ -223,6 +223,62 @@ public class MonitorController{
         
         });
 
+        post("/salvarfotomonitor/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+            JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+            String url1 = json.get("foto1").getAsString();
+            String url2 = json.get("foto2").getAsString();
+
+            try{
+                
+                boolean sucesso = monitorService.alterarFoto(id, url1, url2);
+                
+                if(sucesso){
+
+                    res.status(200);
+                    return "Fotos atualizadas com sucesso!";
+
+                }else{
+
+                    res.status(500);
+                    return "Erro ao atualizar as fotos no banco de dados.";
+
+                }
+
+            }catch(Exception e){
+
+                e.printStackTrace();
+                res.status(500);
+                return "Erro ao processar as fotos.";
+
+            }
+
+        });
+
+        get("/mostrarfotomonitor/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            try{
+
+                List<String> lista = monitorService.getFotos(id);
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+                return "{\"message\":\"Erro no servidor ao buscar as fotos.\"}";
+
+            }
+
+        });
+
     }
 
 }

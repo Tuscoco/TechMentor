@@ -1,6 +1,5 @@
 package dao;
 
-import java.io.InputStream;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -206,14 +205,14 @@ public class PessoaDAO {
 
     }
 
-    public boolean alterarFoto(int id, InputStream foto, long tamanhoFoto) throws SQLException{
+    public boolean alterarFoto(int id, String url) throws SQLException{
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
             String sql = "UPDATE pessoa SET foto = ? WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setBinaryStream(1, foto, tamanhoFoto);
+            pstmt.setString(1, url);
             pstmt.setInt(2, id);
 
             pstmt.executeUpdate();
@@ -229,7 +228,7 @@ public class PessoaDAO {
 
     }
 
-    public InputStream getFoto(int id) throws SQLException{
+    public String getFoto(int id) throws SQLException{
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
@@ -242,7 +241,7 @@ public class PessoaDAO {
 
             if(result.next()){
 
-                return result.getBinaryStream("foto");
+                return result.getString("foto");
 
             }
 

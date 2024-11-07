@@ -119,6 +119,18 @@ public class MonitorService{
 
     }
 
+    public boolean alterarFoto(int id, String url1, String url2) throws Exception{
+
+        return monitorDAO.alterarFoto(id, url1, url2);
+
+    }
+
+    public List<String> getFotos(int id) throws Exception{
+
+        return monitorDAO.getFotos(id);
+
+    }
+
 }
     
 

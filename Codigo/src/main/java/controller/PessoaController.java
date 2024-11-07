@@ -7,9 +7,6 @@ import model.Pessoa;
 import model.Monitoria;
 import service.MonitorService;
 import service.PessoaService;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.http.Part;
-import java.io.InputStream;
 import java.util.*;
 
 public class PessoaController {
@@ -245,47 +242,35 @@ public class PessoaController {
 
         });
 
-        post("/salvarfoto", (req, res) -> {
+        post("/salvarfoto/:id", (req, res) -> {
 
             res.type("application/json");
 
-            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+            int id = Integer.parseInt(req.params(":id"));
+            JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+            String url = json.get("foto").getAsString();
 
-            int id = Integer.parseInt(req.queryParams("id"));
-            Part filePart = req.raw().getPart("foto");
+            try{
+                
+                boolean sucesso = pessoaService.alterarFoto(id, url);
+                
+                if(sucesso){
 
-            if(filePart != null){
+                    res.status(200);
+                    return "Foto atualizada com sucesso!";
 
-                try(InputStream inputStream = filePart.getInputStream()){
+                }else{
 
-                    long tamanhoFoto = filePart.getSize();
-                    
-                    boolean sucesso = pessoaService.alterarFoto(id, inputStream, tamanhoFoto);
-                    
-                    if(sucesso){
-
-                        res.status(200);
-                        return "Foto atualizada com sucesso!";
-
-                    }else{
-
-                        res.status(500);
-                        return "Erro ao atualizar a foto no banco de dados.";
-
-                    }
-
-                }catch(Exception e){
-
-                    e.printStackTrace();
                     res.status(500);
-                    return "Erro ao processar a foto.";
+                    return "Erro ao atualizar a foto no banco de dados.";
 
                 }
 
-            }else{
+            }catch(Exception e){
 
-                res.status(400);
-                return "Nenhuma foto foi enviada.";
+                e.printStackTrace();
+                res.status(500);
+                return "Erro ao processar a foto.";
 
             }
 
@@ -330,23 +315,17 @@ public class PessoaController {
             res.type("application/json");
 
             int id = Integer.parseInt(req.params(":id"));
-            InputStream fotoStream = pessoaService.getFoto(id);
+            String fotoStream = pessoaService.getFoto(id);
 
             if(fotoStream != null){
 
-                byte[] fotoBytes = fotoStream.readAllBytes();
-
-                String fotoB64 = Base64.getEncoder().encodeToString(fotoBytes);
-
-                String jsonRes = "{\"foto\":\"" + fotoB64 + "\"}";
-
                 res.status(200);
-                return jsonRes;
+                return gson.toJson(fotoStream);
 
             }else{
 
                 res.status(404);
-                return "{\"erro\": \"Foto não encontrada.\"}";
+                return gson.toJson("Foto não encontrada");
 
             }
 

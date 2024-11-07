@@ -211,5 +211,55 @@ public class MonitorDAO{
 
     }
 
+    public boolean alterarFoto(int id, String url1, String url2) throws SQLException{
+
+        try(Connection conn = DataBaseConnection.getConnection()){
+
+            String sql = "UPDATE monitoria SET foto1 = ?, foto2 = ? WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, url1);
+            pstmt.setString(2, url2);
+            pstmt.setInt(3, id);
+
+            pstmt.executeUpdate();
+
+            return true;
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
+    }
+
+    public List<String> getFotos(int id) throws SQLException{
+
+        List<String> lista = new ArrayList<>();
+
+        try(Connection conn = DataBaseConnection.getConnection()){
+
+            String sql = "SELECT foto1, foto2 FROM monitoria WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                lista.add(result.getString("foto1"));
+                lista.add(result.getString("foto2"));
+
+            }
+
+        }
+
+        return lista;
+
+    }
+
 }
 
