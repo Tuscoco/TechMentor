@@ -18,7 +18,7 @@ public class App
         MateriaService materiaService = new MateriaService();
         AtendimentoService atendimentoService = new AtendimentoService();
         MonitorService monitorService = new MonitorService();
-        Carga_horariaService carga_horariaService = new Carga_horariaService();
+        PontoService pontoService = new PontoService();
         EventoService eventoService = new EventoService();
         RepositorioService repositorioService = new RepositorioService();
 
@@ -27,7 +27,7 @@ public class App
         MateriaController materia = new MateriaController(materiaService);
         AtendimentoController atendimento = new AtendimentoController(atendimentoService);
         MonitorController monitor = new MonitorController(monitorService);
-        CargaHorariaController carga_horaria = new CargaHorariaController(carga_horariaService);
+        PontoController ponto = new PontoController(pontoService);
         EventoController evento = new EventoController(eventoService);
         RepositorioController repositorio = new RepositorioController(repositorioService);
 
@@ -41,7 +41,7 @@ public class App
         materia.setup();
         atendimento.setup();
         monitor.setup();
-        carga_horaria.setup();
+        ponto.setup();
         evento.setup();
         repositorio.setup();
 

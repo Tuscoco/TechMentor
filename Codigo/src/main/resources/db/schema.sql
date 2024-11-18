@@ -65,13 +65,10 @@ CREATE TABLE atendimento (
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia)
 );
 
--- CRIAR TABELA CARGA_HORARIA
-CREATE TABLE carga_horaria (
+-- CRIAR TABELA PONTO
+CREATE TABLE ponto (
     id_monitor INTEGER NOT NULL, 
-    id_materia INTEGER, 
-    dia_semana VARCHAR(20) NOT NULL, 
-    horario_entrada TIME, 
-    horario_saida TIME, 
-    PRIMARY KEY(id_monitor, id_materia, dia_semana), 
+    data VARCHAR(20), 
+    PRIMARY KEY(id_monitor), 
     FOREIGN KEY(id_monitor) REFERENCES monitoria(id_monitor)
 );
