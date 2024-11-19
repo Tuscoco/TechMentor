@@ -1,5 +1,4 @@
 const usuarioLogadoPerfil = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-fetchAndDisplayImage();
 document.querySelector('#nameEdit').textContent = usuarioLogadoPerfil.nome;
 document.querySelector('#senhaEdit').textContent = usuarioLogadoPerfil.senha;
 
@@ -82,25 +81,5 @@ async function salvarFoto(id, urlFoto) {
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
-    }
-}
-
-
-async function fetchAndDisplayImage() {
-    try {
-
-        const id = usuarioLogadoPerfil.id;
-        const response = await fetch(`http://localhost:4567/mostrarfoto/${id}`);
-        
-        if (!response.ok) {
-            throw new Error('Erro ao buscar a imagem');
-        }
-
-        const foto = await response.json(); // Converte a resposta para JSON
-        const imageUrl = foto;
-
-        document.getElementById('profileImage').src = imageUrl;
-    } catch (error) {
-        console.error('Erro:', error);
     }
 }

@@ -40,7 +40,10 @@ main{
     flex-direction: column;
 }
 #img img{
-    width: 50%;
+    width: 255px;
+    height: 255px;
+    object-fit: cover;
+    object-position: center;
     outline: 2px solid #7F32A6;
     border-radius: 10px;
     margin-bottom: 20px;

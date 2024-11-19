@@ -25,6 +25,7 @@ async function mostrarMonitoresOnline() {
             const materia = await fetchMateria(monitor.id_materia); // Certifique-se de que id_materia existe
             const email = await mostrarEmail(monitor.id_monitor);
             const nome = await mostrarNome(monitor.id_monitor);
+            const foto = await mostrarFoto(monitor.id_monitor);
 
             // Cria um botão para cada monitor
             const button = document.createElement('button');
@@ -33,7 +34,7 @@ async function mostrarMonitoresOnline() {
             // Estrutura do conteúdo do botão (fechado e aberto)
             button.innerHTML = `
                 <div class="bar-close">
-                    <img src="../assets/img/3535250.png" alt="">
+                    <img src="${foto}" alt="foto">
                     <p class="nome">${nome}</p>
                     <div>
                     <p class="materia">${materia}</p>
@@ -41,7 +42,7 @@ async function mostrarMonitoresOnline() {
                     <p class="horario">13:00 - 16:00</p>
                 </div>
                 <div class="bar-open">
-                    <img src="../assets/img/3535250.png" alt="">
+                    <img src="${foto}" alt="foto">
                     <div class="dados">
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
@@ -98,6 +99,8 @@ async function mostrarMonitoresOffline() {
             const materia = await fetchMateria(monitor.id_materia); // Certifique-se de que id_materia existe
             const email = await mostrarEmail(monitor.id_monitor);
             const nome = await mostrarNome(monitor.id_monitor);
+            const foto = await mostrarFoto(monitor.id_monitor);
+            
             // Cria um botão para cada monitor
             const button = document.createElement('button');
             button.classList.add('menu-hamburger');
@@ -105,7 +108,7 @@ async function mostrarMonitoresOffline() {
             // Estrutura do conteúdo do botão (fechado e aberto)
             button.innerHTML = `
                 <div class="bar-close">
-                    <img src="../assets/img/3535250.png" alt="">
+                    <img src="${foto}" alt="foto">
                     <p class="nome">${nome}</p>
                     <div>
                     <p class="materia">${materia}</p>
@@ -113,7 +116,7 @@ async function mostrarMonitoresOffline() {
                     <p class="horario">13:00 - 16:00</p>
                 </div>
                 <div class="bar-open">
-                    <img src="../assets/img/3535250.png" alt="">
+                    <img src="${foto}" alt="foto">
                     <div class="dados">
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
@@ -204,6 +207,29 @@ async function mostrarNome(id_monitor) {
     } catch (error) {
         console.error('Erro ao buscar o monitor:', error);
         return 'Monitor não encontrado'; // Valor padrão em caso de erro
+    }
+}
+
+async function mostrarFoto(id_monitor) {
+    try {
+
+        // Faz o fetch para obter a URL da imagem
+        const response = await fetch(`http://localhost:4567/mostrarfoto/${id_monitor}`);
+        
+        if (!response.ok) {
+            throw new Error('Erro ao buscar a imagem');
+        }
+
+        // Converte a resposta para JSON
+        const foto = await response.json(); 
+
+        if (foto) {
+            return foto;
+        } else {
+            console.error('Elementos com a classe "profileImage" não encontrados.');
+        }
+    } catch (error) {
+        console.error('Erro ao carregar a imagem de perfil:', error);
     }
 }
 
