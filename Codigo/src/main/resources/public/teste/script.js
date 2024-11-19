@@ -48,17 +48,17 @@ async function start() {
       return;
     }
 
-    // Capture Image
+    // Tira foto
     const image = await captureImage(video);
 
-    // Detect Faces
+    // Detecta se tem caras
     const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
 
-    // Check for Faces
+   
     const faceFound = detections.length > 0;
     status.textContent = faceFound ? "Face(s) detected" : "No faces detected";
 
-    // Match Faces
+    // Detecta se o zé ta la
     const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor));
     const isFaceMatched = results.some(result => result.label !== "unknown");
 

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/RepositorioService.java
 /home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/AtendimentoService.java
 /home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/RepositorioDAO.java
@@ -30,36 +29,3 @@
 /home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/EventoController.java
 /home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/EventoService.java
 /home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/MateriaService.java
-=======
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/RepositorioDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/PontoController.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/MonitorDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/MateriaService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/AtendimentoController.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Materia.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/RepositorioController.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Ponto.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/PontoService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/config/DataBaseConnection.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/MonitorController.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/EventoService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/PessoaDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/PessoaController.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/MateriaController.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/config/Config.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/PessoaService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/RepositorioService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/app/App.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Evento.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/MateriaDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/MonitorService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/service/AtendimentoService.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Pessoa.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Atendimento.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/PontoDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Repositorio.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/EventoDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/dao/AtendimentoDAO.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/model/Monitoria.java
-/home/cavalo/facul/repositorios/plmg-cc-ti2-2024-2-g20-techmentor/Codigo/src/main/java/controller/EventoController.java
->>>>>>> refs/remotes/origin/master
