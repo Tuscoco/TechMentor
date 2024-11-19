@@ -45,6 +45,8 @@ CREATE TABLE monitoria (
     sala INTEGER,
     foto1 TEXT,
     foto2 TEXT,
+    entrada varchar(20),
+    saida varchar(20),
     PRIMARY KEY(id_monitor), 
     FOREIGN KEY(id_monitor) REFERENCES pessoa(id) ON DELETE CASCADE, 
     FOREIGN KEY(id_materia) REFERENCES materia(id_materia) ON DELETE CASCADE
