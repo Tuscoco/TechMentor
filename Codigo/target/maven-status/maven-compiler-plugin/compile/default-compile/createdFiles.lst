@@ -1,6 +1,7 @@
 dao/RepositorioDAO.class
 service/MateriaService.class
 dao/MateriaDAO.class
+service/PontoService.class
 model/Atendimento.class
 dao/PessoaDAO.class
 service/MonitorService.class
@@ -9,10 +10,10 @@ model/Monitoria.class
 service/PessoaService.class
 model/Materia.class
 controller/RepositorioController.class
+dao/PontoDAO.class
 model/Evento.class
 controller/MonitorController.class
 config/Config.class
-dao/CargaHorariaDAO.class
 model/Repositorio.class
 controller/EventoController.class
 dao/EventoDAO.class
@@ -20,12 +21,11 @@ controller/PessoaController.class
 config/DataBaseConnection.class
 model/Pessoa.class
 service/AtendimentoService.class
-service/Carga_horariaService.class
 dao/AtendimentoDAO.class
+model/Ponto.class
+controller/PontoController.class
 service/RepositorioService.class
 dao/MonitorDAO.class
-model/CargaHoraria.class
 controller/MateriaController.class
-controller/CargaHorariaController.class
 app/App.class
 controller/AtendimentoController.class
