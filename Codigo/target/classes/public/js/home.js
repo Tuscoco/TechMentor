@@ -3,7 +3,6 @@ const salaInput = document.getElementById('sala');
 const mudarSwitch = document.getElementById('switch');
 const sendButton = document.getElementById('sendBtn');
 const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-
 const tipoVer = usuarioLogadoHome.tipo;
 toggleDisplay(tipoVer);
 

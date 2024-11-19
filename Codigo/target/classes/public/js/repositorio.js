@@ -110,6 +110,7 @@ function carregarRepositorios() {
 
             const repoLink = document.createElement('a');
             repoLink.href = repo.link;
+            repoLink.target = '_blank';
             repoLink.innerHTML = `<div class="nome">${repo.nome}</div>`;
             newRepo.appendChild(repoLink);
 
