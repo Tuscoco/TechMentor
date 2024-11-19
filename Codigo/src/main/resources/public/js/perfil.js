@@ -58,48 +58,45 @@ async function uploadImage() {
     }
 }
 
-async function salvarFoto(userId, fotoUrl) {
-    try {   
+async function salvarFoto(id, urlFoto) {
+    const data = {
+        foto: urlFoto
+    };
 
-        const fotoUsuario = {
-            id: userId,
-            foto: fotoUrl
-        };
-
-        const response = await fetch(`http://localhost:4567/salvarfoto/`, {
+    try {
+        const response = await fetch(`http://localhost:4567/salvarfoto/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(fotoUsuario)
+            body: JSON.stringify(data)
         });
-        
-        if (!response.ok) {
-            // Exibe uma mensagem de erro se o status da resposta não for "ok"
-            console.error('Erro na resposta do servidor:', response.status, response.statusText);
-            return;
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Foto salva com sucesso:', result);
+            return result;
+        } else {
+            console.error('Erro ao salvar foto:', response.status, response.statusText);
         }
-
-        const data = await response.json();
-        console.log('Foto salva com sucesso:', data.message);
-
     } catch (error) {
-        console.error('Erro ao salvar ou atualizar a foto:', error);
+        console.error('Erro na requisição:', error);
     }
 }
 
 
 async function fetchAndDisplayImage() {
     try {
-        const response = await fetch('http://localhost:4567/mostrarfoto/1525533');
+
+        const id = usuarioLogadoPerfil.id;
+        const response = await fetch(`http://localhost:4567/mostrarfoto/${id}`);
         
         if (!response.ok) {
             throw new Error('Erro ao buscar a imagem');
         }
 
-        const data = await response.json(); // Converte a resposta para JSON
-        const imageUrlBase64 = data.foto; // Acessa a URL em Base64
-        const imageUrl = atob(imageUrlBase64); // Decodifica a URL
+        const foto = await response.json(); // Converte a resposta para JSON
+        const imageUrl = foto;
 
         document.getElementById('profileImage').src = imageUrl;
     } catch (error) {
