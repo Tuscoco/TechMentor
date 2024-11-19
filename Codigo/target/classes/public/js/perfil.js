@@ -16,6 +16,7 @@ document.getElementById('uploadButton').addEventListener('click', async function
     const imgUrl = await uploadImage();
     console.log(imgUrl);
     salvarFoto(usuarioLogadoPerfil.id, imgUrl); 
+    location.reload();
 });
 
 async function uploadImage() {
