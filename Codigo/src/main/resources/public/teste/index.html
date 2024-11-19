@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script defer src="face-api.min.js"></script>
+  <script defer src="script.js"></script>
+  <title>Face Recognition with Camera Toggle</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    #video {
+      width: 720px;
+      height: 560px;
+      border: 2px solid black;
+      border-radius: 10px;
+      background: #000;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+    }
+    #toggleCameraButton {
+      background-color: #007BFF;
+      color: white;
+    }
+    #toggleCameraButton:hover {
+      background-color: #0056b3;
+    }
+    #captureButton {
+      background-color: #28a745;
+      color: white;
+    }
+    #captureButton:hover {
+      background-color: #218838;
+    }
+    p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Face Recognition with Camera Toggle</h1>
+  <video id="video" autoplay muted></video>
+  <div>
+    <button id="toggleCameraButton">Turn Camera On</button>
+    <button id="captureButton">Capture Photo</button>
+  </div>
+  <p id="status"></p>
+  <p id="labelDetected"></p>
+</body>
+</html>

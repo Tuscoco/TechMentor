@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="app.AppTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="app.AppTest" time="0.009" errors="0" skipped="0">
   <properties>
+    <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="java.vm.version" value="21.0.5+11-Ubuntu-1ubuntu122.04"/>
+    <property name="java.vm.version" value="21.0.5+11-Ubuntu-1ubuntu124.04"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-amd64/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/tusca/Facul/TechMentor/plmg-cc-ti2-2024-2-g20-techmentor/Codigo"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo"/>
     <property name="java.vm.vendor" value="Ubuntu"/>
     <property name="java.vendor.url" value="https://ubuntu.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,9 +14,9 @@
     <property name="user.country" value="BR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/tusca/Facul/TechMentor/plmg-cc-ti2-2024-2-g20-techmentor/Codigo"/>
-    <property name="java.vm.compressedOopsMode" value="32-bit"/>
-    <property name="java.runtime.version" value="21.0.5+11-Ubuntu-1ubuntu122.04"/>
+    <property name="user.dir" value="/home/fasciani/Estudo/plmg-cc-ti2-2024-2-g20-techmentor/Codigo"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="21.0.5+11-Ubuntu-1ubuntu124.04"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
@@ -32,13 +33,13 @@
     <property name="java.class.version" value="65.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="6.9.3-76060903-generic"/>
+    <property name="os.version" value="6.8.0-48-generic"/>
     <property name="library.jansi.path" value="/usr/share/maven/lib/jansi-native"/>
-    <property name="user.home" value="/home/tusca"/>
+    <property name="user.home" value="/home/fasciani"/>
     <property name="user.timezone" value="America/Sao_Paulo"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="21"/>
-    <property name="user.name" value="tusca"/>
+    <property name="user.name" value="fasciani"/>
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="21"/>
     <property name="sun.arch.data.model" value="64"/>
@@ -57,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="app.AppTest" name="shouldAnswerWithTrue" time="0.003"/>
+  <testcase classname="app.AppTest" name="shouldAnswerWithTrue" time="0.009"/>
 </testsuite>
