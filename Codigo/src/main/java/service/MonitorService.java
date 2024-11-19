@@ -54,11 +54,11 @@ public class MonitorService{
 
     }
 
-        public boolean ficarOnline(int id_monitor) throws SQLException{
+    public boolean setHorarios(int id, String entrada, String saida) throws Exception{
 
         try{
 
-            monitorDAO.ficarOnline(id_monitor);
+            monitorDAO.setHorarios(id, entrada, saida);
             return true;
 
         }catch(Exception e){
@@ -67,6 +67,22 @@ public class MonitorService{
             return false;
 
         }
+
+    }
+
+    public boolean ficarOnline(int id_monitor, String horario) throws SQLException{
+
+        try{
+
+            return monitorDAO.ficarOnline(id_monitor, horario);
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+
     }
 
     public boolean ficarOffline(int id_monitor) throws SQLException{

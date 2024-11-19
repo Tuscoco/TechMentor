@@ -1,15 +1,16 @@
 package controller;
 
-
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import model.Monitoria;
 import service.MonitorService;
 import static spark.Spark.*;
-
+import model.Ponto;
+import service.PontoService;
 
 
 public class MonitorController{
@@ -143,16 +144,73 @@ public class MonitorController{
 
         });
 
+        post("/sethorarios/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            try{
+
+                JsonObject json = gson.fromJson(req.body(), JsonObject.class);
+                int id = Integer.parseInt(req.params(":id"));
+                String entrada = json.get("entrada").getAsString();
+                String saida = json.get("saida").getAsString();
+
+                boolean success = monitorService.setHorarios(id, entrada, saida);
+
+                if(success){
+
+                    return gson.toJson("Horários atualizados com sucesso!");
+
+                }else{
+
+                    return gson.toJson("Não foi possível alterar os horários!");
+
+                }
+
+            }catch(Exception e){
+
+                res.status(500);
+
+                return gson.toJson("Erro interno ao processar a requisição!");
+
+            }
+
+        });
+
         post("/ficaronline/:id", (req, res) -> {
 
             try{
 
                 int idMonitor = Integer.parseInt(req.params(":id"));
-                boolean success = monitorService.ficarOnline(idMonitor);
+                LocalTime horario = LocalTime.now();
+                String horarioString = horario.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+                boolean success = monitorService.ficarOnline(idMonitor, horarioString);
 
                 if(success){
 
-                    return gson.toJson("Monitor está online!");
+                    LocalDate hoje = LocalDate.now();
+                    DateTimeFormatter formatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+                    String data = hoje.format(formatada);
+
+                    Ponto ponto = new Ponto(Integer.parseInt(req.params(":id")), data);
+
+                    PontoService pontoService = new PontoService();
+
+                    boolean successPonto = pontoService.baterPonto(ponto);
+
+                    if(successPonto){
+
+                        return gson.toJson("Monitor Online e ponto batido com sucesso!");
+
+                    }else{
+
+                        res.status(500);
+
+                        return gson.toJson("Erro ao bater ponto!");
+
+                    }
 
                 }else{
 
@@ -162,7 +220,7 @@ public class MonitorController{
 
             }catch(Exception e){
 
-                return gson.toJson("Erro interno ao processar a requisição.");
+                return gson.toJson("Erro interno ao processar a requisição!");
 
             }
 

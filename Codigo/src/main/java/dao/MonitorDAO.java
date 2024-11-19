@@ -90,16 +90,36 @@ public class MonitorDAO{
 
     }
 
-    public void ficarOnline(int id) throws SQLException{
+    public void setHorarios(int id, String entrada, String saida) throws SQLException{
+
+        try(Connection conn = DataBaseConnection.getConnection()){
+
+            String sql = "UPDATE monitoria SET entrada = ?, saida = ? WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, entrada);
+            pstmt.setString(2, saida);
+            pstmt.setInt(3, id);
+
+            pstmt.executeUpdate();
+
+        }
+
+    }
+
+    public boolean ficarOnline(int id, String horario) throws SQLException{
     
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "UPDATE monitoria SET online = true, sala = 1101 WHERE id_monitor = ?";
+            String sql = "UPDATE monitoria SET online = true, sala = 1101 WHERE id_monitor = ? AND CAST(? AS TIME) BETWEEN CAST(entrada AS TIME) AND CAST(saida AS TIME)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, id);
+            pstmt.setString(2, horario);
 
-            pstmt.executeUpdate();
+            int alterado = pstmt.executeUpdate();
+
+            return alterado > 0;
 
         }
 
@@ -109,7 +129,7 @@ public class MonitorDAO{
     
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "UPDATE monitoria SET online = false WHERE id_monitor = ?";
+            String sql = "UPDATE monitoria SET online = false, sala = NULL WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, id);
