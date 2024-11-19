@@ -134,3 +134,72 @@ article:hover {
 #sendBtn:hover{
     background-color: #53216c;
 }
+
+#verFoto {
+    height: 100%;
+    width: 75%;
+    display: none; /* Oculta inicialmente */
+    position: fixed; /* Faz com que fique sobreposta */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Garante que fique acima de outros elementos */
+    background: rgba(0, 0, 0, 0.8); /* Fundo escuro para destacar */
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    justify-content: center;
+}
+
+#video {
+    margin: 0 auto 5%;
+    width: 30%;
+    height:70% !important;
+    height: auto;
+    background: #000;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: none;
+    outline: 10px solid #7F32A6;
+}
+
+#captureButton{
+    background-color: #7F32A6;
+    margin: 0 auto;
+    color: #fff;
+    width: min-content;
+    padding: 0 10px;
+    font-size: 50%;
+    border-radius: 10px;
+    transition: .1s;
+}
+
+#loadingButton{
+    background-color: #53216c;
+    margin: 0 auto;
+    color: #fff;
+    width: min-content;
+    padding: 0 10px;
+    font-size: 50%;
+    border-radius: 10px;
+    transition: .1s;
+}
+
+#captureButton{
+    display: none;
+    background-color: #7F32A6;
+    margin: 0 auto;
+    color: #fff;
+    width: min-content;
+    padding: 0 10px;
+    font-size: 50%;
+    border-radius: 10px;
+    transition: .1s;
+}
+
+#captureButton:hover{
+    scale: 1.1;
+}
+
