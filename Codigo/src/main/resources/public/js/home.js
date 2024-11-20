@@ -11,11 +11,7 @@ const loadingButton = document.getElementById('loadingButton');
 
 let cameraStream = null;
 
-
-
 toggleDisplay(tipoVer);
-
-
 
 // Alterna a classe 'active' ao clicar no botão
 button.addEventListener('click', function(event) {
@@ -42,42 +38,69 @@ verFotoElement.addEventListener('click', function(event) {
 
 async function start() {
 
-    captureButton.style.display = 'block';
-    loadingButton.style.display = 'none';
-
     const labeledFaceDescriptors = await loadLabeledImages();
     const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
     // document.body.append('Loaded');
 
+    captureButton.style.display = 'block';
+    loadingButton.style.display = 'none';
+
     captureButton.addEventListener('click', async () => {
-    if (!cameraStream) {
-        alert('Please turn on the camera first!');
-        return;
-    }
+        if (!cameraStream) {
+            alert('Por favor ligue sua camera primeiro!');
+            return;
+        }
 
-    // Tira foto
-    const image = await captureImage(video);
+        // Tira foto
+        const image = await captureImage(video);
 
-    // Detecta se tem caras
-    const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
+        // Detecta se tem caras
+        const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceDescriptors();
 
 
-    const faceFound = detections.length > 0;
-    status.textContent = faceFound ? "Face(s) detected" : "No faces detected";
+        const faceFound = detections.length > 0;
+        status.textContent = faceFound ? "Face(s) detected" : "No faces detected";
 
-    // Detecta se o zé ta la
-    const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor));
-    const isFaceMatched = results.some(result => result.label !== "unknown");
+        // Detecta se o zé ta la
+        const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor));
+        const isFaceMatched = results.some(result => result.label !== "unknown");
 
-    // if (results.length > 0) {
-    //   labelDetected.textContent = "Detected: " + results.map(result => result.toString()).join(', ');
-    //   console.log("Match found:", isFaceMatched);
-    // } else {
-    //   labelDetected.textContent = "No known faces detected";
-    // }
+        // if (results.length > 0) {
+        //   labelDetected.textContent = "Detected: " + results.map(result => result.toString()).join(', ');
+        //   console.log("Match found:", isFaceMatched);
+        // } else {
+        //   labelDetected.textContent = "No known faces detected";
+        // }
 
-    console.log("Face matched with known label:", isFaceMatched);
+        console.log("Face matched with known label:", isFaceMatched);
+        if(isFaceMatched){
+            matchEnd();
+        }
+        else{
+            unmatchEnd();
+            
+        }
+
     });
+}
+
+function matchEnd(){
+    console.log("verificado");
+
+    captureButton.style.backgroundColor = "green";
+    setTimeout(() => {
+        cameraStream.getTracks().forEach(track => track.stop());
+        video.srcObject = null;
+        cameraStream = null;
+        verFotoElement.style.display = 'none';
+    }, 1000);
+    funcaoLigada(usuarioLogadoHome.id)
+}
+
+function unmatchEnd(){
+    console.log("n verificado");
+    captureButton.style.backgroundColor = "red";
+    
 }
 
 function captureImage(videoElement) {
@@ -97,8 +120,8 @@ function captureImage(videoElement) {
 }
 
 async function loadLabeledImages() {
-    const monitorId = 1527678; // Hardcoded ID for Felipe Portes
-    const label = 'Felipe Portes'; // Label for the monitor
+    const monitorId = usuarioLogadoHome.id; // Hardcoded ID for Felipe Portes
+    const label = usuarioLogadoHome.nome; // Label for the monitor
     const descriptions = [];
   
     // Fetch the photos for Felipe Portes by their ID
@@ -167,34 +190,44 @@ document.addEventListener("DOMContentLoaded", async () => {
     switchElement.checked = (status === 1);
 });
 
-
 // Evento do switch para alternar entre online e offline
 mudarSwitch.addEventListener('change', async () => {
     
-    
     if (mudarSwitch.checked) {
-        
         
         verFotoElement.style.display = 'flex';
         cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = cameraStream;
-        video.play();
-        // funcaoLigada(usuarioLogadoHome.id);
+        
+        const verProm = await doPromise();
+        
+        if(verProm){
+            start();
+        }
         
     } else {
-        
+
+        captureButton.style.backgroundColor = "#7F32A6";
         verFotoElement.style.display = 'none';
-        // funcaoDesligada(usuarioLogadoHome.id);
+        funcaoDesligada(usuarioLogadoHome.id);
     }
 })
 
-Promise.all([
-    faceapi.nets.faceRecognitionNet.loadFromUri('../models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('../models'),
-    faceapi.nets.ssdMobilenetv1.loadFromUri('../models')
-  ]).then(start);
+async function doPromise() {
+    try {
+        await Promise.all([
+            faceapi.nets.faceRecognitionNet.loadFromUri('../models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('../models'),
+            faceapi.nets.ssdMobilenetv1.loadFromUri('../models')
+        ]);
 
+        return true;  // Retorno após o carregamento bem-sucedido dos modelos
+    } catch (error) {
+        return false;  // Retorno em caso de erro
+    }
+}
 
+    
 // Função para verificar o status do monitor
 async function verificarStatusMonitor(id) {
     try {
@@ -224,7 +257,6 @@ async function verificarStatusMonitor(id) {
 
 // Função para quando o switch é ligado
 function funcaoLigada(id) {
-    
     
     fetch(`http://localhost:4567/ficaronline/${id}`, {
         method: "POST",

@@ -1,10 +1,10 @@
-service/MateriaService.class
 dao/RepositorioDAO.class
+service/MateriaService.class
 dao/MateriaDAO.class
 service/PontoService.class
 model/Atendimento.class
-service/MonitorService.class
 dao/PessoaDAO.class
+service/MonitorService.class
 service/EventoService.class
 model/Monitoria.class
 service/PessoaService.class
@@ -22,8 +22,8 @@ config/DataBaseConnection.class
 model/Pessoa.class
 service/AtendimentoService.class
 dao/AtendimentoDAO.class
-controller/PontoController.class
 model/Ponto.class
+controller/PontoController.class
 service/RepositorioService.class
 dao/MonitorDAO.class
 controller/MateriaController.class
