@@ -33,7 +33,7 @@ public class App
         RepositorioController repositorio = new RepositorioController(repositorioService);
 
         get("/", (req, res) -> {
-            res.redirect("/html/logCad.html");
+            res.redirect("html/logCad.html");
             return null;
         });        
 
