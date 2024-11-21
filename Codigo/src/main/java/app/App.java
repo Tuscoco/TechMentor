@@ -12,7 +12,8 @@ public class App
 
         port(4567);
 
-        staticFiles.externalLocation("src/main/resources/public");
+        //staticFiles.externalLocation("src/main/resources/public");
+        staticFiles.externalLocation("target/classes/public");
 
         PessoaService pessoaService = new PessoaService();
         MateriaService materiaService = new MateriaService();
@@ -32,7 +33,7 @@ public class App
         RepositorioController repositorio = new RepositorioController(repositorioService);
 
         get("/", (req, res) -> {
-            res.redirect("html/logCad.html");
+            res.redirect("/html/logCad.html");
             return null;
         });        
 
