@@ -15,11 +15,13 @@ public class PontoDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "INSERT INTO ponto (id_monitor, data) VALUES (?,?)";
+            String sql = "INSERT INTO ponto (id_monitor, data) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM ponto WHERE id_monitor = ? AND data = ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, ponto.getIdMonitor());
             pstmt.setString(2, ponto.getData());
+            pstmt.setInt(3, ponto.getIdMonitor());
+            pstmt.setString(4, ponto.getData());
 
             pstmt.executeUpdate();
 
