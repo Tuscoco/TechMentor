@@ -32,7 +32,6 @@ sendButton.addEventListener('click', function() {
     mudarSala(salaInput); // Passa o valor para a função mudarSala
 });
 
-
 // Impede o fechamento ao interagir com o switch
 mudarSwitch.addEventListener('click', function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique
@@ -317,7 +316,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if(status == 1){
         switchElement.checked = true;
         enviarSala.style.display = 'flex';
-
+    }
+    else{
+        enviarSala.style.display = 'none';
     }
 
 });
