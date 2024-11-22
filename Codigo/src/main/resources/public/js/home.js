@@ -129,16 +129,16 @@ async function loadLabeledImages() {
     const imageUrls = await fetchPhotoMonitorData(monitorId);
     console.log(imageUrls);
   
-    for (const url of imageUrls) {
+    for (const imageUrl of imageUrls) {
         try {
-            const img = await faceapi.fetchImage(url);
+            const img = await faceapi.fetchImage(imageUrl);
             const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
   
             if (detections) {
                 descriptions.push(detections.descriptor);
             }
         } catch (error) {
-            console.error(`Error processing image from URL: ${url}`, error);
+            console.error(`Error processing image from URL: ${imageUrl}`, error);
         }
     }
   
@@ -306,11 +306,10 @@ function funcaoDesligada(id) {
 }
 
 async function mudarSala(id, sala) {
-    const url = `${url}/mudarsala/${id}`;
     const dados = { sala: sala };
     
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`${url}/mudarsala/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -330,10 +329,9 @@ async function mudarSala(id, sala) {
 }
 
 // async function mostrarSala(idAluno) {
-//     const url = `${url}/mostrarsala/${idAluno}`;
     
 //     try {
-//         const response = await fetch(url, {
+//         const response = await fetch(`${url}/mostrarsala/${idAluno}`, {
 //             method: "GET"
 //         });
         

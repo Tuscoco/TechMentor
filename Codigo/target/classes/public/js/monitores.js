@@ -325,11 +325,10 @@ async function fetchMateria(id_materia) {
 }       
 
 async function buscarMateria(id_monitor) {
-    const url = `${url}/buscarmateriamonitor/${id_monitor}`;
 
     try {
         // Fazendo a requisição GET
-        const response = await fetch(url);
+        const response = await fetch(`${url}/buscarmateriamonitor/${id_monitor}`);
         
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
