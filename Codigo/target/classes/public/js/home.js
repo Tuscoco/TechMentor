@@ -9,6 +9,7 @@ const verFotoElement = document.getElementById('verFoto');
 const video = document.getElementById('video');
 const captureButton = document.getElementById('captureButton');
 const loadingButton = document.getElementById('loadingButton');
+const tirarFoto = document.getElementById('tirarFoto');
 
 let cameraStream = null;
 
@@ -33,9 +34,6 @@ mudarSwitch.addEventListener('click', function(event) {
 verFotoElement.addEventListener('click', function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique
 });
-
-
-
 
 async function start() {
 
@@ -101,7 +99,129 @@ function matchEnd(){
 function unmatchEnd(){
     console.log("n verificado");
     captureButton.style.backgroundColor = "red";
+}
+
+async function uploadImage(foto) {
+
+    if (!foto) {
+        alert('Por favor, selecione uma imagem primeiro.');
+        return;
+    }
+
+    // Configurações de upload
+    const cloudName = 'deycrrjpb'; // Substitua pelo seu Cloud name
+    const uploadPreset = 'verificationImg'; // Defina um Upload Preset no Cloudinary
+    const folderNameVer = 'verificationImg'; // Substitua pelo nome da pasta desejada
+
+    const urlCloud = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+    const formData = new FormData();
+    formData.append('file', foto);
+    formData.append('upload_preset', uploadPreset);
+    formData.append('folder', folderNameVer); // Define a pasta para armazenar as imagens
+
+    try {
+        // Fazendo o upload da imagem para o Cloudinary
+        const response = await fetch(urlCloud, {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+
+        if (data.secure_url) {
+            // Exibindo a URL e a imagem carregada
+            return data.secure_url;
+            
+            
+        } else {
+            console.error('Erro ao fazer upload:', data);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+}
+
+async function capturarImagens() {
+    return new Promise((resolve) => {
+        tirarFoto.addEventListener('click', async () => {
+            const image = await captureImage(video);
+            const arquivoFoto1 = await imageToFile(image, 'minha_foto.png');
+            resolve(arquivoFoto1);
+        });
+    });
+}
+
+function imageToFile(image, fileName = 'captured_image.png') {
+    return new Promise((resolve) => {
+        // Cria um elemento canvas
+        const canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        // Desenha a imagem no canvas
+        const context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        // Converte o canvas para um Blob
+        canvas.toBlob((blob) => {
+            // Converte o Blob para um File
+            const file = new File([blob], fileName, { type: 'image/png' });
+            resolve(file);
+        }, 'image/png');
+    });
+}
+
+async function postarFoto(){
+
+    loadingButton.style.display = 'none';
+    tirarFoto.style.display = 'block';
+
+    try {
+        
+        const foto1 = await capturarImagens();
+        console.log('Primeira foto capturada:', foto1);
+
+        loadingButton.style.display = 'block';
+        tirarFoto.style.display = 'none';
+
+        const urlFoto1 = await uploadImage(foto1);
+        console.log('Primeira foto upada:', urlFoto1);
+
+        loadingButton.style.display = 'none';
+        tirarFoto.style.display = 'block';
+
+        const foto2 = await capturarImagens();
+        console.log('Segunda foto capturada:', foto2);
+
+        loadingButton.style.display = 'block';
+        tirarFoto.style.display = 'none';
+
+        const urlFoto2 = await uploadImage(foto2);
+        console.log('Segunda foto upada:', urlFoto2);
+        
+        const data = {
+            foto1: urlFoto1,
+            foto2: urlFoto2
+        };
     
+        const response = await fetch(`${url}/salvarfotomonitor/${usuarioLogadoHome.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Foto salva com sucesso:', result);
+            return result;
+        } else {
+            console.error('Erro ao salvar foto:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
 }
 
 function captureImage(videoElement) {
@@ -126,10 +246,16 @@ async function loadLabeledImages() {
     const descriptions = [];
   
     // Fetch the photos for Felipe Portes by their ID
-    const imageUrls = await fetchPhotoMonitorData(monitorId);
+    let imageUrls = await fetchPhotoMonitorData(monitorId);
     console.log(imageUrls);
+
+    if(imageUrls[0] == null || imageUrls[0] == null){
+        await postarFoto();   
+        imageUrls = await fetchPhotoMonitorData(monitorId);
+        console.log(imageUrls);     
+    }
   
-    for (const imageUrl of imageUrls) {
+    for (let imageUrl of imageUrls) {
         try {
             const img = await faceapi.fetchImage(imageUrl);
             const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
@@ -227,8 +353,7 @@ async function doPromise() {
         return false;  // Retorno em caso de erro
     }
 }
-
-    
+  
 // Função para verificar o status do monitor
 async function verificarStatusMonitor(id) {
     try {

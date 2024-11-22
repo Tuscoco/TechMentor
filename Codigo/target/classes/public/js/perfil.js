@@ -22,7 +22,7 @@ document.getElementById('uploadButton').addEventListener('click', async function
 async function uploadImage() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
-
+    
     if (!file) {
         alert('Por favor, selecione uma imagem primeiro.');
         return;
@@ -30,17 +30,19 @@ async function uploadImage() {
 
     // Configurações de upload
     const cloudName = 'deycrrjpb'; // Substitua pelo seu Cloud name
-    const uploadPreset = 'profile_upload'; // Defina um Upload Preset no Cloudinary
+    const uploadPreset = 'profileImg'; // Defina um Upload Preset no Cloudinary
+    const folderName = 'profileImg'; // Substitua pelo nome da pasta desejada
 
-    const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+    const urlCloudPerf = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', uploadPreset);
+    formData.append('folder', folderName); // Define a pasta para armazenar as imagens
 
     try {
         // Fazendo o upload da imagem para o Cloudinary
-        const response = await fetch(url, {
+        const response = await fetch(urlCloudPerf, {
             method: 'POST',
             body: formData
         });

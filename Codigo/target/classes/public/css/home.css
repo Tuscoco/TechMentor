@@ -165,17 +165,6 @@ article:hover {
     outline: 10px solid #7F32A6;
 }
 
-#captureButton{
-    background-color: #7F32A6;
-    margin: 0 auto;
-    color: #fff;
-    width: min-content;
-    padding: 0 10px;
-    font-size: 50%;
-    border-radius: 10px;
-    transition: .1s;
-}
-
 #loadingButton{
     background-color: #53216c;
     margin: 0 auto;
@@ -187,7 +176,7 @@ article:hover {
     transition: .1s;
 }
 
-#captureButton{
+#captureButton, #tirarFoto{
     display: none;
     background-color: #7F32A6;
     margin: 0 auto;
@@ -199,7 +188,9 @@ article:hover {
     transition: .1s;
 }
 
-#captureButton:hover{
+
+
+#captureButton:hover, #tirarFoto:hover{
     scale: 1.1;
 }
 
