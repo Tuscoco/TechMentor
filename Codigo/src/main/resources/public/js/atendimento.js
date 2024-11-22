@@ -57,7 +57,7 @@ async function salvarAtendimento() {
     console.log('Objeto Atendimento:', atendimento);
 
     try {
-        const response = await fetch('https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/salvaratendimento', {
+        const response = await fetch('http://localhost:4567/salvaratendimento', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

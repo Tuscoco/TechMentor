@@ -29,7 +29,7 @@ async function fetchAndDisplayImage() {
         const id = usuarioLogado.id;
 
         // Faz o fetch para obter a URL da imagem
-        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarfoto/${id}`);
+        const response = await fetch(`http://localhost:4567/mostrarfoto/${id}`);
         
         if (!response.ok) {
             throw new Error('Erro ao buscar a imagem');

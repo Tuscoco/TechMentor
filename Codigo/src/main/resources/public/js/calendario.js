@@ -163,7 +163,7 @@ document.querySelector('#novoEvento button').addEventListener('click', () => {
     };
 
     // Enviar dados para o servidor
-    fetch('https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/salvarevento', {
+    fetch('http://localhost:4567/salvarevento', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ function mostrarEventosPorData() {
     const dataAtual = `${currentYear}-${String(mes + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
 
     // Faz a requisição GET para o servidor
-    fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrareventosdodia/${dataAtual}`)
+    fetch(`http://localhost:4567/mostrareventosdodia/${dataAtual}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -245,7 +245,7 @@ function mostrarEventosPorData() {
 }
 
 function deletarEvento(eventoId) {
-    fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/removerevento/${eventoId}`, {
+    fetch(`http://localhost:4567/removerevento/${eventoId}`, {
         method: 'DELETE'
     })
     .then(response => {
