@@ -26,7 +26,7 @@ async function mostrarMonitoresOnline() {
             const email = await mostrarEmail(monitor.id_monitor);
             const nome = await mostrarNome(monitor.id_monitor);
             const foto = await mostrarFoto(monitor.id_monitor);
-
+            const sala = await mostrarSala(monitor.id_monitor);
             // Cria um botão para cada monitor
             const button = document.createElement('button');
             button.classList.add('menu-hamburger');
@@ -47,7 +47,7 @@ async function mostrarMonitoresOnline() {
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
                         <p class="horario">Horário: 13:00 - 16:00</p>
-                        <p class="local">Local: ${monitor.sala}</p>
+                        <p class="local">Local: ${sala}</p>
                         <p class="contato">Contato: ${email}</p>
                     </div>
                 </div>
@@ -230,6 +230,31 @@ async function mostrarFoto(id_monitor) {
         }
     } catch (error) {
         console.error('Erro ao carregar a imagem de perfil:', error);
+    }
+}
+
+async function mostrarSala(id_monitor) {    
+    try {
+        // Fazendo a requisição GET
+        const response = await fetch(`${url}/mostrarsala/${id_monitor}`, { method: 'GET' });
+        
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+        
+        // Obtendo o texto da resposta
+        const data = await response.json();
+        
+        
+        // Preenchendo o campo de texto com o valor retornado
+        
+        if (data) {
+            return data;
+        } else {
+            console.error("Elemento com ID 'sala' não encontrado.");
+        }
+    } catch (error) {
+        console.error("Erro ao buscar a sala:", error);
     }
 }
 
