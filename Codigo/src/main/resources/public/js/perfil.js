@@ -1,3 +1,4 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor
 const usuarioLogadoPerfil = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 document.querySelector('#nameEdit').textContent = usuarioLogadoPerfil.nome;
 document.querySelector('#senhaEdit').textContent = usuarioLogadoPerfil.senha;
@@ -64,7 +65,7 @@ async function salvarFoto(id, urlFoto) {
     };
 
     try {
-        const response = await fetch(`http://localhost:4567/salvarfoto/${id}`, {
+        const response = await fetch(`${url}/salvarfoto/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

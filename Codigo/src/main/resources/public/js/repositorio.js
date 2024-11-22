@@ -1,3 +1,5 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor
+
 // Adicionar event listener para o botão "Adicionar"
 document.getElementById('adicionar').addEventListener('click', function() {
     // Capturar os valores dos inputs
@@ -21,7 +23,7 @@ document.getElementById('adicionar').addEventListener('click', function() {
     console.log(dados);
 
     // Enviar os dados para o JSON Server
-    fetch('http://localhost:4567/salvarrepositorio', {
+    fetch(`${url}/salvarrepositorio`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -59,7 +61,7 @@ document.getElementById('adicionar').addEventListener('click', function() {
 
 // Função para carregar e exibir os repositórios
 function carregarRepositorios() {
-    fetch('http://localhost:4567/mostrarrepositorio', {
+    fetch(`${url}/mostrarrepositorio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json' 
@@ -89,7 +91,7 @@ function carregarRepositorios() {
             deleteButton.className = 'deleteBtn';
 
             deleteButton.addEventListener('click', function() {
-                fetch(`http://localhost:4567/deletarrepositorio/${repo.id}`, {
+                fetch(`${url}/deletarrepositorio/${repo.id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json' 

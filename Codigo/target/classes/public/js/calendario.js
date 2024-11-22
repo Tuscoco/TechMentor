@@ -1,8 +1,10 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor ${url}
 let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let day;
 let mes;
+
 
 
 // Gerar calendário ao carregar a página
@@ -163,7 +165,7 @@ document.querySelector('#novoEvento button').addEventListener('click', () => {
     };
 
     // Enviar dados para o servidor
-    fetch('http://localhost:4567/salvarevento', {
+    fetch(`${url}/salvarevento`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -201,7 +203,7 @@ function mostrarEventosPorData() {
     const dataAtual = `${currentYear}-${String(mes + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
 
     // Faz a requisição GET para o servidor
-    fetch(`http://localhost:4567/mostrareventosdodia/${dataAtual}`)
+    fetch(`${url}/mostrareventosdodia/${dataAtual}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -245,7 +247,7 @@ function mostrarEventosPorData() {
 }
 
 function deletarEvento(eventoId) {
-    fetch(`http://localhost:4567/removerevento/${eventoId}`, {
+    fetch(`${url}/removerevento/${eventoId}`, {
         method: 'DELETE'
     })
     .then(response => {

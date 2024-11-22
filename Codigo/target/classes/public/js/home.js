@@ -1,3 +1,4 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor
 const button = document.getElementById('btn');
 const salaInput = document.getElementById('sala');
 const mudarSwitch = document.getElementById('switch');
@@ -149,7 +150,7 @@ async function loadLabeledImages() {
 
 async function fetchPhotoMonitorData(id) {
 try {
-    const response = await fetch(`http://localhost:4567/mostrarfotomonitor/${id}`);
+    const response = await fetch(`${url}/mostrarfotomonitor/${id}`);
     
     if (!response.ok) {
     throw new Error('Network response was not ok');
@@ -233,7 +234,7 @@ async function verificarStatusMonitor(id) {
     try {
         console.log("ID do monitor:", id); // Log do ID
 
-        const response = await fetch(`http://localhost:4567/mostraronline/${id}`, {
+        const response = await fetch(`${url}/mostraronline/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -258,7 +259,7 @@ async function verificarStatusMonitor(id) {
 // Função para quando o switch é ligado
 function funcaoLigada(id) {
     
-    fetch(`http://localhost:4567/ficaronline/${id}`, {
+    fetch(`${url}/ficaronline/${id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -282,7 +283,7 @@ function funcaoLigada(id) {
 
 // Função para quando o switch é desligado
 function funcaoDesligada(id) {
-    fetch(`http://localhost:4567/ficaroffline/${id}`, {
+    fetch(`${url}/ficaroffline/${id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -305,7 +306,7 @@ function funcaoDesligada(id) {
 }
 
 async function mudarSala(id, sala) {
-    const url = `http://localhost:4567/mudarsala/${id}`;
+    const url = `${url}/mudarsala/${id}`;
     const dados = { sala: sala };
     
     try {
@@ -329,7 +330,7 @@ async function mudarSala(id, sala) {
 }
 
 // async function mostrarSala(idAluno) {
-//     const url = `http://localhost:4567/mostrarsala/${idAluno}`;
+//     const url = `${url}/mostrarsala/${idAluno}`;
     
 //     try {
 //         const response = await fetch(url, {

@@ -1,5 +1,5 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor
 const usLogMon = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-
 
 // Função para buscar e exibir os nomes dos usuários do tipo 3
 async function fetchUsuarios() {
@@ -7,7 +7,7 @@ async function fetchUsuarios() {
         const tipoLogado = usLogMon.tipo;
 
         // Fazendo a requisição GET para a API
-        const response = await fetch('http://localhost:4567/mostrarusuarios/3');
+        const response = await fetch(`${url}/mostrarusuarios/3`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -137,7 +137,7 @@ async function fetchUsuarios() {
                         console.log(alteraTipo);
 
                         // Fazendo a requisição POST
-                        const response = await fetch('http://localhost:4567/alterartipousuario', {
+                        const response = await fetch(`${url}/alterartipousuario`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -184,7 +184,7 @@ async function fetchMonitores() {
         const tipoLogado = usLogMon.tipo;
 
         // Fazendo a requisição GET para a API
-        const response = await fetch('http://localhost:4567/mostrarusuarios/2');
+        const response = await fetch(`${url}/mostrarusuarios/2`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -267,7 +267,7 @@ async function fetchMonitores() {
                         };
 
                         // Fazendo a requisição POST
-                        const response = await fetch('http://localhost:4567/alterartipousuario', {
+                        const response = await fetch(`${url}/alterartipousuario`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(alteraTipo)
@@ -304,7 +304,7 @@ async function fetchMonitores() {
 
 async function fetchMateria(id_materia) {
     try {
-        const response = await fetch(`http://localhost:4567/mostrarmateria/${id_materia}`);
+        const response = await fetch(`${url}/mostrarmateria/${id_materia}`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -325,7 +325,7 @@ async function fetchMateria(id_materia) {
 }       
 
 async function buscarMateria(id_monitor) {
-    const url = `http://localhost:4567/buscarmateriamonitor/${id_monitor}`;
+    const url = `${url}/buscarmateriamonitor/${id_monitor}`;
 
     try {
         // Fazendo a requisição GET

@@ -1,3 +1,4 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor
 const video = document.getElementById('video');
 const toggleCameraButton = document.getElementById('toggleCameraButton');
 const captureButton = document.getElementById('captureButton');
@@ -93,7 +94,7 @@ function captureImage(videoElement) {
 // Load Labeled Images for Face Matching
 async function fetchPhotoMonitorData(id) {
   try {
-    const response = await fetch(`http://localhost:4567/mostrarfotomonitor/${id}`);
+    const response = await fetch(`${url}/mostrarfotomonitor/${id}`);
     
     if (!response.ok) {
       throw new Error('Network response was not ok');

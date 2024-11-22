@@ -1,11 +1,12 @@
-        // Função para definir o estado inicial da página
+const url = 'http://localhost:4567'; // Endereço do seu servidor
+
+// Função para definir o estado inicial da página
 function setInitialState() {
     showLogin(); // Inicialmente mostra a seção de login
 }
 
 // Adiciona um evento de carregamento da página
 window.addEventListener('load', setInitialState);
-
 
 // Função para mostrar a seção de login e ocultar a de cadastro
 function showLogin() {
@@ -53,58 +54,58 @@ function toggleNewField() {
         cadastrarBtn.style.marginTop = '30px'; // Ajuste a margem original conforme necessário
     }
 }
-
     
-    // Captura o botão de cadastro
-    const cadastrarBtn = document.getElementById('cadastrarBtn');
+// Captura o botão de cadastro
+const cadastrarBtn = document.getElementById('cadastrarBtn');
 
     // Função para enviar os dados de cadastro para o servidor
-    cadastrarBtn.addEventListener('click', async (e) => {
-        e.preventDefault(); // Evita a recarga da página ao clicar no botão
+cadastrarBtn.addEventListener('click', async (e) => {
+    e.preventDefault(); // Evita a recarga da página ao clicar no botão
 
-        // Captura os valores dos campos de cadastro
-        const nome = document.querySelector('#cadastrar input[placeholder="Nome"]').value;
-        const id = document.querySelector('#cadastrar input[placeholder="ID"]').value;
-        const email = document.querySelector('#cadastrar input[placeholder="Email"]').value;
-        const senha = document.querySelector('#cadastrar input[placeholder="Senha"]').value;
-        const confirmarSenha = document.querySelector('#cadastrar input[placeholder="Confirmar Senha"]').value;
+    // Captura os valores dos campos de cadastro
+    const nome = document.querySelector('#cadastrar input[placeholder="Nome"]').value;
+    const id = document.querySelector('#cadastrar input[placeholder="ID"]').value;
+    const email = document.querySelector('#cadastrar input[placeholder="Email"]').value;
+    const senha = document.querySelector('#cadastrar input[placeholder="Senha"]').value;
+    const confirmarSenha = document.querySelector('#cadastrar input[placeholder="Confirmar Senha"]').value;
 
-        // Validação básica para verificar se as senhas coincidem
-        if (senha !== confirmarSenha) {
-            alert('As senhas não correspondem!');
-            return;
+    // Validação básica para verificar se as senhas coincidem
+    if (senha !== confirmarSenha) {
+        alert('As senhas não correspondem!');
+        return;
+    }
+
+    // Criação do objeto que será enviado para o banco de dados
+    const novoUsuario = {
+        id: Number(id),
+        nome,
+        email,
+        senha,
+        tipo: "3"
+    };
+
+    try {
+        // Envio da requisição POST para o JSON Server
+        const resposta = await fetch(`${url}/registrarpessoa`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(novoUsuario)
+        });
+
+        if (resposta.ok) {
+            alert('Usuário cadastrado com sucesso!');
+            sessionStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario));
+            window.location.href = '../html/home.html';
+        } else {
+            alert('Erro ao cadastrar o usuário.');
         }
-
-        // Criação do objeto que será enviado para o banco de dados
-        const novoUsuario = {
-            id: Number(id),
-            nome,
-            email,
-            senha,
-        };
-
-        try {
-            // Envio da requisição POST para o JSON Server
-            const resposta = await fetch('http://localhost:4567/registrarpessoa', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(novoUsuario)
-            });
-
-            if (resposta.ok) {
-                alert('Usuário cadastrado com sucesso!');
-                sessionStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario));
-                window.location.href = '../html/home.html';
-            } else {
-                alert('Erro ao cadastrar o usuário.');
-            }
-        } catch (erro) {
-            console.error('Erro ao conectar com o servidor:', erro);
-            alert('Erro de conexão com o servidor.');
-        }
-    });
+    } catch (erro) {
+        console.error('Erro ao conectar com o servidor:', erro);
+        alert('Erro de conexão com o servidor.');
+    }
+});
 
 // LOGIN
 const loginBtn = document.querySelector('#entrar button');
@@ -119,14 +120,10 @@ loginBtn.addEventListener('click', () => {
         return; // Interrompe a execução se algum campo estiver vazio
     }
 
-    // const tipo = getTipoUsuario(id);
-
     loginPessoa(id, senha);
 });
 
 async function loginPessoa(id, senha, tipo, nome) {
-    const url = 'http://localhost:4567/loginpessoa'; // Endereço do seu servidor
-
     const pessoa = {
         id: id,
         senha: senha
@@ -140,7 +137,7 @@ async function loginPessoa(id, senha, tipo, nome) {
     };
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`${url}/loginpessoa`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -179,7 +176,7 @@ async function loginPessoa(id, senha, tipo, nome) {
 
 async function getTipoUsuario(id) {
     try {
-        const response = await fetch(`http://localhost:4567/tipousuario/${id}`, { 
+        const response = await fetch(`${url}/tipousuario/${id}`, { 
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
@@ -204,7 +201,7 @@ async function getTipoUsuario(id) {
 
 async function getNomeUsuario(id) {
     try {
-        const response = await fetch(`http://localhost:4567/mostrarnome/${id}`, { 
+        const response = await fetch(`${url}/mostrarnome/${id}`, { 
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });

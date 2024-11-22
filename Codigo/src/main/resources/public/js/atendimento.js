@@ -1,3 +1,4 @@
+const url = 'http://localhost:4567'; // Endereço do seu servidor ${url}
 const usLogAtendimento = JSON.parse(sessionStorage.getItem('usuarioLogado'));
 
 // Seleciona o botão de enviar
@@ -57,7 +58,7 @@ async function salvarAtendimento() {
     console.log('Objeto Atendimento:', atendimento);
 
     try {
-        const response = await fetch('http://localhost:4567/salvaratendimento', {
+        const response = await fetch(`${url}/salvaratendimento`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
