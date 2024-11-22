@@ -116,6 +116,7 @@ article:hover {
     text-align: center;
 }
 #send {
+    display: none;
     display: flex; /* Mantém os itens dentro de send em linha */
     align-items: center; /* Alinha verticalmente os itens no centro */
     justify-content: center; /* Centraliza horizontalmente */

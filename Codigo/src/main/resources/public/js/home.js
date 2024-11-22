@@ -1,6 +1,5 @@
 const url = 'http://localhost:4567'; // Endereço do seu servidor
 const button = document.getElementById('btn');
-const salaInput = document.getElementById('sala');
 const mudarSwitch = document.getElementById('switch');
 const sendButton = document.getElementById('sendBtn');
 const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
@@ -10,10 +9,12 @@ const video = document.getElementById('video');
 const captureButton = document.getElementById('captureButton');
 const loadingButton = document.getElementById('loadingButton');
 const tirarFoto = document.getElementById('tirarFoto');
+const enviarSala = document.getElementById('send')
 
 let cameraStream = null;
 
 toggleDisplay(tipoVer);
+mostrarSala();
 
 // Alterna a classe 'active' ao clicar no botão
 button.addEventListener('click', function(event) {
@@ -22,9 +23,15 @@ button.addEventListener('click', function(event) {
 });
 
 // Impede o fechamento do botão ao clicar no input number
-salaInput.addEventListener('click', function(event) {
+enviarSala.addEventListener('click', function(event) {
     event.stopPropagation(); // Impede a propagação do evento de clique
 });
+
+sendButton.addEventListener('click', function() {
+    const salaInput = document.getElementById('sala').value; // Obtém o valor atualizado no momento do clique
+    mudarSala(salaInput); // Passa o valor para a função mudarSala
+});
+
 
 // Impede o fechamento ao interagir com o switch
 mudarSwitch.addEventListener('click', function(event) {
@@ -63,13 +70,6 @@ async function start() {
         // Detecta se o zé ta la
         const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor));
         const isFaceMatched = results.some(result => result.label !== "unknown");
-
-        // if (results.length > 0) {
-        //   labelDetected.textContent = "Detected: " + results.map(result => result.toString()).join(', ');
-        //   console.log("Match found:", isFaceMatched);
-        // } else {
-        //   labelDetected.textContent = "No known faces detected";
-        // }
 
         console.log("Face matched with known label:", isFaceMatched);
         if(isFaceMatched){
@@ -314,7 +314,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Atualiza o estado do switch baseado no status
     const switchElement = document.getElementById('switch');
-    switchElement.checked = (status === 1);
+    if(status == 1){
+        switchElement.checked = true;
+        enviarSala.style.display = 'flex';
+
+    }
+
 });
 
 // Evento do switch para alternar entre online e offline
@@ -323,6 +328,7 @@ mudarSwitch.addEventListener('change', async () => {
     if (mudarSwitch.checked) {
         
         verFotoElement.style.display = 'flex';
+        enviarSala.style.display = 'flex';
         cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = cameraStream;
         
@@ -336,6 +342,7 @@ mudarSwitch.addEventListener('change', async () => {
 
         captureButton.style.backgroundColor = "#7F32A6";
         verFotoElement.style.display = 'none';
+        enviarSala.style.display = 'none';
         funcaoDesligada(usuarioLogadoHome.id);
     }
 })
@@ -430,56 +437,56 @@ function funcaoDesligada(id) {
     });
 }
 
-async function mudarSala(id, sala) {
-    const dados = { sala: sala };
-    
+async function mostrarSala() {    
     try {
-        const response = await fetch(`${url}/mudarsala/${id}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dados)
-        });
+        // Fazendo a requisição GET
+        const response = await fetch(`${url}/mostrarsala/${usuarioLogadoHome.id}`, { method: 'GET' });
         
-        if (response.ok) {
-            const respostaJson = await response.json();
-            console.log("Sala alterada com sucesso:", respostaJson);
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+        
+        // Obtendo o texto da resposta
+        const data = await response.json();
+        
+        
+        // Preenchendo o campo de texto com o valor retornado
+        const inputSala = document.getElementById('sala');
+        if (inputSala) {
+            inputSala.value = data;
         } else {
-            console.error("Erro ao mudar de sala:", response.statusText);
+            console.error("Elemento com ID 'sala' não encontrado.");
         }
     } catch (error) {
-        console.error("Erro na requisição:", error);
+        console.error("Erro ao buscar a sala:", error);
     }
 }
 
-// async function mostrarSala(idAluno) {
+async function mudarSala(sala) {
     
-//     try {
-//         const response = await fetch(`${url}/mostrarsala/${idAluno}`, {
-//             method: "GET"
-//         });
-        
-//         if (response.ok) {
-//             const dados = await response.json();
-//             // Verifica se a sala está definida e é um número válido
-//             if (dados.sala !== undefined && !isNaN(dados.sala)) {
-//                 document.getElementById("sala").value = dados.sala;
-//             } else {
-//                 console.error("Valor da sala não definido ou inválido:", dados.sala);
-//                 document.getElementById("sala").value = ''; // Limpa o campo se o valor for inválido
-//             }
-//         } else {
-//             console.error("Erro ao obter dados da sala:", response.statusText);
-//         }
-//     } catch (error) {
-//         console.error("Erro na requisição:", error);
-//     }
-// }
+    try {
+        const data = { 
+            sala: sala
+        };
 
+        // Fazendo a requisição POST
+        const response = await fetch(`${url}/mudarsala/${usuarioLogadoHome.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-// Exemplo de uso
-// const salaInput = document.getElementById('sala');
-// const valorSala = salaInput.value;
-// mudarSala(usuarioLogadoHome.id, valorSala);
-// mudarSala(usuarioLogadoHome.id, valorSala);
+        // Verificando o status da resposta
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+
+        // Obtendo a resposta em texto ou JSON
+        const resposta = await response.json();
+        console.log("Resposta do servidor:", resposta);
+    } catch (error) {
+        console.error("Erro ao mudar a sala:", error);
+    }
+}
