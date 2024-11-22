@@ -1,5 +1,5 @@
 const urlScrp = 'http://localhost:4567'; // Endereço do seu servidor
-const usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
 if (usuarioLogado) {
     inicializarUsuario(usuarioLogado); // Chama a função para iniciar
@@ -12,8 +12,8 @@ if (usuarioLogado) {
 async function inicializarUsuario(usuarioLogado) {
     try {
 
-        // Atualiza o sessionStorage com o objeto atualizado
-        sessionStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
+        // Atualiza o localStorage com o objeto atualizado
+        localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado));
         
         document.querySelector('#username').textContent = usuarioLogado.nome;
         console.log(`Bem-vindo, ${usuarioLogado.nome}!`);

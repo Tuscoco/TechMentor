@@ -121,7 +121,7 @@ async function mostrarMonitoresOffline() {
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
                         <p class="horario">Horário: 13:00 - 16:00</p>
-                        <p class="local">Local: ${monitor.sala}</p>
+                        <p class="local">Local: Denscansando</p>
                         <p class="contato">Contato: ${email}</p>
                     </div>
                 </div>

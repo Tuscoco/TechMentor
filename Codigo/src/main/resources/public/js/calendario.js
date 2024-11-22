@@ -266,7 +266,7 @@ function deletarEvento(eventoId) {
 
 
 //ESCONDER DEPENDENDO DO USUARIO
-const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+const usuarioLogadoHome = JSON.parse(localStorage.getItem('usuarioLogado'));
 
 let tipoVer;
 

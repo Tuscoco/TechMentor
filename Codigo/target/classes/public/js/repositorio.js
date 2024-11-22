@@ -136,7 +136,7 @@ window.onload = carregarRepositorios;
 
 // Verificação de tipo para esconder funções
 
-const usuarioLogadoRepositorios = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+const usuarioLogadoRepositorios = JSON.parse(localStorage.getItem('usuarioLogado'));
 let tipoVer;
 
 if (usuarioLogadoRepositorios && usuarioLogadoRepositorios.tipo !== undefined) {

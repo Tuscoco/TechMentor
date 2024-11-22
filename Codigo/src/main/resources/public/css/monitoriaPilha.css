@@ -122,6 +122,7 @@ button.menu-hamburger.open img {
 
 .bar-open img{
     margin: 0 !important;
+    object-position: center;
 }
 /* .materia{
     width: 450px;

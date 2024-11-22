@@ -1,5 +1,5 @@
 const url = 'http://localhost:4567'; // Endereço do seu servidor
-const usLogMon = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+const usLogMon = JSON.parse(localStorage.getItem('usuarioLogado'));
 
 // Função para buscar e exibir os nomes dos usuários do tipo 3
 async function fetchUsuarios() {
@@ -154,8 +154,8 @@ async function fetchUsuarios() {
                         const data = await response.json();
                         console.log('Resposta do servidor:', data);
 
-                        window.location.reload();
-
+                        fetchMonitores();
+                        fetchUsuarios();
 
                     } catch (error) {
                         console.error('Erro ao alterar tipo de usuário:', error);
@@ -276,9 +276,8 @@ async function fetchMonitores() {
                         if (!response.ok) {
                             throw new Error(`Erro na requisição: ${response.status}`);
                         }
-
-                        // Recarregar a página após sucesso
-                        window.location.reload();
+                        fetchMonitores();
+                        fetchUsuarios();
                     } catch (error) {
                         console.error('Erro ao alterar tipo de usuário:', error);
                     }
@@ -300,7 +299,6 @@ async function fetchMonitores() {
         console.error('Erro ao buscar os usuários:', error);
     }
 }
-
 
 async function fetchMateria(id_materia) {
     try {

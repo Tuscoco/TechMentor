@@ -2,7 +2,7 @@ const url = 'http://localhost:4567'; // Endereço do seu servidor
 const button = document.getElementById('btn');
 const mudarSwitch = document.getElementById('switch');
 const sendButton = document.getElementById('sendBtn');
-const usuarioLogadoHome = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+const usuarioLogadoHome = JSON.parse(localStorage.getItem('usuarioLogado'));
 const tipoVer = usuarioLogadoHome.tipo;
 const verFotoElement = document.getElementById('verFoto');
 const video = document.getElementById('video');
@@ -92,7 +92,9 @@ function matchEnd(){
         cameraStream = null;
         verFotoElement.style.display = 'none';
     }, 1000);
-    funcaoLigada(usuarioLogadoHome.id)
+    funcaoLigada(usuarioLogadoHome.id);
+    mostrarSala();
+
 }
 
 function unmatchEnd(){
@@ -332,7 +334,6 @@ mudarSwitch.addEventListener('change', async () => {
         enviarSala.style.display = 'flex';
         cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = cameraStream;
-        
         const verProm = await doPromise();
         
         if(verProm){

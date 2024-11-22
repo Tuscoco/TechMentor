@@ -1,5 +1,5 @@
 const url = 'http://localhost:4567'; // Endereço do seu servidor ${url}
-const usLogAtendimento = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+const usLogAtendimento = JSON.parse(localStorage.getItem('usuarioLogado'));
 
 // Seleciona o botão de enviar
 const enviarButton = document.getElementById('enviar');
@@ -11,7 +11,7 @@ enviarButton.addEventListener('click', function () {
 
 async function salvarAtendimento() {
     // Obter os elementos do HTML (inputs, textareas, etc.)
-    const usLogAtendimento = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+    const usLogAtendimento = JSON.parse(localStorage.getItem('usuarioLogado'));
     
     if (!usLogAtendimento || !usLogAtendimento.id) {
         console.error("Usuário não está logado ou ID não encontrado.");
