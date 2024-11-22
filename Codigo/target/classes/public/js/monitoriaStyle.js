@@ -5,7 +5,7 @@ let currentOpenButton = null;
 async function mostrarMonitoresOnline() {
     try {
         // Faz a requisição GET para o servidor local
-        const response = await fetch('http://localhost:4567/mostrarMonitoresOnline');
+        const response = await fetch('https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarMonitoresOnline');
         
         // Verifica se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -79,7 +79,7 @@ async function mostrarMonitoresOnline() {
 async function mostrarMonitoresOffline() {
     try {
         // Faz a requisição GET para o servidor local
-        const response = await fetch('http://localhost:4567/mostrarMonitoresOffline');
+        const response = await fetch('https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarMonitoresOffline');
         
         // Verifica se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -152,7 +152,7 @@ async function mostrarMonitoresOffline() {
 // Função para buscar uma matéria pelo ID
 async function fetchMateria(id_materia) {
     try {
-        const response = await fetch(`http://localhost:4567/mostrarmateria/${id_materia}`);
+        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarmateria/${id_materia}`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -173,7 +173,7 @@ async function fetchMateria(id_materia) {
 async function mostrarEmail(id_monitor) {
     try {
         // Fazendo a requisição GET para a API
-        const response = await fetch(`http://localhost:4567/mostraremail/${id_monitor}`);
+        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostraremail/${id_monitor}`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -193,7 +193,7 @@ async function mostrarEmail(id_monitor) {
 async function mostrarNome(id_monitor) {
     try {
         // Fazendo a requisição GET para a API
-        const response = await fetch(`http://localhost:4567/mostrarnome/${id_monitor}`);
+        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarnome/${id_monitor}`);
 
         // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
@@ -214,7 +214,7 @@ async function mostrarFoto(id_monitor) {
     try {
 
         // Faz o fetch para obter a URL da imagem
-        const response = await fetch(`http://localhost:4567/mostrarfoto/${id_monitor}`);
+        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarfoto/${id_monitor}`);
         
         if (!response.ok) {
             throw new Error('Erro ao buscar a imagem');

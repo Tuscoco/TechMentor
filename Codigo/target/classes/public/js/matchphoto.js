@@ -93,7 +93,7 @@ function captureImage(videoElement) {
 // Load Labeled Images for Face Matching
 async function fetchPhotoMonitorData(id) {
   try {
-    const response = await fetch(`http://localhost:4567/mostrarfotomonitor/${id}`);
+    const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarfotomonitor/${id}`);
     
     if (!response.ok) {
       throw new Error('Network response was not ok');

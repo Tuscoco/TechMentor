@@ -85,7 +85,7 @@ function toggleNewField() {
 
         try {
             // Envio da requisição POST para o JSON Server
-            const resposta = await fetch('http://localhost:4567/registrarpessoa', {
+            const resposta = await fetch('https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/registrarpessoa', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ loginBtn.addEventListener('click', () => {
 });
 
 async function loginPessoa(id, senha, tipo, nome) {
-    const url = 'http://localhost:4567/loginpessoa'; // Endereço do seu servidor
+    const url = 'https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/loginpessoa'; // Endereço do seu servidor
 
     const pessoa = {
         id: id,
@@ -179,7 +179,7 @@ async function loginPessoa(id, senha, tipo, nome) {
 
 async function getTipoUsuario(id) {
     try {
-        const response = await fetch(`http://localhost:4567/tipousuario/${id}`, { 
+        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/tipousuario/${id}`, { 
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
@@ -204,7 +204,7 @@ async function getTipoUsuario(id) {
 
 async function getNomeUsuario(id) {
     try {
-        const response = await fetch(`http://localhost:4567/mostrarnome/${id}`, { 
+        const response = await fetch(`https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com/mostrarnome/${id}`, { 
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
