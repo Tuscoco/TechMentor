@@ -33,23 +33,53 @@
         </div>
         <div id="dados">
 
-            <section>
-                <p>Nome:</p>
-                <p id="nameEdit">...</p>
-            </section>
-            <input type="text" name="nome" placeholder="Alterar nome">
+            <div class="edit">
+                <section>
+                    <p>Nome:</p>
+                    <p id="nameEdit">...</p>
+                </section>
+                <input type="text" id="nome" placeholder="Alterar nome">
+                <i id="nameSubm" class="ph-fill ph-pencil-simple"></i>
+            </div>
+
+            <div class="edit">
+                <section>
+                    <p>Email:</p>
+                    <p id="emailEdit">...</p>
+                </section>
+                <input type="email" id="email" placeholder="Alterar email">
+                <i id="emailSubm" class="ph-fill ph-pencil-simple"></i>
+            </div>
                 
-            <section>
-                <p>Email:</p>
-                <p id="emailEdit">...</p>
-            </section>
-            <input type="email" name="email" placeholder="Alterar email">
-                
-            <section>
-                <p>Senha:</p>
-                <p id="senhaEdit">...</p>
-            </section>
-            <input type="password" name="senha" placeholder="Alterar senha">
+            <div class="edit">
+                <section>
+                    <p>Senha:</p>
+                    <p id="senhaEdit">...</p>
+                </section>
+                <input type="password" id="senha" placeholder="Alterar senha">
+                <i id="senhaSubm" class="ph-fill ph-pencil-simple"></i>
+            </div>
+
+            <div class="edit">
+                <section>
+                    <p>Horario:</p>
+                    <p id="horarioEdit">...</p>
+                </section>
+                <section id="horarios">
+                    <div id="editaHora">
+                        <div class="horario">
+                            <i class="ph-fill ph-sign-in"></i>  
+                            <input type="time" id="entrada">
+                        </div>
+                        <div class="horario">
+                            <i class="ph-fill ph-sign-out"></i>
+                            <input type="time" id="saida"> 
+                        </div>
+                    </div>
+                    <i id="horaSubm" class="ph-fill ph-pencil-simple"></i>
+                </section>
+            </div>
+
 
             <section>
 

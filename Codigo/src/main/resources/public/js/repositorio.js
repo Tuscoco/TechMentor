@@ -127,12 +127,8 @@ function carregarRepositorios() {
     });
 }
 
-
 // Carregar repositórios ao iniciar a página
 window.onload = carregarRepositorios;
-
-
-
 
 // Verificação de tipo para esconder funções
 

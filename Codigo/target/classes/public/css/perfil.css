@@ -14,7 +14,6 @@ main{
     outline: 3px solid #7F32A6;
     padding-left: 10px;
     border-radius: 10px;
-    margin-bottom: 20px;
 }
 
 #dados section{
@@ -101,3 +100,27 @@ main{
     border-bottom-left-radius: 5px;
 }
 
+.ph-fill{
+    transition: .1s;
+}
+
+.ph-fill:hover{
+    color: #53216c;
+}
+
+.edit{
+    width: 100%;
+}
+
+#horarios{
+    display: flex;
+    align-items: center;
+}
+
+#horarios input{
+    width: max-content;
+}
+
+.horario{
+    margin: 20px 0;
+}
