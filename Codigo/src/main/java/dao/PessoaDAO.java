@@ -37,7 +37,7 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT * FROM pessoa WHERE id = ?";
+            String sql = "SELECT senha FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
@@ -283,7 +283,7 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT id, nome, tipo_usuario FROM pessoa WHERE tipo_usuario = ?";
+            String sql = "SELECT id, nome FROM pessoa WHERE tipo_usuario = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1, tipo);
@@ -292,37 +292,10 @@ public class PessoaDAO {
 
             while(result.next()){
 
-                Pessoa pessoa = new Pessoa(result.getInt("id"),result.getString("nome"), result.getInt("tipo_usuario"));
+                Pessoa pessoa = new Pessoa(result.getInt("id"),result.getString("nome"), tipo);
                 lista.add(pessoa);
 
             }
-
-        }
-
-        lista = ordenar(lista);
-
-        return lista;
-
-    }
-
-    public List<Pessoa> ordenar(List<Pessoa> lista){
-
-        int n = lista.size();
-
-
-        for(int i = 1;i < n;i++){
-
-            Pessoa temp = lista.get(i);
-            int j = i - 1;
-
-            while((j >= 0) && (lista.get(j).getNome().compareTo(temp.getNome()) > 0)){
-
-                lista.set(j + 1, lista.get(j));
-                j--;
-
-            }
-
-            lista.set(j + 1, temp);
 
         }
 

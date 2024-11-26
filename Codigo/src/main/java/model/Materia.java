@@ -14,6 +14,13 @@ public class Materia implements Comparable<Materia>{
     }
 
 
+    public Materia(String nome) {
+
+        this.nome = nome;
+
+    }
+
+
     public int getIdMateria(){
         return id_materia;
     }

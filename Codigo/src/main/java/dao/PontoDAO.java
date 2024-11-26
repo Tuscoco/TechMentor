@@ -42,7 +42,7 @@ public class PontoDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT * FROM ponto WHERE id_monitor = ?";
+            String sql = "SELECT data FROM ponto WHERE id_monitor = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, id);
@@ -51,7 +51,7 @@ public class PontoDAO {
 
             while(result.next()){
 
-                Ponto ponto = new Ponto(result.getInt("id_monitor"), result.getString("data"));
+                Ponto ponto = new Ponto(id, result.getString("data"));
                 lista.add(ponto);
 
             }
@@ -68,7 +68,7 @@ public class PontoDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT * FROM ponto WHERE id_monitor = ? AND EXTRACT(MONTH FROM TO_DATE(data, 'DD/MM/YYYY')) = ?";
+            String sql = "SELECT data FROM ponto WHERE id_monitor = ? AND EXTRACT(MONTH FROM TO_DATE(data, 'DD/MM/YYYY')) = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, id);
@@ -78,7 +78,7 @@ public class PontoDAO {
 
             while(result.next()){
 
-                Ponto ponto = new Ponto(result.getInt("id_monitor"), result.getString("data"));
+                Ponto ponto = new Ponto(id, result.getString("data"));
                 lista.add(ponto);
 
             }
