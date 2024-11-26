@@ -337,6 +337,27 @@ public class MonitorController{
 
         });
 
+        get("/mostrarhorarios/:id", (req, res) -> {
+
+            res.type("application/json");
+
+            int id = Integer.parseInt(req.params(":id"));
+
+            try{
+
+                List<String> lista = monitorService.getHorarios(id);
+
+                return new Gson().toJson(lista);
+
+            }catch(Exception e){
+
+                res.status(500);
+                return "{\"message\":\"Erro no servidor ao buscar as fotos.\"}";
+
+            }
+
+        });
+
     }
 
 }

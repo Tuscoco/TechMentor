@@ -288,6 +288,32 @@ public class MonitorDAO{
 
     }
 
+    public List<String> getHorarios(int id) throws SQLException{
+
+        List<String> lista = new ArrayList<>();
+
+        try(Connection conn = DataBaseConnection.getConnection()){
+
+            String sql = "SELECT entrada, saida FROM monitoria WHERE id_monitor = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, id);
+
+            ResultSet result = pstmt.executeQuery();
+
+            if(result.next()){
+
+                lista.add(result.getString("entrada"));
+                lista.add(result.getString("saida"));
+
+            }
+
+        }
+
+        return lista;
+
+    }
+
     public List<Monitoria> getOnline() throws SQLException{
 
         if(cacheMonitoresOnline == null){
