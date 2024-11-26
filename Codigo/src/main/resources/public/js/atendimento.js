@@ -46,9 +46,9 @@ async function salvarAtendimento() {
 
     // Criar o objeto a ser enviado no corpo da requisição
     const atendimento = {
-        id_monitor: parseInt(idMonitor),
+        id_monitor: idMonitor,
         id_aluno: idAluno,
-        id_materia: parseInt(idMateria) ,
+        id_materia: idMateria ,
         data: data,
         tema_duvida: temaDuvida,
         descricao: descricao,

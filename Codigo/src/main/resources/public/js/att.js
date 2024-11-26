@@ -27,6 +27,9 @@ async function mostrarMonitoresOnline() {
             const pontosTotais = await mostrarPontos(monitor.id);
             const email = await mostrarEmail(monitor.id);
             const foto = await mostrarFoto(monitor.id);
+            const att = await mostrarAtendimentos(monitor.id);
+            console.log(att);
+            
             let pontosMes = null;
 
             const button = document.createElement('button');
@@ -42,31 +45,48 @@ async function mostrarMonitoresOnline() {
                     </div>
                 </div>
                 <div class="bar-open">
-                    <img src="${foto}" alt="foto">
-                    <div class="dados">
-                        <p class="nome">Nome: ${nome}</p>
-                        <p class="materia">Matéria: ${materia}</p>
-                        <p class="email">Email: ${email}</p>
-                        <p class="pontos">Pontos totais: ${pontosTotais}</p>
-                        <div class="selectMes">
-                            <p class="pontosMes">Pontos Mensais: ${pontosMes}</p>
-                            <select class="mes">
-                                <option default selected disabled class="disabled" style="display: none;">Selecione um mês</option>
-                                <option value="1">Janeiro</option>
-                                <option value="2">Fevereiro</option>
-                                <option value="3">Março</option>
-                                <option value="4">Abril</option>
-                                <option value="5">Maio</option>
-                                <option value="6">Junho</option>
-                                <option value="7">Julho</option>
-                                <option value="8">Agosto</option>
-                                <option value="9">Setembro</option>
-                                <option value="10">Outubro</option>
-                                <option value="11">Novembro</option>
-                                <option value="12">Dezembro</option>
-                            </select>
-                            <button class="send">Ok</button>
+                    <div class="info">
+                        <img src="${foto}" alt="foto">
+                        <div class="dados">
+                            <p class="nome">Nome: ${nome}</p>
+                            <p class="materia">Matéria: ${materia}</p>
+                            <p class="email">Email: ${email}</p>
+                            <p class="pontos">Pontos totais: ${pontosTotais}</p>
+                            <div class="selectMes">
+                                <p class="pontosMes">Pontos Mensais: ${pontosMes}</p>
+                                <select class="mes">
+                                    <option default selected disabled class="disabled" style="display: none;">Selecione um mês</option>
+                                    <option value="1">Janeiro</option>
+                                    <option value="2">Fevereiro</option>
+                                    <option value="3">Março</option>
+                                    <option value="4">Abril</option>
+                                    <option value="5">Maio</option>
+                                    <option value="6">Junho</option>
+                                    <option value="7">Julho</option>
+                                    <option value="8">Agosto</option>
+                                    <option value="9">Setembro</option>
+                                    <option value="10">Outubro</option>
+                                    <option value="11">Novembro</option>
+                                    <option value="12">Dezembro</option>
+                                </select>
+                                <button class="send">Ok</button>
+                            </div>
                         </div>
+                    </div>
+
+                    <p>Atendimentos</p>
+
+                    <div>
+                    ${att.map((obj, index) => `
+                        <div class="atendimento">
+                            <p>Atendimento ${index + 1}:</p>
+                            <p>Aluno: ${obj.id_aluno}</p>
+                            <p>Data: ${obj.data}</p>
+                            <p>Tema: ${obj.tema_duvida}</p>
+                            <p>Descrição: ${obj.descricao}</p>
+                            <p>A duvida foi sanada?: ${obj.duvida_sanada}</p>
+                        </div>
+                    `).join('')}
                     </div>
                 </div>
             `;
@@ -252,6 +272,28 @@ async function mostrarPontosMes(mes, id_monitor) {
         return 'Monitor não encontrado'; // Valor padrão em caso de erro
     }
 }
+
+async function mostrarAtendimentos(id_monitor) {
+    try {
+        // Fazendo a requisição GET para a API
+        const response = await fetch(`${url}/buscaratendimentos/${id_monitor}`);
+
+        // Verificando se a resposta foi bem-sucedida
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        // Convertendo a resposta para JSON
+        const data = await response.json();
+
+        return data; 
+        
+    } catch (error) {
+        console.error('Erro ao buscar o monitor:', error);
+        return 'Monitor não encontrado'; // Valor padrão em caso de erro
+    }
+}
+
 
 // Chama as funções para exibir os monitores online e offline
 mostrarMonitoresOnline();

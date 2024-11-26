@@ -121,6 +121,15 @@ button.menu-hamburger.open img {
     background-color: #7F32A6;
 }
 
+.bar-open{
+    display: flex;
+    flex-direction: column;
+}
+
+.info{
+    display: flex;
+}
+
 .bar-open img{
     margin: 0 !important;
     object-position: center;
@@ -146,4 +155,15 @@ button.menu-hamburger.open img {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     height: 90%;
+}
+
+.atendimento{
+    display: flex;
+    outline: 3px solid #7F32A6;
+    margin-bottom: 10px !important;
+}
+
+.atendimento p{
+    font-size: 50%;
+    margin: 0 5px !important;
 }
