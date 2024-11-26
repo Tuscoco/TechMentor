@@ -295,16 +295,20 @@ function toggleDisplay(tipoVer) {
      
     const btn = document.getElementById('btn');
     const attVer = document.getElementById('attVer');
+    const attVerCord = document.getElementById('attVerCord');
     const monVer = document.getElementById('monVer');
 
     if (tipoVer == 3) {
         btn.style.display = 'none';
         attVer.style.display = 'none';
         monVer.style.display = 'none';
+        attVerCord.style.display = 'none';
     } else if (tipoVer == 2) {
+        attVerCord.style.display = 'none';
         monVer.style.display = 'none';
     } else if (tipoVer == 1) {
         btn.style.display = 'none';
+        attVer.style.display = 'none';
     }
 }
 
