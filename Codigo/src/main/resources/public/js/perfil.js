@@ -72,9 +72,6 @@ document.getElementById('horaSubm').addEventListener('click', function() {
     }
 });
 
-
-
-
 async function uploadImage() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
