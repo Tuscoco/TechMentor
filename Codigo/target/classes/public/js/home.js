@@ -11,6 +11,9 @@ const loadingButton = document.getElementById('loadingButton');
 const tirarFoto = document.getElementById('tirarFoto');
 const enviarSala = document.getElementById('send')
 
+console.log(usuarioLogadoHome);
+
+
 let cameraStream = null;
 
 toggleDisplay(tipoVer);

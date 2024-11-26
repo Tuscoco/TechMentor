@@ -1,7 +1,7 @@
 const url = 'http://localhost:4567'; // Endereço do seu servidor
 const usuarioLogadoPerfil = JSON.parse(localStorage.getItem('usuarioLogado'));
 document.querySelector('#nameEdit').textContent = usuarioLogadoPerfil.nome;
-document.querySelector('#senhaEdit').textContent = usuarioLogadoPerfil.senha;
+document.querySelector('#emailEdit').textContent = usuarioLogadoPerfil.email;
 
 document.getElementById('sair').addEventListener('click', function() {
     localStorage.clear();

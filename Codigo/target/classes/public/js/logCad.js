@@ -96,7 +96,7 @@ cadastrarBtn.addEventListener('click', async (e) => {
 
         if (resposta.ok) {
             alert('Usuário cadastrado com sucesso!');
-            localStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario));
+            localStorage.   tItem('usuarioLogado', JSON.stringify(novoUsuario));
             window.location.href = '../html/home.html';
         } else {
             alert('Erro ao cadastrar o usuário.');
@@ -123,7 +123,7 @@ loginBtn.addEventListener('click', () => {
     loginPessoa(id, senha);
 });
 
-async function loginPessoa(id, senha, tipo, nome) {
+async function loginPessoa(id, senha, tipo, nome, email) {
     const pessoa = {
         id: id,
         senha: senha
@@ -133,7 +133,8 @@ async function loginPessoa(id, senha, tipo, nome) {
         nome: nome,
         id: id,
         senha: senha,
-        tipo: tipo
+        tipo: tipo,
+        email: email
     };
 
     try {
@@ -156,6 +157,7 @@ async function loginPessoa(id, senha, tipo, nome) {
                 // Aguarda a resposta das funções assíncronas
                 userLogado.tipo = await getTipoUsuario(id);
                 userLogado.nome = await getNomeUsuario(id);
+                userLogado.email = await getEmailUsuario(id);
 
                 localStorage.setItem('usuarioLogado', JSON.stringify(userLogado))
                 console.log(userLogado)
@@ -215,6 +217,30 @@ async function getNomeUsuario(id) {
         } else {
             console.error('Erro ao obter o nome do usuário:', response.status);
             alert('Erro ao obter o nome do usuário: ' + response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Erro ao realizar a requisição:', error);
+        alert('Erro ao realizar a requisição');
+        return null;
+    }
+}
+
+async function getEmailUsuario(id) {
+    try {
+        const response = await fetch(`${url}/mostraremail/${id}`, { 
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            return result; // Retorna o nome do usuário
+        } else if (response.status === 404) {
+            alert("Email não encontrado");
+            return null;
+        } else {
+            console.error('Erro ao obter o email do usuário:', response.status);
             return null;
         }
     } catch (error) {
