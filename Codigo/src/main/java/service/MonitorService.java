@@ -147,6 +147,12 @@ public class MonitorService{
 
     }
 
+    public List<String> getHorarios(int id) throws Exception{
+
+        return monitorDAO.getHorarios(id);
+
+    }
+
 }
     
 
