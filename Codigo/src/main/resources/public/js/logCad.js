@@ -96,7 +96,7 @@ cadastrarBtn.addEventListener('click', async (e) => {
 
         if (resposta.ok) {
             alert('Usuário cadastrado com sucesso!');
-            localStorage.   tItem('usuarioLogado', JSON.stringify(novoUsuario));
+            localStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario));
             window.location.href = '../html/home.html';
         } else {
             alert('Erro ao cadastrar o usuário.');

@@ -2,6 +2,12 @@ const url = 'http://localhost:4567'; // Endereço do seu servidor
 const usuarioLogadoPerfil = JSON.parse(localStorage.getItem('usuarioLogado'));
 document.querySelector('#nameEdit').textContent = usuarioLogadoPerfil.nome;
 document.querySelector('#emailEdit').textContent = usuarioLogadoPerfil.email;
+const horarios = mostrarHorarios(usuarioLogadoPerfil.id);
+toggleDisplay(usuarioLogadoPerfil.tipo)
+console.log(usuarioLogadoPerfil);
+
+
+// document.querySelector('#horarioEdit').textContent = `${horarios[0]} - ${horarios[1]}`;
 
 document.getElementById('sair').addEventListener('click', function() {
     localStorage.clear();
@@ -257,5 +263,37 @@ async function alterarHorarios(entrada, saida) {
         }
     } catch (error) {
         console.error("Erro na requisição:", error);
+    }
+}
+
+function mostrarHorarios(id) {
+
+    fetch(`${url}/mostrarhorarios/${id}`, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    }
+})
+.then(async response => {
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+    const data = await response.json(); // Converte a resposta para JSON
+    console.log(data);
+    document.querySelector('#horarioEdit').textContent = `${data[0]} - ${data[1]}`;
+
+})
+.catch(error => {
+    console.error("Erro na requisição:", error.message);
+});
+
+}
+
+function toggleDisplay(tipoVer) {
+     
+    const horarios = document.getElementById('horarioDiv');
+
+    if (tipoVer == 3) {
+        horarios.style.display = 'none';
     }
 }

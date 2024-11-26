@@ -100,7 +100,8 @@ async function mostrarMonitoresOffline() {
             const email = await mostrarEmail(monitor.id_monitor);
             const nome = await mostrarNome(monitor.id_monitor);
             const foto = await mostrarFoto(monitor.id_monitor);
-            
+            const horario = await mostrarHorarios(monitor.id_monitor);
+
             // Cria um botão para cada monitor
             const button = document.createElement('button');
             button.classList.add('menu-hamburger');
@@ -120,7 +121,7 @@ async function mostrarMonitoresOffline() {
                     <div class="dados">
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
-                        <p class="horario">Horário: 13:00 - 16:00</p>
+                        <p class="horario">Horário: ${horario[0]}</p>
                         <p class="local">Local: Denscansando</p>
                         <p class="contato">Contato: ${email}</p>
                     </div>
@@ -256,6 +257,29 @@ async function mostrarSala(id_monitor) {
     } catch (error) {
         console.error("Erro ao buscar a sala:", error);
     }
+}
+
+async function mostrarHorarios(id) {
+
+    fetch(`${url}/mostrarhorarios/${id}`, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    }
+})
+.then(async response => {
+    if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+    }
+    const data = await response.json(); // Converte a resposta para JSON
+    console.log(data);
+    document.querySelector('#horarioEdit').textContent = `${data[0]} - ${data[1]}`;
+
+})
+.catch(error => {
+    console.error("Erro na requisição:", error.message);
+});
+
 }
 
 // Chama as funções para exibir os monitores online e offline
