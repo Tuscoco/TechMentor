@@ -11,6 +11,9 @@ import java.util.*;
 
 public class PessoaDAO {
 
+    private List<Pessoa> cachePessoas2;
+    private List<Pessoa> cachePessoas3;
+
     public void registrarPessoa(Pessoa pessoa) throws SQLException{
 
         try(Connection conn = DataBaseConnection.getConnection()){
@@ -25,6 +28,8 @@ public class PessoaDAO {
             pstmt.setString(4, senhaCripto);
             pstmt.setInt(5, pessoa.getTipoUsuario());
 
+            atualizarCache();
+
             pstmt.executeUpdate();
 
         }
@@ -37,7 +42,7 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT * FROM pessoa WHERE id = ?";
+            String sql = "SELECT senha FROM pessoa WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
@@ -93,6 +98,8 @@ public class PessoaDAO {
             pstmt.setInt(2, id);
 
             int alterado = pstmt.executeUpdate();
+
+            atualizarCache();
 
             return alterado > 0;
 
@@ -173,6 +180,8 @@ public class PessoaDAO {
             pstmt.setInt(2, id);
 
             int alterado = pstmt.executeUpdate();
+
+            atualizarCache();
 
             return alterado > 0;
 
@@ -283,7 +292,7 @@ public class PessoaDAO {
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT id, nome, tipo_usuario FROM pessoa WHERE tipo_usuario = ?";
+            String sql = "SELECT id, nome FROM pessoa WHERE tipo_usuario = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             
             pstmt.setInt(1, tipo);
@@ -292,41 +301,49 @@ public class PessoaDAO {
 
             while(result.next()){
 
-                Pessoa pessoa = new Pessoa(result.getInt("id"),result.getString("nome"), result.getInt("tipo_usuario"));
+                Pessoa pessoa = new Pessoa(result.getInt("id"),result.getString("nome"), tipo);
                 lista.add(pessoa);
 
             }
 
         }
 
-        lista = ordenar(lista);
-
         return lista;
 
     }
 
-    public List<Pessoa> ordenar(List<Pessoa> lista){
+    public List<Pessoa> getPessoas(int tipo) throws SQLException{
 
-        int n = lista.size();
+        if(tipo == 2){
 
+            if(cachePessoas2 == null){
 
-        for(int i = 1;i < n;i++){
-
-            Pessoa temp = lista.get(i);
-            int j = i - 1;
-
-            while((j >= 0) && (lista.get(j).getNome().compareTo(temp.getNome()) > 0)){
-
-                lista.set(j + 1, lista.get(j));
-                j--;
+                cachePessoas2 = getUsuarios(tipo);
 
             }
 
-            lista.set(j + 1, temp);
+            return cachePessoas2;
+
+        }else if(tipo == 3){
+
+            if(cachePessoas3 == null){
+
+                cachePessoas3 = getUsuarios(tipo);
+
+            }
+
+            return cachePessoas3;
 
         }
 
-        return lista;
+        return null;
+
+    }
+
+    public void atualizarCache() throws SQLException{
+
+        cachePessoas2 = getUsuarios(2);
+        cachePessoas3 = getUsuarios(3);
 
     }
 

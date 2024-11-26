@@ -10,6 +10,9 @@ import model.Monitoria;
 
 public class MonitorDAO{
 
+    private List<Monitoria> cacheMonitoresOnline;
+    private List<Monitoria> cacheMonitoresOffline;
+
     public void adicionarMonitor(Monitoria monitor) throws SQLException{
 
         try(Connection conn = DataBaseConnection.getConnection()){
@@ -48,14 +51,14 @@ public class MonitorDAO{
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online = true";
+            String sql = "SELECT id_monitor, id_materia, sala, entrada, saida FROM monitoria WHERE online = true";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
 
-                Monitoria monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"));
+                Monitoria monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"), result.getInt("sala"), result.getString("entrada"), result.getString("saida"));
                 lista.add(monitor);
 
             }
@@ -72,14 +75,14 @@ public class MonitorDAO{
 
         try(Connection conn = DataBaseConnection.getConnection()){
 
-            String sql = "SELECT id_monitor, id_materia FROM monitoria WHERE online IS DISTINCT FROM true";
+            String sql = "SELECT id_monitor, id_materia, sala, entrada, saida FROM monitoria WHERE online IS DISTINCT FROM true";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet result = pstmt.executeQuery();
 
             while(result.next()){
 
-                Monitoria monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"));
+                Monitoria monitor = new Monitoria(result.getInt("id_monitor"), result.getInt("id_materia"), result.getInt("sala"), result.getString("entrada"), result.getString("saida"));
                 lista.add(monitor);
 
             }
@@ -119,6 +122,8 @@ public class MonitorDAO{
 
             int alterado = pstmt.executeUpdate();
 
+            atualizarCacheMonitores();
+
             return alterado > 0;
 
         }
@@ -133,6 +138,8 @@ public class MonitorDAO{
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, id);
+
+            atualizarCacheMonitores();
 
             pstmt.executeUpdate();
 
@@ -278,6 +285,37 @@ public class MonitorDAO{
         }
 
         return lista;
+
+    }
+
+    public List<Monitoria> getOnline() throws SQLException{
+
+        if(cacheMonitoresOnline == null){
+
+            cacheMonitoresOnline = getMonitoresOnline();
+
+        }
+
+        return cacheMonitoresOnline;
+
+    }
+
+    public List<Monitoria> getOffline() throws SQLException{
+
+        if(cacheMonitoresOffline == null){
+
+            cacheMonitoresOffline = getMonitoresOffline();
+
+        }
+
+        return cacheMonitoresOffline;
+
+    }
+
+    public void atualizarCacheMonitores() throws SQLException{
+
+        cacheMonitoresOnline = getMonitoresOnline();
+        cacheMonitoresOffline = getMonitoresOffline();
 
     }
 
