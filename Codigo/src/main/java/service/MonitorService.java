@@ -44,13 +44,13 @@ public class MonitorService{
 
     public List<Monitoria> getMonitoresOnline() throws Exception{
 
-        return monitorDAO.getMonitoresOnline();
+        return monitorDAO.getOnline();
 
     }
 
     public List<Monitoria> getMonitoresOffline() throws Exception{
 
-        return monitorDAO.getMonitoresOffline();
+        return monitorDAO.getOffline();
 
     }
 

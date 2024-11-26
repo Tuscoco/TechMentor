@@ -11,6 +11,9 @@ import java.util.*;
 
 public class PessoaDAO {
 
+    private List<Pessoa> cachePessoas2;
+    private List<Pessoa> cachePessoas3;
+
     public void registrarPessoa(Pessoa pessoa) throws SQLException{
 
         try(Connection conn = DataBaseConnection.getConnection()){
@@ -24,6 +27,8 @@ public class PessoaDAO {
             pstmt.setString(3, pessoa.getEmail());
             pstmt.setString(4, senhaCripto);
             pstmt.setInt(5, pessoa.getTipoUsuario());
+
+            atualizarCache();
 
             pstmt.executeUpdate();
 
@@ -93,6 +98,8 @@ public class PessoaDAO {
             pstmt.setInt(2, id);
 
             int alterado = pstmt.executeUpdate();
+
+            atualizarCache();
 
             return alterado > 0;
 
@@ -173,6 +180,8 @@ public class PessoaDAO {
             pstmt.setInt(2, id);
 
             int alterado = pstmt.executeUpdate();
+
+            atualizarCache();
 
             return alterado > 0;
 
@@ -300,6 +309,41 @@ public class PessoaDAO {
         }
 
         return lista;
+
+    }
+
+    public List<Pessoa> getPessoas(int tipo) throws SQLException{
+
+        if(tipo == 2){
+
+            if(cachePessoas2 == null){
+
+                cachePessoas2 = getUsuarios(tipo);
+
+            }
+
+            return cachePessoas2;
+
+        }else if(tipo == 3){
+
+            if(cachePessoas3 == null){
+
+                cachePessoas3 = getUsuarios(tipo);
+
+            }
+
+            return cachePessoas3;
+
+        }
+
+        return null;
+
+    }
+
+    public void atualizarCache() throws SQLException{
+
+        cachePessoas2 = getUsuarios(2);
+        cachePessoas3 = getUsuarios(3);
 
     }
 
