@@ -19,7 +19,7 @@ public class PessoaDAO {
         try(Connection conn = DataBaseConnection.getConnection()){
 
             String senhaCripto = BCrypt.hashpw(pessoa.getSenha(), BCrypt.gensalt());
-            String sql = "INSERT INTO pessoa (id, nome, email, senha, tipo_usuario) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO pessoa (id, nome, email, senha, tipo_usuario, foto) VALUES (?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, pessoa.getId());
@@ -27,10 +27,11 @@ public class PessoaDAO {
             pstmt.setString(3, pessoa.getEmail());
             pstmt.setString(4, senhaCripto);
             pstmt.setInt(5, pessoa.getTipoUsuario());
-
-            atualizarCache();
+            pstmt.setString(6, pessoa.getFoto());
 
             pstmt.executeUpdate();
+
+            atualizarCache();
 
         }
 
