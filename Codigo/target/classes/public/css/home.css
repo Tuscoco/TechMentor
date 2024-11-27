@@ -1,45 +1,10 @@
-main {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-    padding: 50px;
-}
-
-main a {
-    text-decoration: none;
-}
-
-article {
-    padding: 10px;
-    color: white;
-    background-color: #7F32A6;
-    border-radius: 10px;
-    text-align: center;
-    transition: 0.1s;
-}
-
-article p {
-    margin: 0;
-}
-
-article i {
-    font-size: 175px;
-}
-
-article:hover {
-    scale: 1.05;
-    color: #7F32A6;
-    background-color: #fff;
-    outline: 5px solid #7F32A6;
-}
-
 #btn {
     justify-content: center;
     align-items: center;
     display: flex;
     width: 70px;
     height: 70px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: #fff;
     color: #7F32A6;
     position: fixed;
@@ -195,3 +160,59 @@ article:hover {
     scale: 1.1;
 }
 
+nav{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navButCont{
+    display: flex;
+    flex-direction: column;
+}
+
+.navButtons{
+    scale: 1.2;
+    text-decoration: none;
+    color: #7F32A6;
+    transition: .1s;
+    padding: .5%;
+}
+
+.navButtons:hover{
+    background-color: #7F32A6;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.navButtons i{
+    margin: 0 auto;
+}
+
+.navButtons p{
+    margin: 0 auto;
+    font-size: 35%;
+}
+
+
+.navButtons p{
+    opacity: 0;
+    transition: .1s;
+}
+
+.navButtons:hover p{
+    opacity: 1;
+    color: #fff;
+}
+
+.carousel-item{
+    margin: 1.5% 0 2%;
+}
+
+.carousel-item img{
+    border-radius: 5px;
+    outline: solid 5px #7F32A6;
+    margin: 0 auto;
+    width: 800px !important;
+    height: 430px  !important;
+    object-fit: cover;
+}
