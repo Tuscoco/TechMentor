@@ -25,6 +25,9 @@ public class MonitorDAO{
             pstmt.setBoolean(3, false);
 
             pstmt.executeUpdate();
+
+            atualizarCacheMonitores();
+
         }
 
     }
@@ -39,6 +42,8 @@ public class MonitorDAO{
             pstmt.setInt(1, id);
 
             int removido = pstmt.executeUpdate();
+
+            atualizarCacheMonitores();
 
             return removido > 0;
             
@@ -139,9 +144,9 @@ public class MonitorDAO{
 
             pstmt.setInt(1, id);
 
-            atualizarCacheMonitores();
-
             pstmt.executeUpdate();
+
+            atualizarCacheMonitores();
 
         }
 
@@ -158,6 +163,8 @@ public class MonitorDAO{
             pstmt.setInt(2, id);
 
             pstmt.executeUpdate();
+
+            atualizarCacheMonitores();
 
         }
 

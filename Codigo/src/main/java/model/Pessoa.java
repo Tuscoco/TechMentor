@@ -7,6 +7,7 @@ public class Pessoa {
     private String email;
     private String senha;
     private int tipo_usuario = 3;
+    private String foto = "https://res.cloudinary.com/deycrrjpb/image/upload/v1732706559/mzyq3m5groxsx42hshrd.jpg";
 
 
     public Pessoa(){}
@@ -73,6 +74,11 @@ public class Pessoa {
 
     public void setTipoUsuario(int tipo_usuario) {
         this.tipo_usuario = tipo_usuario;
+    }
+
+
+    public String getFoto(){
+        return foto;
     }
 
 }
