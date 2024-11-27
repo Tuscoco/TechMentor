@@ -348,10 +348,6 @@ mudarSwitch.addEventListener('change', async () => {
         }
         
     } else {
-
-        cameraStream.getTracks().forEach(track => track.stop());
-        cameraStream = null;
-        video.srcObject = null;
         captureButton.style.backgroundColor = "#7F32A6";
         verFotoElement.style.display = 'none';
         enviarSala.style.display = 'none';
@@ -401,52 +397,47 @@ async function verificarStatusMonitor(id) {
 }
 
 // Função para quando o switch é ligado
-function funcaoLigada(id) {
+async function funcaoLigada(id) {
+
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+    const body = {};
     
     fetch(`${url}/ficaronline/${id}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({})
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body)
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Erro na solicitação");
-        }
-    })
-    .then(data => {
-        console.log("Resposta do servidor:", data);
-    })
-    .catch(error => {
-        console.error("Erro:", error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log('Resposta:', data);
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+      });
+    
 }
 
 // Função para quando o switch é desligado
 function funcaoDesligada(id) {
-    fetch(`${url}/ficaroffline/${id}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({})
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Erro na solicitação");
-        }
-    })
-    .then(data => {
-        console.log("Resposta do servidor:", data);
-    })
-    .catch(error => {
-        console.error("Erro:", error);
-    });
+    const headers = {
+        'Content-Type': 'application/json'
+      };
+      const body = {};
+      
+      fetch(`${url}/ficaroffline/${id}`, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body)
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Resposta:', data);
+        })
+        .catch(error => {
+          console.error('Erro:', error);
+        });
 }
 
 async function mostrarSala() {    

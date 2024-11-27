@@ -27,6 +27,13 @@ async function mostrarMonitoresOnline() {
             const nome = await mostrarNome(monitor.id_monitor);
             const foto = await mostrarFoto(monitor.id_monitor);
             const sala = await mostrarSala(monitor.id_monitor);
+            const horario = await mostrarHorarios(monitor.id_monitor);
+            console.log(horario);
+            if(horario[0] == null || horario[0] == null){
+                horario[0] = "horario não definido"
+                horario[1] = " "
+            }    
+            
             // Cria um botão para cada monitor
             const button = document.createElement('button');
             button.classList.add('menu-hamburger');
@@ -39,15 +46,15 @@ async function mostrarMonitoresOnline() {
                     <div>
                     <p class="materia">${materia}</p>
                     </div>
-                    <p class="horario">13:00 - 16:00</p>
+                    <p class="horario">${horario[0]} - ${horario[1]}</p>
                 </div>
                 <div class="bar-open">
                     <img src="${foto}" alt="foto">
                     <div class="dados">
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
-                        <p class="horario">Horário: 13:00 - 16:00</p>
-                        <p class="local">Local: ${sala}</p>
+                        <p class="horario">Horário: ${horario[0]} - ${horario[1]}</p>
+                        <p class="local">Local: Denscansando</p>
                         <p class="contato">Contato: ${email}</p>
                     </div>
                 </div>
