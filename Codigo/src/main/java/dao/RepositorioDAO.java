@@ -7,6 +7,8 @@ import config.*;
 
 public class RepositorioDAO {
 
+    private List<Repositorio> cacheRepositorio;
+
     public void salvarRepositorio(Repositorio repositorio) throws SQLException{
 
         try(Connection conn = DataBaseConnection.getConnection()){
@@ -19,6 +21,8 @@ public class RepositorioDAO {
             pstmt.setString(3, repositorio.getLink());
 
             pstmt.executeUpdate();
+
+            atualizarCache();
 
         }
 
@@ -34,6 +38,8 @@ public class RepositorioDAO {
             pstmt.setInt(1, id);
 
             pstmt.executeUpdate();
+
+            atualizarCache();
 
         }
 
@@ -106,6 +112,24 @@ public class RepositorioDAO {
         }
 
         return lista;
+
+    }
+
+    public List<Repositorio> getRepos() throws SQLException{
+
+        if(cacheRepositorio == null){
+
+            cacheRepositorio = getTodos();
+
+        }
+
+        return cacheRepositorio;
+
+    }
+
+    public void atualizarCache() throws SQLException{
+
+        cacheRepositorio = getTodos();
 
     }
     

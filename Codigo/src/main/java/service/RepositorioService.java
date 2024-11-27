@@ -48,7 +48,7 @@ public class RepositorioService {
 
     public List<Repositorio> getTodos() throws SQLException{
 
-        return repositorioDAO.getTodos();
+        return repositorioDAO.getRepos();
 
     }
 
