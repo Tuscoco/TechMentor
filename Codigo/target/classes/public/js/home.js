@@ -11,9 +11,6 @@ const loadingButton = document.getElementById('loadingButton');
 const tirarFoto = document.getElementById('tirarFoto');
 const enviarSala = document.getElementById('send')
 
-console.log(usuarioLogadoHome);
-
-
 let cameraStream = null;
 
 toggleDisplay(tipoVer);
@@ -101,7 +98,7 @@ function matchEnd(){
 }
 
 function unmatchEnd(){
-    console.log("n verificado");
+    console.log("não verificado");
     captureButton.style.backgroundColor = "red";
 }
 
@@ -372,7 +369,6 @@ async function doPromise() {
 // Função para verificar o status do monitor
 async function verificarStatusMonitor(id) {
     try {
-        console.log("ID do monitor:", id); // Log do ID
 
         const response = await fetch(`${url}/mostraronline/${id}`, {
             method: "GET",

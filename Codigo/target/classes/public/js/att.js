@@ -28,7 +28,6 @@ async function mostrarMonitoresOnline() {
             const email = await mostrarEmail(monitor.id);
             const foto = await mostrarFoto(monitor.id);
             const att = await mostrarAtendimentos(monitor.id);
-            console.log(att);
             
             let pontosMes = null;
 

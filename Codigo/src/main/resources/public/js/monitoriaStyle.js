@@ -28,7 +28,7 @@ async function mostrarMonitoresOnline() {
             const foto = await mostrarFoto(monitor.id_monitor);
             const sala = await mostrarSala(monitor.id_monitor);
             const horario = await mostrarHorarios(monitor.id_monitor);
-            console.log(horario);
+            
             if(horario[0] == null || horario[0] == null){
                 horario[0] = "horario não definido"
                 horario[1] = " "
@@ -108,7 +108,7 @@ async function mostrarMonitoresOffline() {
             const nome = await mostrarNome(monitor.id_monitor);
             const foto = await mostrarFoto(monitor.id_monitor);
             const horario = await mostrarHorarios(monitor.id_monitor);
-            console.log(horario);
+
             if(horario[0] == null || horario[0] == null){
                 horario[0] = "horario não definido"
                 horario[1] = " "

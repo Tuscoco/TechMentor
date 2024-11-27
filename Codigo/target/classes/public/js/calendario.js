@@ -175,7 +175,6 @@ document.querySelector('#novoEvento button').addEventListener('click', () => {
     .then(response => {
         if (response.ok) {
             console.log('Evento salvo com sucesso');
-            console.log(eventoData);
             clearEventInput();
         } else {
             console.error('Falha ao salvar o evento');

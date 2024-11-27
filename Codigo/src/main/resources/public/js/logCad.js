@@ -160,7 +160,7 @@ async function loginPessoa(id, senha, tipo, nome, email) {
                 userLogado.email = await getEmailUsuario(id);
 
                 localStorage.setItem('usuarioLogado', JSON.stringify(userLogado))
-                console.log(userLogado)
+                
                 window.location.href = '../html/home.html';
             } else {
                 console.log("Falha no login:", result);

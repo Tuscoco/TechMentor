@@ -134,8 +134,6 @@ async function fetchUsuarios() {
                             idMateria: materiaSelecionada
                         };
 
-                        console.log(alteraTipo);
-
                         // Fazendo a requisição POST
                         const response = await fetch(`${url}/alterartipousuario`, {
                             method: 'POST',

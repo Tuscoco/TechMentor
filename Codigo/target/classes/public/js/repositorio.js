@@ -20,8 +20,6 @@ document.getElementById('adicionar').addEventListener('click', function() {
         link: link
     };
 
-    console.log(dados);
-
     // Enviar os dados para o JSON Server
     fetch(`${url}/salvarrepositorio`, {
         method: 'POST',

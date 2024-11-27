@@ -4,7 +4,6 @@ document.querySelector('#nameEdit').textContent = usuarioLogadoPerfil.nome;
 document.querySelector('#emailEdit').textContent = usuarioLogadoPerfil.email;
 const horarios = mostrarHorarios(usuarioLogadoPerfil.id);
 toggleDisplay(usuarioLogadoPerfil.tipo)
-console.log(usuarioLogadoPerfil);
 
 
 // document.querySelector('#horarioEdit').textContent = `${horarios[0]} - ${horarios[1]}`;
@@ -19,7 +18,7 @@ document.getElementById('sair').addEventListener('click', function() {
 
 document.getElementById('uploadButton').addEventListener('click', async function() {
     const imgUrl = await uploadImage();
-    console.log(imgUrl);
+    
     salvarFoto(usuarioLogadoPerfil.id, imgUrl); 
     location.reload();
 });
@@ -279,7 +278,7 @@ function mostrarHorarios(id) {
         throw new Error(`Erro HTTP: ${response.status}`);
     }
     const data = await response.json(); // Converte a resposta para JSON
-    console.log(data);
+    
     document.querySelector('#horarioEdit').textContent = `${data[0]} - ${data[1]}`;
 
 })
