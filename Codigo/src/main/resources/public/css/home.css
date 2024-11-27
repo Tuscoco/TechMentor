@@ -1,3 +1,6 @@
+main{
+}
+
 #btn {
     justify-content: center;
     align-items: center;
@@ -104,18 +107,19 @@
 #verFoto {
     height: 100%;
     width: 75%;
-    display: none; /* Oculta inicialmente */
-    position: fixed; /* Faz com que fique sobreposta */
-    top: 50%; /* Centraliza verticalmente */
-    left: 50%; /* Centraliza horizontalmente */
+    display: none;
+    position: fixed; /* Garante que o elemento esteja fixo e independente do fluxo do documento */
+    top: 50%; 
+    left: 50%; 
     transform: translate(-50%, -50%);
-    z-index: 9999; /* Garante que fique acima de outros elementos */
-    background: rgba(0, 0, 0, 0.8); /* Fundo escuro para destacar */
+    z-index: 9999; /* Coloca o elemento acima de tudo */
+    background: rgba(0, 0, 0, 0.8); 
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     flex-direction: column;
     justify-content: center;
 }
+
 
 #video {
     margin: 0 auto 5%;
@@ -137,7 +141,7 @@
     color: #fff;
     width: min-content;
     padding: 0 10px;
-    font-size: 50%;
+    font-size: 150%;
     border-radius: 10px;
     transition: .1s;
 }
@@ -147,9 +151,9 @@
     background-color: #7F32A6;
     margin: 0 auto;
     color: #fff;
-    width: min-content;
+    width: max-content;
     padding: 0 10px;
-    font-size: 50%;
+    font-size: 150%;
     border-radius: 10px;
     transition: .1s;
 }
@@ -206,13 +210,13 @@ nav{
 
 .carousel-inner{
     padding: 15px;
-    margin: 1% 0 1%;
+    margin: 1% auto 1%;
+    width: min-content !important;
 }
 
 .carousel-item img{
     border-radius: 5px;
     outline: solid 5px #7F32A6;
-    margin: 0 auto;
     width: 800px !important;
     height: 430px  !important;
     object-fit: cover;

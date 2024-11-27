@@ -69,6 +69,14 @@ async function salvarAtendimento() {
         if (response.ok) {
             const result = await response.json();
             console.log('Atendimento salvo com sucesso:', result);
+            
+            const enviar = document.getElementById('enviar');
+            enviar.style.backgroundColor = 'green'
+            enviar.innerText = 'Enviado'
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         } else {
             const errorResult = await response.json();
             console.error('Erro ao salvar atendimento:', response.status, response.statusText, errorResult);

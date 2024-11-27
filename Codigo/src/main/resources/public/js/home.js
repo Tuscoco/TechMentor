@@ -349,6 +349,9 @@ mudarSwitch.addEventListener('change', async () => {
         
     } else {
 
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null;
+        video.srcObject = null;
         captureButton.style.backgroundColor = "#7F32A6";
         verFotoElement.style.display = 'none';
         enviarSala.style.display = 'none';
