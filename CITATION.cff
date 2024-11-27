@@ -1,31 +1,30 @@
 cff-version: 1.0.1
 message: Please cite this software using these metadata.
-title: 
+title: Techmentor
 authors:
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names: 
-  - family-names: 
-    given-names:
+  - family-names: Fernandes Marinho
+    given-names: Lucas
+  - family-names: Portes Antunes
+    given-names: Felipe
+  - family-names: Fasciani Viggiani Rios de Castro
+    given-names: Mateus
+  - family-names: Duarte Gomes
+    given-names: Letícia
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Vieira Carneiro
+    given-names: Rommel
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Mara Freitas Diniz
+    given-names: Luciana
 keywords:
-  - 
-  - 
-repository-code: 
+  - Monitoria
+  - Monitores
+  - Atendimento
+  - Calendário
+  - Repositório
+repository-code: https://github.com/ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-2-g20-techmentor
 license: CC-BY-4.0
 version: 1.0.0
 date-released: 2022-07-14
