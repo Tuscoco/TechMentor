@@ -1,4 +1,4 @@
-const url = 'http://localhost:4567'; // Endereço do seu servidor
+const url = 'http://localhost:4567';
 let currentOpenButton = null;
 let monitorCache = {}; // Objeto para armazenar os dados no cache
 
@@ -53,7 +53,7 @@ async function mostrarMonitoresOffline() {
 // Função para obter dados de um monitor (com cache)
 async function getMonitorData(monitor) {
     if (monitorCache[monitor.id_monitor]) {
-        return monitorCache[monitor.id_monitor]; // Retorna do cache se disponível
+        return monitorCache[monitor.id_monitor]; 
     }
 
     try {
@@ -67,20 +67,20 @@ async function getMonitorData(monitor) {
         ]);
 
         const monitorData = { nome, materia, email, foto, horario };
-        monitorCache[monitor.id_monitor] = monitorData; // Salva no cache
+        monitorCache[monitor.id_monitor] = monitorData;
         return monitorData;
     } catch (error) {
         console.error('Erro ao obter dados do monitor:', error);
-        return { nome: 'Monitor não encontrado', materia: 'Não disponível', email: 'Não disponível', foto: '', horario: ['Horário não definido', ''] }; // Valor padrão em caso de erro
+        return { nome: 'Monitor não encontrado', materia: 'Não disponível', email: 'Não disponível', foto: '', horario: ['Horário não definido', ''] }; 
     }
 }
 
 
 // Função para criar o botão de monitor
 function criarBotaoMonitor(nome, materia, email, foto, horario) {
-    // Verifica se "horario" é válido e possui pelo menos 2 elementos
+
     if (!Array.isArray(horario) || horario.length < 2 || horario[0] == null || horario[1] == null) {
-        horario = ["horário não definido", " "]; // Define valores padrão
+        horario = ["horário não definido", " "]; 
     }
 
     const button = document.createElement('button');
@@ -118,79 +118,67 @@ function criarBotaoMonitor(nome, materia, email, foto, horario) {
     return button;
 }
 
-// Funções auxiliares para buscar informações específicas (já no seu código, sem alterações)
-// Função para buscar uma matéria pelo ID
 async function fetchMateria(id_materia) {
     try {
         const response = await fetch(`${url}/mostrarmateria/${id_materia}`);
 
-        // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error(`Erro na requisição da matéria: ${response.status}`);
         }
 
-        // Convertendo a resposta para JSON
         const materia = await response.json();
 
-        // Retornando o nome da matéria
-        return materia.nome; // Certifique-se de que o JSON retornado tem o campo "nome"
+        return materia.nome;
     } catch (error) {
         console.error('Erro ao buscar a matéria:', error);
-        return 'Matéria não encontrada'; // Valor padrão em caso de erro
+        return 'Matéria não encontrada'; 
     }
 }
 
 async function mostrarEmail(id_monitor) {
     try {
-        // Fazendo a requisição GET para a API
         const response = await fetch(`${url}/mostraremail/${id_monitor}`);
 
-        // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        // Convertendo a resposta para JSON
         const email = await response.json();
-        // Retornando o email
-        return email; // Certifique-se de que o JSON retornado tem o campo "email"
+
+        return email; 
     } catch (error) {
         console.error('Erro ao buscar o monitor:', error);
-        return 'Monitor não encontrado'; // Valor padrão em caso de erro
+        return 'Monitor não encontrado';
     }
 }
 
 async function mostrarNome(id_monitor) {
     try {
-        // Fazendo a requisição GET para a API
+
         const response = await fetch(`${url}/mostrarnome/${id_monitor}`);
 
-        // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        // Convertendo a resposta para JSON
         const nome = await response.json();
-        // Retornando o nome
-        return nome; // Certifique-se de que o JSON retornado tem o campo "email"
+
+        return nome;
     } catch (error) {
         console.error('Erro ao buscar o monitor:', error);
-        return 'Monitor não encontrado'; // Valor padrão em caso de erro
+        return 'Monitor não encontrado'; 
     }
 }
 
 async function mostrarFoto(id_monitor) {
     try {
 
-        // Faz o fetch para obter a URL da imagem
         const response = await fetch(`${url}/mostrarfoto/${id_monitor}`);
         
         if (!response.ok) {
             throw new Error('Erro ao buscar a imagem');
         }
 
-        // Converte a resposta para JSON
         const foto = await response.json(); 
 
         if (foto) {
@@ -205,18 +193,14 @@ async function mostrarFoto(id_monitor) {
 
 async function mostrarSala(id_monitor) {    
     try {
-        // Fazendo a requisição GET
+
         const response = await fetch(`${url}/mostrarsala/${id_monitor}`, { method: 'GET' });
         
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.statusText}`);
         }
         
-        // Obtendo o texto da resposta
         const data = await response.json();
-        
-        
-        // Preenchendo o campo de texto com o valor retornado
         
         if (data) {
             return data;
@@ -230,21 +214,19 @@ async function mostrarSala(id_monitor) {
 
 async function mostrarHorarios(id_monitor) {
     try {
-        // Fazendo a requisição GET para a API
+
         const response = await fetch(`${url}/mostrarhorarios/${id_monitor}`);
 
-        // Verificando se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        // Convertendo a resposta para JSON
         const data = await response.json();
-        // Retornando o data
-        return data; // Certifique-se de que o JSON retornado tem o campo "email"
+
+        return data; 
     } catch (error) {
         console.error('Erro ao buscar o monitor:', error);
-        return 'Monitor não encontrado'; // Valor padrão em caso de erro
+        return 'Monitor não encontrado';
     }
 }
 
