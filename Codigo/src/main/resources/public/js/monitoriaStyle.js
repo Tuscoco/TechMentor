@@ -101,7 +101,12 @@ async function mostrarMonitoresOffline() {
             const nome = await mostrarNome(monitor.id_monitor);
             const foto = await mostrarFoto(monitor.id_monitor);
             const horario = await mostrarHorarios(monitor.id_monitor);
-
+            console.log(horario);
+            if(horario[0] == null || horario[0] == null){
+                horario[0] = "horario não definido"
+                horario[1] = " "
+            }    
+            
             // Cria um botão para cada monitor
             const button = document.createElement('button');
             button.classList.add('menu-hamburger');
@@ -114,14 +119,14 @@ async function mostrarMonitoresOffline() {
                     <div>
                     <p class="materia">${materia}</p>
                     </div>
-                    <p class="horario">13:00 - 16:00</p>
+                    <p class="horario">${horario[0]} - ${horario[1]}</p>
                 </div>
                 <div class="bar-open">
                     <img src="${foto}" alt="foto">
                     <div class="dados">
                         <p class="nome">Nome: ${nome}</p>
                         <p class="materia">Matéria: ${materia}</p>
-                        <p class="horario">Horário: ${horario[0]}</p>
+                        <p class="horario">Horário: ${horario[0]} - ${horario[1]}</p>
                         <p class="local">Local: Denscansando</p>
                         <p class="contato">Contato: ${email}</p>
                     </div>
@@ -259,27 +264,24 @@ async function mostrarSala(id_monitor) {
     }
 }
 
-async function mostrarHorarios(id) {
+async function mostrarHorarios(id_monitor) {
+    try {
+        // Fazendo a requisição GET para a API
+        const response = await fetch(`${url}/mostrarhorarios/${id_monitor}`);
 
-    fetch(`${url}/mostrarhorarios/${id}`, {
-    method: "GET",
-    headers: {
-        "Content-Type": "application/json"
+        // Verificando se a resposta foi bem-sucedida
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        // Convertendo a resposta para JSON
+        const data = await response.json();
+        // Retornando o data
+        return data; // Certifique-se de que o JSON retornado tem o campo "email"
+    } catch (error) {
+        console.error('Erro ao buscar o monitor:', error);
+        return 'Monitor não encontrado'; // Valor padrão em caso de erro
     }
-})
-.then(async response => {
-    if (!response.ok) {
-        throw new Error(`Erro HTTP: ${response.status}`);
-    }
-    const data = await response.json(); // Converte a resposta para JSON
-    console.log(data);
-    document.querySelector('#horarioEdit').textContent = `${data[0]} - ${data[1]}`;
-
-})
-.catch(error => {
-    console.error("Erro na requisição:", error.message);
-});
-
 }
 
 // Chama as funções para exibir os monitores online e offline
