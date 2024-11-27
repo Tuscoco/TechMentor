@@ -1,80 +1,24 @@
 const url = 'http://localhost:4567'; // Endereço do seu servidor
 let currentOpenButton = null;
+let monitorCache = {}; // Objeto para armazenar os dados no cache
 
 // Função para buscar monitores online e exibi-los na tela
 async function mostrarMonitoresOnline() {
     try {
-        // Faz a requisição GET para o servidor local
         const response = await fetch(`${url}/mostrarMonitoresOnline`);
-        
-        // Verifica se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error(`Erro na requisição de monitores: ${response.status}`);
         }
+        const monitores = await response.json();
 
-        const monitores = await response.json(); // Converte a resposta em JSON
-
-        // Seleciona o contêiner onde os botões serão inseridos
         const container = document.getElementById('monP');
-        container.innerHTML = ''; // Limpa o conteúdo anterior
+        container.innerHTML = '';
 
-        // Itera sobre os monitores retornados
         for (const monitor of monitores) {
+            const monitorData = await getMonitorData(monitor);
+            const { nome, materia, email, foto, horario } = monitorData;
 
-            // Obtém a matéria do monitor
-            const materia = await fetchMateria(monitor.id_materia); // Certifique-se de que id_materia existe
-            const email = await mostrarEmail(monitor.id_monitor);
-            const nome = await mostrarNome(monitor.id_monitor);
-            const foto = await mostrarFoto(monitor.id_monitor);
-            const sala = await mostrarSala(monitor.id_monitor);
-            const horario = await mostrarHorarios(monitor.id_monitor);
-            
-            if(horario[0] == null || horario[0] == null){
-                horario[0] = "horario não definido"
-                horario[1] = " "
-            }    
-            
-            // Cria um botão para cada monitor
-            const button = document.createElement('button');
-            button.classList.add('menu-hamburger');
-
-            // Estrutura do conteúdo do botão (fechado e aberto)
-            button.innerHTML = `
-                <div class="bar-close">
-                    <img src="${foto}" alt="foto">
-                    <p class="nome">${nome}</p>
-                    <div>
-                    <p class="materia">${materia}</p>
-                    </div>
-                    <p class="horario">${horario[0]} - ${horario[1]}</p>
-                </div>
-                <div class="bar-open">
-                    <img src="${foto}" alt="foto">
-                    <div class="dados">
-                        <p class="nome">Nome: ${nome}</p>
-                        <p class="materia">Matéria: ${materia}</p>
-                        <p class="horario">Horário: ${horario[0]} - ${horario[1]}</p>
-                        <p class="local">Local: Denscansando</p>
-                        <p class="contato">Contato: ${email}</p>
-                    </div>
-                </div>
-            `;
-
-            // Adiciona um evento de clique ao botão
-            button.addEventListener('click', () => {
-                // Fecha o botão atualmente aberto, se houver
-                if (currentOpenButton && currentOpenButton !== button) {
-                    currentOpenButton.classList.remove('open');
-                }
-
-                // Alterna a classe 'open' no botão atual
-                button.classList.toggle('open');
-
-                // Atualiza a referência do botão atualmente aberto
-                currentOpenButton = button.classList.contains('open') ? button : null;
-            });
-
-            // Adiciona o botão ao contêiner
+            const button = criarBotaoMonitor(nome, materia, email, foto, horario);
             container.appendChild(button);
         }
     } catch (error) {
@@ -82,79 +26,23 @@ async function mostrarMonitoresOnline() {
     }
 }
 
-// Função para buscar monitores offline (mantém o mesmo comportamento)
+// Função para buscar monitores offline
 async function mostrarMonitoresOffline() {
     try {
-        // Faz a requisição GET para o servidor local
-        const response = await fetch('/mostrarMonitoresOffline');
-        
-        // Verifica se a resposta foi bem-sucedida
+        const response = await fetch(`${url}/mostrarMonitoresOffline`);
         if (!response.ok) {
             throw new Error(`Erro na requisição de monitores: ${response.status}`);
         }
+        const monitores = await response.json();
 
-        const monitores = await response.json(); // Converte a resposta em JSON
-
-        // Seleciona o contêiner onde os botões serão inseridos
         const container = document.getElementById('monA');
-        container.innerHTML = ''; // Limpa o conteúdo anterior
+        container.innerHTML = '';
 
-        // Itera sobre os monitores retornados
         for (const monitor of monitores) {
+            const monitorData = await getMonitorData(monitor);
+            const { nome, materia, email, foto, horario } = monitorData;
 
-            // Obtém a matéria do monitor
-            const materia = await fetchMateria(monitor.id_materia); // Certifique-se de que id_materia existe
-            const email = await mostrarEmail(monitor.id_monitor);
-            const nome = await mostrarNome(monitor.id_monitor);
-            const foto = await mostrarFoto(monitor.id_monitor);
-            const horario = await mostrarHorarios(monitor.id_monitor);
-
-            if(horario[0] == null || horario[0] == null){
-                horario[0] = "horario não definido"
-                horario[1] = " "
-            }    
-            
-            // Cria um botão para cada monitor
-            const button = document.createElement('button');
-            button.classList.add('menu-hamburger');
-
-            // Estrutura do conteúdo do botão (fechado e aberto)
-            button.innerHTML = `
-                <div class="bar-close">
-                    <img src="${foto}" alt="foto">
-                    <p class="nome">${nome}</p>
-                    <div>
-                    <p class="materia">${materia}</p>
-                    </div>
-                    <p class="horario">${horario[0]} - ${horario[1]}</p>
-                </div>
-                <div class="bar-open">
-                    <img src="${foto}" alt="foto">
-                    <div class="dados">
-                        <p class="nome">Nome: ${nome}</p>
-                        <p class="materia">Matéria: ${materia}</p>
-                        <p class="horario">Horário: ${horario[0]} - ${horario[1]}</p>
-                        <p class="local">Local: Denscansando</p>
-                        <p class="contato">Contato: ${email}</p>
-                    </div>
-                </div>
-            `;
-
-            // Adiciona um evento de clique ao botão
-            button.addEventListener('click', () => {
-                // Fecha o botão atualmente aberto, se houver
-                if (currentOpenButton && currentOpenButton !== button) {
-                    currentOpenButton.classList.remove('open');
-                }
-
-                // Alterna a classe 'open' no botão atual
-                button.classList.toggle('open');
-
-                // Atualiza a referência do botão atualmente aberto
-                currentOpenButton = button.classList.contains('open') ? button : null;
-            });
-
-            // Adiciona o botão ao contêiner
+            const button = criarBotaoMonitor(nome, materia, email, foto, horario);
             container.appendChild(button);
         }
     } catch (error) {
@@ -162,6 +50,75 @@ async function mostrarMonitoresOffline() {
     }
 }
 
+// Função para obter dados de um monitor (com cache)
+async function getMonitorData(monitor) {
+    if (monitorCache[monitor.id_monitor]) {
+        return monitorCache[monitor.id_monitor]; // Retorna do cache se disponível
+    }
+
+    try {
+        // Buscando os dados em paralelo
+        const [nome, materia, email, foto, horario] = await Promise.all([
+            mostrarNome(monitor.id_monitor),
+            fetchMateria(monitor.id_materia),
+            mostrarEmail(monitor.id_monitor),
+            mostrarFoto(monitor.id_monitor),
+            mostrarHorarios(monitor.id_monitor)
+        ]);
+
+        const monitorData = { nome, materia, email, foto, horario };
+        monitorCache[monitor.id_monitor] = monitorData; // Salva no cache
+        return monitorData;
+    } catch (error) {
+        console.error('Erro ao obter dados do monitor:', error);
+        return { nome: 'Monitor não encontrado', materia: 'Não disponível', email: 'Não disponível', foto: '', horario: ['Horário não definido', ''] }; // Valor padrão em caso de erro
+    }
+}
+
+
+// Função para criar o botão de monitor
+function criarBotaoMonitor(nome, materia, email, foto, horario) {
+    // Verifica se "horario" é válido e possui pelo menos 2 elementos
+    if (!Array.isArray(horario) || horario.length < 2 || horario[0] == null || horario[1] == null) {
+        horario = ["horário não definido", " "]; // Define valores padrão
+    }
+
+    const button = document.createElement('button');
+    button.classList.add('menu-hamburger');
+
+    button.innerHTML = `
+        <div class="bar-close">
+            <img src="${foto}" alt="foto">
+            <p class="nome">${nome}</p>
+            <div>
+                <p class="materia">${materia}</p>
+            </div>
+            <p class="horario">${horario[0]} - ${horario[1]}</p>
+        </div>
+        <div class="bar-open">
+            <img src="${foto}" alt="foto">
+            <div class="dados">
+                <p class="nome">Nome: ${nome}</p>
+                <p class="materia">Matéria: ${materia}</p>
+                <p class="horario">Horário: ${horario[0]} - ${horario[1]}</p>
+                <p class="local">Local: Descansando</p>
+                <p class="contato">Contato: ${email}</p>
+            </div>
+        </div>
+    `;
+
+    button.addEventListener('click', () => {
+        if (currentOpenButton && currentOpenButton !== button) {
+            currentOpenButton.classList.remove('open');
+        }
+        button.classList.toggle('open');
+        currentOpenButton = button.classList.contains('open') ? button : null;
+    });
+
+    return button;
+}
+
+// Funções auxiliares para buscar informações específicas (já no seu código, sem alterações)
 // Função para buscar uma matéria pelo ID
 async function fetchMateria(id_materia) {
     try {
@@ -291,6 +248,6 @@ async function mostrarHorarios(id_monitor) {
     }
 }
 
-// Chama as funções para exibir os monitores online e offline
+// Chama as funções para exibir os monitores
 mostrarMonitoresOnline();
 mostrarMonitoresOffline();
