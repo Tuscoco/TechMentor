@@ -204,8 +204,9 @@ nav{
     color: #fff;
 }
 
-.carousel-item{
-    margin: 1.5% 0 2%;
+.carousel-inner{
+    padding: 15px;
+    margin: 1% 0 1%;
 }
 
 .carousel-item img{
