@@ -1,4 +1,4 @@
-const url = 'http://localhost:4567';
+const url = 'https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com';
 let currentOpenButton = null;
 
 const cache = {

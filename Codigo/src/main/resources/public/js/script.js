@@ -1,4 +1,4 @@
-const urlScrp = 'http://localhost:4567'; // Endereço do seu servidor
+const urlScrp = 'https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com'; // Endereço do seu servidor
 const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
 
 if (usuarioLogado) {

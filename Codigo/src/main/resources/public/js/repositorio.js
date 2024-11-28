@@ -1,4 +1,4 @@
-const url = 'http://localhost:4567'; // Endereço do seu servidor
+const url = 'https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com'; // Endereço do seu servidor
 
 // Adicionar event listener para o botão "Adicionar"
 document.getElementById('adicionar').addEventListener('click', function() {
