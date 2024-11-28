@@ -215,6 +215,7 @@ function mostrarEventosPorData() {
             
             if (eventos.length > 0) {
                 eventos.forEach(evento => {
+
                     // Cria um elemento para cada evento e adiciona à div
                     const eventoElemento = document.createElement('p');
                     eventoElemento.innerHTML = `
@@ -227,6 +228,8 @@ function mostrarEventosPorData() {
                     </div>`;
                     eventosDiv.appendChild(eventoElemento);
                 });
+
+                toggleDisplay()
 
                 // Adiciona event listener para cada div de apagar
                 const apagarDivs = document.querySelectorAll('.apagar');
@@ -287,8 +290,4 @@ function toggleDisplay() {
             elemento.style.display = 'none';
         });
     }
-}
-
-
-toggleDisplay()
-        
+}        
