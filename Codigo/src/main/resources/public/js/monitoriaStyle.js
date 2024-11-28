@@ -1,8 +1,7 @@
 const url = 'http://localhost:4567';
 let currentOpenButton = null;
-let monitorCache = {}; // Objeto para armazenar os dados no cache
+let monitorCache = {}; 
 
-// Função para buscar monitores online e exibi-los na tela
 async function mostrarMonitoresOnline() {
     try {
         const response = await fetch(`${url}/mostrarMonitoresOnline`);
@@ -16,9 +15,9 @@ async function mostrarMonitoresOnline() {
 
         for (const monitor of monitores) {
             const monitorData = await getMonitorData(monitor);
-            const { nome, materia, email, foto, horario } = monitorData;
+            const { nome, materia, email, foto, horario, sala } = monitorData;
 
-            const button = criarBotaoMonitor(nome, materia, email, foto, horario);
+            const button = criarBotaoMonitor(nome, materia, email, foto, horario, sala);
             container.appendChild(button);
         }
     } catch (error) {
@@ -26,7 +25,6 @@ async function mostrarMonitoresOnline() {
     }
 }
 
-// Função para buscar monitores offline
 async function mostrarMonitoresOffline() {
     try {
         const response = await fetch(`${url}/mostrarMonitoresOffline`);
@@ -50,38 +48,36 @@ async function mostrarMonitoresOffline() {
     }
 }
 
-// Função para obter dados de um monitor (com cache)
 async function getMonitorData(monitor) {
     if (monitorCache[monitor.id_monitor]) {
         return monitorCache[monitor.id_monitor]; 
     }
 
     try {
-        // Buscando os dados em paralelo
-        const [nome, materia, email, foto, horario] = await Promise.all([
+        const [nome, materia, email, foto, horario, sala] = await Promise.all([
             mostrarNome(monitor.id_monitor),
             fetchMateria(monitor.id_materia),
             mostrarEmail(monitor.id_monitor),
             mostrarFoto(monitor.id_monitor),
-            mostrarHorarios(monitor.id_monitor)
+            mostrarHorarios(monitor.id_monitor),
+            mostrarSala(monitor.id_monitor)
         ]);
 
-        const monitorData = { nome, materia, email, foto, horario };
+        const monitorData = { nome, materia, email, foto, horario, sala };
         monitorCache[monitor.id_monitor] = monitorData;
         return monitorData;
     } catch (error) {
         console.error('Erro ao obter dados do monitor:', error);
-        return { nome: 'Monitor não encontrado', materia: 'Não disponível', email: 'Não disponível', foto: '', horario: ['Horário não definido', ''] }; 
+        return { nome: 'Monitor não encontrado', materia: 'Não disponível', email: 'Não disponível', foto: '', horario: ['Horário não definido', ''], sala: 'Não definida' }; 
     }
 }
 
-
-// Função para criar o botão de monitor
-function criarBotaoMonitor(nome, materia, email, foto, horario) {
-
+function criarBotaoMonitor(nome, materia, email, foto, horario, sala) {
     if (!Array.isArray(horario) || horario.length < 2 || horario[0] == null || horario[1] == null) {
         horario = ["horário não definido", " "]; 
     }
+
+    const local = sala !== undefined ? sala : "Descansando"; 
 
     const button = document.createElement('button');
     button.classList.add('menu-hamburger');
@@ -101,7 +97,7 @@ function criarBotaoMonitor(nome, materia, email, foto, horario) {
                 <p class="nome">Nome: ${nome}</p>
                 <p class="materia">Matéria: ${materia}</p>
                 <p class="horario">Horário: ${horario[0]} - ${horario[1]}</p>
-                <p class="local">Local: Descansando</p>
+                <p class="local">Local: ${local}</p>
                 <p class="contato">Contato: ${email}</p>
             </div>
         </div>
@@ -154,7 +150,6 @@ async function mostrarEmail(id_monitor) {
 
 async function mostrarNome(id_monitor) {
     try {
-
         const response = await fetch(`${url}/mostrarnome/${id_monitor}`);
 
         if (!response.ok) {
@@ -172,7 +167,6 @@ async function mostrarNome(id_monitor) {
 
 async function mostrarFoto(id_monitor) {
     try {
-
         const response = await fetch(`${url}/mostrarfoto/${id_monitor}`);
         
         if (!response.ok) {
@@ -193,7 +187,6 @@ async function mostrarFoto(id_monitor) {
 
 async function mostrarSala(id_monitor) {    
     try {
-
         const response = await fetch(`${url}/mostrarsala/${id_monitor}`, { method: 'GET' });
         
         if (!response.ok) {
@@ -214,7 +207,6 @@ async function mostrarSala(id_monitor) {
 
 async function mostrarHorarios(id_monitor) {
     try {
-
         const response = await fetch(`${url}/mostrarhorarios/${id_monitor}`);
 
         if (!response.ok) {
@@ -230,6 +222,5 @@ async function mostrarHorarios(id_monitor) {
     }
 }
 
-// Chama as funções para exibir os monitores
 mostrarMonitoresOnline();
 mostrarMonitoresOffline();
