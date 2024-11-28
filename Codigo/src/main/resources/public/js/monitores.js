@@ -5,6 +5,7 @@ const usLogMon = JSON.parse(localStorage.getItem('usuarioLogado'));
 async function fetchUsuarios() {
     try {
         const tipoLogado = usLogMon.tipo;
+        const idLogado = usLogMon.id;
 
         // Fazendo a requisição GET para a API
         const response = await fetch(`${url}/mostrarusuarios/3`);
@@ -117,7 +118,7 @@ async function fetchUsuarios() {
             // Adicionando o event listener ao botão
             addButton.addEventListener('click', async () => {
 
-                if (tipoLogado == 0) {
+                if (tipoLogado == 0 || tipoLogado == 1) {
                     try {
                         // Capturando o valor da matéria selecionada
                         const materiaSelecionada = selectMateria.value;
@@ -128,7 +129,7 @@ async function fetchUsuarios() {
 
                         // Criando o objeto com os dados para a requisição
                         const alteraTipo = {
-                            idAlterador: tipoLogado, // O ID a ser enviado
+                            idAlterador: idLogado, // O ID a ser enviado
                             idAlvo: idUsuario,
                             novoTipo: 2,
                             idMateria: materiaSelecionada
@@ -180,6 +181,7 @@ async function fetchUsuarios() {
 async function fetchMonitores() {
     try {
         const tipoLogado = usLogMon.tipo;
+        const idLogado = usLogMon.id;
 
         // Fazendo a requisição GET para a API
         const response = await fetch(`${url}/mostrarusuarios/2`);
@@ -254,11 +256,11 @@ async function fetchMonitores() {
 
             // Event listener para remover monitor
             rmvButton.addEventListener('click', async () => {
-                if (tipoLogado == 0) {
+                if (tipoLogado == 0 || tipoLogado == 1) {
                     try {
                         // Criando o objeto com os dados para a requisição
                         const alteraTipo = {
-                            idAlterador: tipoLogado,
+                            idAlterador: idLogado,
                             idAlvo: idUsuario,
                             novoTipo: 3,
                             idMateria: 0
