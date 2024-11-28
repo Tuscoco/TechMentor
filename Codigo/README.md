@@ -1,3 +1,30 @@
 # Código do Projeto
 
-Mantenha neste diretório todo o código do projeto. Se necessário, descreva neste arquivo aspectos relevantes da estrutura de diretórios criada para organização do código.
+### Estrutura do Projeto:
+
+          Codigo/
+          ├── src/
+          │   ├── main/
+          │   │   ├── java/
+          │   │   │   ├── app/
+          │   │   │   ├── config/
+          │   │   │   ├── controller/
+          │   │   │   ├── dao/
+          │   │   │   ├── model/
+          │   │   │   ├── service/
+          │   │   ├── resources/
+          │   │   │   ├── config/
+          │   │   │   │   └── config.properties
+          │   │   │   ├── db/
+          │   │   │   │   └── schema.sql
+          │   │   │   └── public/
+          │   │   │       ├── assets/
+          │   │   │       ├── css/
+          │   │   │       ├── html/
+          │   │   │       └── js/
+          │   ├── test/
+          ├── target/
+          ├── Dockerfile
+          ├── exec
+          ├── pom.xml
+          └── README.md
