@@ -106,5 +106,7 @@ O TechMentor tem como objetivo facilitar a interação dos universitários com a
    ```
 3. **Compile e execute o projeto(há um arquivo executavel pronto para isso)**:
    ```bash
+   ls -l ./exec
+   chmod +x ./exec
    ./exec
    ```   
