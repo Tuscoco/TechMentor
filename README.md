@@ -1,4 +1,4 @@
-# Techmentor
+# TechMentor
 
 O TechMentor tem como objetivo facilitar a interação dos universitários com a monitoria. O projeto apresenta várias funções que facilitam a vida universitária do usuário, como por exemplo:<br>
 .Calendário: Nele podemos colocar datas de aulões, provas, eventos, palestra, etc.<br>
