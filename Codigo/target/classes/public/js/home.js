@@ -1,4 +1,4 @@
-const url = 'https://plmg-cc-ti2-2024-2-g20-techmentor-1.onrender.com';
+const url = 'http://localhost:4567';
 const button = document.getElementById('btn');
 const mudarSwitch = document.getElementById('switch');
 const sendButton = document.getElementById('sendBtn');
