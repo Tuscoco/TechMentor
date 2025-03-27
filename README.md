@@ -104,7 +104,7 @@ O TechMentor tem como objetivo facilitar a interação dos universitários com a
    ```bash
    cd seu_diretorio/plmg-cc-ti2-2024-2-g20-techmentor/Codigo
    ```
-3. **Compile e execute o projeto(há um arquivo executavel pronto para isso)**:
+3. **Compile e execute o projeto(há um arquivo makefile pronto para isso)**:
    ```bash
-   ./exec
+   make run
    ```   
