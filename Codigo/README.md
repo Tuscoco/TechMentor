@@ -25,6 +25,6 @@
           │   ├── test/
           ├── target/
           ├── Dockerfile
-          ├── exec
+          ├── makefile
           ├── pom.xml
           └── README.md
